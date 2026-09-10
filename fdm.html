@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FDM Maintenance</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .num-box { background:#eef4fb; border:1px solid #cfe0f5; border-radius:10px; padding:12px 14px; margin-bottom:14px; }
+    .num-box .lab { font-size:12px; font-weight:700; color:#5a6673; }
+    .num-box .val { font-size:18px; font-weight:800; color:#083f78; font-family:monospace; margin-top:2px; word-break:break-all; }
+    .btn-photo { display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+      padding:15px; font-size:16px; font-weight:bold; border:none; border-radius:12px; cursor:pointer;
+      background:#0078D7; color:#fff; }
+    .btn-gal { background:#4b5563; }
+    .btns-photo { display:flex; flex-direction:column; gap:10px; }
+    #camInput, #galInput { position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    #galerie { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+    #galerie .vignette { position:relative; border-radius:10px; overflow:hidden; border:1px solid #d0d7de; aspect-ratio:1/1; }
+    #galerie .vignette img { width:100%; height:100%; object-fit:cover; display:block; }
+    #galerie .num { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.55);
+      color:#fff; font-size:12px; text-align:center; padding:2px 0; }
+    #galerie .suppr { position:absolute; top:4px; right:4px; width:26px; height:26px;
+      background:rgba(217,56,56,.92); color:#fff; border:none; border-radius:50%;
+      font-size:15px; font-weight:bold; cursor:pointer; }
+    .compteur { font-size:14px; color:var(--muted,#5a6673); text-align:center; margin-top:10px; }
+    .jauge { height:8px; background:#e5e9ef; border-radius:6px; overflow:hidden; margin-top:8px; }
+    .jauge > div { height:100%; width:0%; background:#1f9d55; transition:width .2s, background .2s; }
+    .status { text-align:center; font-size:14px; font-weight:bold; padding:12px; border-radius:12px; margin-top:8px; display:none; }
+    .status.info  { display:block; background:#e7f0fb; color:#083f78; }
+    .status.ok    { display:block; background:#e4f6ec; color:#1f9d55; }
+    .status.erreur{ display:block; background:#fdecec; color:#d93838; }
+    .photo-note { font-size:13px; color:var(--muted); margin-top:6px; }
+    .adresse-bloc { display:flex; align-items:center; gap:10px; background:#f2f4f7;
+      border:1px dashed #0078D7; border-radius:10px; padding:10px; margin-top:8px; }
+    .adresse-bloc .mail { flex:1; font-family:monospace; font-size:13px; font-weight:bold;
+      color:#083f78; word-break:break-all; }
+    .btn-copy { background:#0078D7; color:#fff; border:none; border-radius:10px;
+      padding:10px 14px; font-size:13px; font-weight:bold; cursor:pointer; white-space:nowrap; }
+    .section-title { font-size:15px; font-weight:700; margin:4px 0 10px; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="back" href="index.html">‹</a>
+    <h1>🔧 Fiche de maintenance</h1>
+  </header>
+  <div class="container">
+
+    <div class="num-box">
+      <div class="lab">N° de fiche (généré automatiquement)</div>
+      <div class="val" id="numFicheVal">—</div>
+    </div>
+
+    <p class="info">* champs obligatoires</p>
+
+    <div class="field-group">
+      <label>Équipement <span class="req">*</span></label>
+      <div class="field-wrap">
+        <input type="text" style="display:none">
+        <input type="text" id="equipement" name="random_12345_equipement"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               placeholder="Rechercher un équipement…">
+        <div id="equipementList" class="dropdown"></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Description <span class="req">*</span></label>
+      <textarea id="description" placeholder="Décrire le problème…"></textarea>
+    </div>
+    <div class="field-group">
+      <label>Date <span class="req">*</span></label>
+      <input type="date" id="date">
+    </div>
+    <div class="field-group">
+      <label>Site <span class="req">*</span></label>
+      <div class="field-wrap">
+        <input type="text" style="display:none">
+        <input type="text" id="site" name="random_12345_site"
+               autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+               placeholder="Rechercher un site…">
+        <div id="siteList" class="dropdown"></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label>Matériel utilisable ? <span class="req">*</span></label>
+      <div class="choice-group">
+        <button type="button" onclick="selectMateriel('Oui', this)">Oui</button>
+        <button type="button" onclick="selectMateriel('Oui en mode dégradé', this)">Oui, dégradé</button>
+        <button type="button" onclick="selectMateriel('Non', this)">Non</button>
+      </div>
+      <input type="hidden" id="materiel">
+    </div>
+    <div class="field-group">
+      <label>Action immédiate</label>
+      <textarea id="action1" placeholder="Action corrective immédiate…"></textarea>
+    </div>
+    <div class="field-group">
+      <label>Action à effectuer</label>
+      <textarea id="action2" placeholder="Action à prévoir…"></textarea>
+    </div>
+    <div class="field-group">
+      <label>Rédacteur <span class="req">*</span></label>
+      <input type="text" id="redacteur" placeholder="Votre nom">
+    </div>
+
+    <div class="card" style="margin-top:8px">
+      <div class="section-title">📷 Photos (facultatif)</div>
+      <p class="photo-note">Ajoute des photos : elles seront envoyées <b>avec la fiche</b>, dans le même mail.</p>
+      <input type="file" accept="image/*" capture="environment" id="camInput">
+      <input type="file" accept="image/*" multiple id="galInput">
+      <div class="btns-photo">
+        <label for="camInput" class="btn-photo">📸 Prendre une photo</label>
+        <label for="galInput" class="btn-photo btn-gal">🖼️ Choisir dans la galerie</label>
+      </div>
+      <div id="galerie"></div>
+      <div class="compteur" id="compteur"></div>
+      <div class="jauge"><div id="jaugeFill"></div></div>
+    </div>
+
+    <div class="adresse-bloc">
+      <span class="mail" id="mailDest">fdm-pigvs@tasociete.fr</span>
+      <button type="button" class="btn-copy" id="copyBtn">Copier</button>
+    </div>
+    <div class="photo-note">À l'envoi, choisis Outlook/Gmail et colle cette adresse dans le champ « À ».</div>
+
+    <button class="btn" id="sendBtn" style="margin-top:12px">✅ Envoyer la fiche 📤</button>
+    <div id="status" class="status"></div>
+  </div>
+
+<script src="pigvs-chantier.js"></script>
+<script>
+const DESTINATAIRE  = "souarns@westinghouse.com";
+const QUALITE_JPEG  = 0.90;
+const MAX_LARGEUR   = 2500;
+const LIMITE_TOTALE = 10 * 1024 * 1024;
+
+/* Nettoie pour un chemin/nom SharePoint MAIS conserve le # (autorisé par SharePoint) */
+function sanitizePath(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|]/g,'-'); }
+/* Nettoie strictement (numéro, site) — retire aussi le # */
+function cleanStrict(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|#]/g,'-'); }
+/* Valeur pour un marqueur : garde le #, supprime les retours ligne et neutralise le token de fin '#|' */
+function forMarker(s){ return (s||'').toString().replace(/[\r\n]+/g,' / ').replace(/#\|/g,'# |').trim(); }
+
+/* =========================================================
+   AUTOCOMPLÉTION
+   ========================================================= */
+function normalize(str){ return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+function editDistance(a,b){
+  const dp=[]; for(let i=0;i<=a.length;i++){dp[i]=[];dp[i][0]=i;} for(let j=0;j<=b.length;j++){dp[0][j]=j;}
+  for(let i=1;i<=a.length;i++){for(let j=1;j<=b.length;j++){
+    const c=a[i-1]===b[j-1]?0:1;
+    dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+c);
+    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])dp[i][j]=Math.min(dp[i][j],dp[i-2][j-2]+1);
+  }} return dp[a.length][b.length];
+}
+function wordScore(s,t){
+  if(!s)return 1; if(t===s)return 120; if(t.startsWith(s))return 100; if(t.includes(s))return 80;
+  const tp=t.substring(0,s.length); const d=Math.min(editDistance(s,t),editDistance(s,tp));
+  let th=0; if(s.length<=3)th=0; else if(s.length<=5)th=1; else if(s.length<=9)th=2; else th=3;
+  return d<=th?60-d*10:0;
+}
+function itemScore(search,item){
+  const q=normalize(search),text=normalize(item); if(!q)return 1;
+  const qw=q.split(/\s+/).filter(Boolean),tw=text.split(/\s+/).filter(Boolean); let tot=0;
+  for(const w of qw){let b=0;for(const t of tw){const sc=wordScore(w,t);if(sc>b)b=sc;}if(b===0)return 0;tot+=b;}
+  if(text.startsWith(q))tot+=50; if(text.includes(q))tot+=30; return tot;
+}
+let equipements=[], sites=[];
+function selectMateriel(value, element){
+  document.getElementById("materiel").value=value;
+  document.querySelectorAll(".choice-group button").forEach(b=>b.classList.remove("active"));
+  element.classList.add("active");
+}
+function createAutocomplete(inputId, listId, dataList){
+  const input=document.getElementById(inputId), list=document.getElementById(listId);
+  input.addEventListener("focus",()=>show(""));
+  input.addEventListener("input",()=>{ show(input.value); if(inputId==='site') majNumero(); });
+  function show(filter){
+    const val=normalize(filter);
+    let r=dataList.map(it=>({original:it,score:itemScore(val,it)})).filter(x=>x.score>0)
+      .sort((a,b)=>b.score!==a.score?b.score-a.score:a.original.localeCompare(b.original)).slice(0,100);
+    list.innerHTML = r.length===0 ? "<div>Aucun résultat</div>"
+      : r.map(it=>`<div onclick="selectItem('${it.original.replace(/'/g,"\\'")}','${inputId}','${listId}')">${it.original}</div>`).join("");
+    list.style.display="block";
+  }
+}
+function selectItem(value, inputId, listId){
+  document.getElementById(inputId).value=value;
+  document.getElementById(listId).style.display="none";
+  if(inputId==='site') majNumero();
+}
+Promise.all([
+  fetch("equipements.json").then(r=>r.json()),
+  fetch("sites.json").then(r=>r.json())
+]).then(([e,s])=>{ equipements=e; sites=s;
+  createAutocomplete("equipement","equipementList",equipements);
+  createAutocomplete("site","siteList",sites);
+});
+document.addEventListener("click", e=>{
+  if(!e.target.closest(".field-wrap")){ document.querySelectorAll(".dropdown").forEach(d=>d.style.display="none"); }
+});
+window.addEventListener("load", ()=>{ document.getElementById("date").valueAsDate=new Date(); });
+
+if (window.PIGVS) {
+  PIGVS.loadChantiers().then(function(){
+    PIGVS.prefillSite(document.getElementById('site'));
+    majNumero();
+  });
+}
+
+/* =========================================================
+   NUMÉRO DE FICHE : FDM-{SITE}-{AAAAMMJJ}-{HHMMSS}
+   ========================================================= */
+let NUM_FICHE = "";
+function majNumero(){
+  const site = cleanStrict(document.getElementById('site').value) || "SITE";
+  const d = new Date();
+  const p = n => String(n).padStart(2,'0');
+  const stamp = `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
+  NUM_FICHE = `FDM-${site}-${stamp}`;
+  document.getElementById('numFicheVal').textContent = NUM_FICHE;
+}
+majNumero();
+
+/* =========================================================
+   PHOTOS
+   ========================================================= */
+let photos = [];
+const camInput   = document.getElementById('camInput');
+const galInput   = document.getElementById('galInput');
+const galerie    = document.getElementById('galerie');
+const compteur   = document.getElementById('compteur');
+const jaugeFill  = document.getElementById('jaugeFill');
+const status     = document.getElementById('status');
+const copyBtn    = document.getElementById('copyBtn');
+document.getElementById('mailDest').textContent = DESTINATAIRE;
+
+function setStatus(t,m){ status.className="status "+t; status.innerHTML=m; }
+function clearStatus(){ status.className="status"; status.innerHTML=""; }
+function tailleTotale(){ return photos.reduce((s,p)=>s+p.file.size,0); }
+function fmtMo(o){ return (o/1048576).toFixed(1); }
+
+function compresser(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onerror=()=>reject("lecture impossible");
+    reader.onload=ev=>{
+      const img=new Image();
+      img.onerror=()=>reject("image invalide");
+      img.onload=()=>{
+        const ratio=Math.min(1, MAX_LARGEUR/Math.max(img.width,img.height));
+        const canvas=document.createElement('canvas');
+        canvas.width =Math.round(img.width *ratio);
+        canvas.height=Math.round(img.height*ratio);
+        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+        canvas.toBlob(b=> b?resolve(b):reject("échec compression"), 'image/jpeg', QUALITE_JPEG);
+      };
+      img.src=ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+copyBtn.addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText(DESTINATAIRE); }
+  catch(err){ const t=document.createElement('textarea'); t.value=DESTINATAIRE;
+    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  copyBtn.textContent="Copié ✅"; setTimeout(()=>copyBtn.textContent="Copier",1800);
+});
+
+async function traiterFichiers(fichiers){
+  if(!fichiers.length) return;
+  setStatus('info','⏳ Compression en cours…');
+  let ok=0, ko=0;
+  for(const f of fichiers){
+    let blob; try{ blob=await compresser(f); }catch(e){ ko++; continue; }
+    if(tailleTotale()+blob.size>LIMITE_TOTALE){ ko++; continue; }
+    const file=new File([blob], `tmp_${Date.now()}.jpg`, {type:'image/jpeg'});
+    photos.push({file, url:URL.createObjectURL(file)}); ok++;
+  }
+  rendreGalerie();
+  if(ko>0) setStatus('erreur', `⚠️ ${ok} ajoutée(s), ${ko} refusée(s) : limite 10 Mo.`);
+  else setStatus('info', `✅ ${ok} photo(s) ajoutée(s).`);
+}
+camInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files||[]); camInput.value=""; await traiterFichiers(f); });
+galInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files||[]); galInput.value=""; await traiterFichiers(f); });
+
+function rendreGalerie(){
+  galerie.innerHTML="";
+  photos.forEach((p,i)=>{
+    const div=document.createElement('div'); div.className='vignette';
+    div.innerHTML=`<img src="${p.url}"><div class="num">${i+1}</div><button class="suppr" data-i="${i}">×</button>`;
+    galerie.appendChild(div);
+  });
+  galerie.querySelectorAll('.suppr').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i; URL.revokeObjectURL(photos[i].url); photos.splice(i,1); rendreGalerie();
+  }));
+  const total=tailleTotale(), pct=Math.min(100,Math.round(total/LIMITE_TOTALE*100));
+  compteur.textContent = photos.length ? `${photos.length} photo(s) · ${fmtMo(total)} / 10 Mo` : "";
+  jaugeFill.style.width = pct+'%';
+  jaugeFill.style.background = pct>=90?'#d93838':(pct>=70?'#e8a13a':'#1f9d55');
+}
+
+/* =========================================================
+   ENVOI UNIQUE : fiche + photos dans le même mail
+   ========================================================= */
+document.getElementById('sendBtn').addEventListener('click', async ()=>{
+  const equipement = document.getElementById("equipement").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const date = document.getElementById("date").value;
+  const site = document.getElementById("site").value.trim();
+  const materiel = document.getElementById("materiel").value;
+  const action1 = document.getElementById("action1").value.trim();
+  const action2 = document.getElementById("action2").value.trim();
+  const redacteur = document.getElementById("redacteur").value.trim();
+
+  if(!equipement || !description || !date || !site || !materiel || !redacteur){
+    setStatus('erreur',"⚠️ Remplis tous les champs obligatoires (*)."); return;
+  }
+  if(tailleTotale() > LIMITE_TOTALE){ setStatus('erreur',"⚠️ Total photos > 10 Mo."); return; }
+
+  majNumero();
+  const num = NUM_FICHE;
+
+  /* Chemin : # conservé (SharePoint l'accepte), autres caractères illégaux nettoyés */
+  const chemin = `fiches de maintenance/${sanitizePath(equipement)}`;
+
+  /* Marqueurs fermés par '#|' -> les valeurs peuvent contenir des '#' (ex : CART #03) */
+  const texte =
+`#FDMPIGVS#
+#NUM:${num}#|
+#PATH:${chemin}#|
+#EQUIP:${forMarker(equipement)}#|
+#SITE:${forMarker(site)}#|
+#DATE:${date}#|
+#MATERIEL:${forMarker(materiel)}#|
+#ACTION1:${forMarker(action1)}#|
+#ACTION2:${forMarker(action2)}#|
+#REDACTEUR:${forMarker(redacteur)}#|
+#DESC:${forMarker(description)}#|
+
+--- Fiche de maintenance ${num} ---
+Équipement : ${equipement}
+Site : ${site}
+Date : ${date}
+Matériel utilisable : ${materiel}
+Action immédiate : ${action1 || 'N/C'}
+Action à effectuer : ${action2 || 'N/C'}
+Rédacteur : ${redacteur}
+Description : ${description}
+Photos : ${photos.length}`;
+
+  const files = photos.map((p,idx)=> new File([p.file], `${num}_${idx+1}.jpg`, {type:'image/jpeg'}));
+  const donnees = { title:"Fiche de maintenance "+num, text:texte };
+  if(files.length) donnees.files = files;
+
+  const peutPartager = files.length ? (navigator.canShare && navigator.canShare({files})) : !!navigator.share;
+  if(peutPartager){
+    try{
+      await navigator.share(donnees);
+      setStatus('ok',"✅ Partage lancé ("+num+"). Choisis Outlook/Gmail, colle l'adresse puis envoie.");
+    }catch(err){
+      if(err && err.name==='AbortError'){ setStatus('info',"Envoi annulé."); }
+      else{ console.error(err); setStatus('erreur',"❌ Partage impossible : "+(err.message||err)); }
+    }
+    return;
+  }
+  setStatus('erreur',"⚠️ Partage non supporté ici. Teste sur Android + Chrome (HTTPS).");
+});
+</script>
+</body>
+</html>

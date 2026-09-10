@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIGVS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .chantier-bar { background:#fff; border:1px solid #e0e0e0; border-radius:12px;
+      padding:12px 14px; margin-bottom:16px; }
+    .chantier-bar label { display:block; font-size:12px; font-weight:700; color:#5a6673; margin-bottom:6px; }
+    .pigvs-select { width:100%; padding:12px; font-size:16px; border-radius:8px; border:1px solid #ccc; box-sizing:border-box; }
+    .chantier-warn { display:none; margin-top:8px; font-size:13px; color:#b45309; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <h1>PIGVS</h1>
+  </header>
+  <div class="container">
+
+    <!-- SÉLECTEUR DE CHANTIER -->
+    <div class="chantier-bar">
+      <label>🏭 Chantier en cours</label>
+      <div id="chantierSelector"></div>
+      <div class="chantier-warn" id="chantierWarn">⚠️ Choisis ton chantier pour pré-remplir les formulaires.</div>
+    </div>
+
+    <p class="info" style="color:var(--muted)">Choisissez une application</p>
+
+    <a class="card clickable" href="fdm.html"
+       style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+      <div style="font-size:34px">📝</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Fiche de maintenance</div>
+        <div style="font-size:14px;color:var(--muted)">Saisir et remonter une FDM</div>
+      </div>
+    </a>
+
+    <a class="card clickable" href="materiel.html"
+       style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+      <div style="font-size:34px">📊</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">État du matériel</div>
+        <div style="font-size:14px;color:var(--muted)">Vue d'ensemble des sous-ensembles</div>
+      </div>
+    </a>
+
+    <a class="card clickable" href="photos.html"
+       style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+      <div style="font-size:34px">📷</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Photos</div>
+        <div style="font-size:14px;color:var(--muted)">Colisage, cahier de quart, portées de joint…</div>
+      </div>
+    </a>
+
+    <a class="card clickable" href="rex.html"
+       style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+      <div style="font-size:34px">💬</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Retour d'expérience</div>
+        <div style="font-size:14px;color:var(--muted)">Remarques et REX depuis le terrain</div>
+      </div>
+    </a>
+
+    <a class="card clickable" href="colisage.html"
+       style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+      <div style="font-size:34px">📦</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Colisage</div>
+        <div style="font-size:14px;color:var(--muted)">Où est rangé le matériel (conteneur, caisse…)</div>
+      </div>
+    </a>
+
+    <a class="card clickable" href="info.html"
+       style="display:flex;align-items:center;gap:16px;text-decoration:none;color:inherit">
+      <div style="font-size:34px">ℹ️</div>
+      <div>
+        <div style="font-size:18px;font-weight:700">Infos chantier</div>
+        <div style="font-size:14px;color:var(--muted)">Informations importantes à ne pas manquer</div>
+      </div>
+    </a>
+
+  </div>
+
+  <script src="pigvs-chantier.js"></script>
+  <script>
+    PIGVS.loadChantiers().then(function () {
+      const warn = document.getElementById('chantierWarn');
+      PIGVS.renderSelector(document.getElementById('chantierSelector'), function () {
+        warn.style.display = PIGVS.getChantier() ? 'none' : 'block';
+      });
+      warn.style.display = PIGVS.getChantier() ? 'none' : 'block';
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(function () { console.log('PWA prete'); })
+          .catch(function (err) { console.error('SW erreur', err); });
+      });
+    }
+  </script>
+</body>
+</html>

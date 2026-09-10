@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infos chantier — PIGVS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .chantier-bar { background:#fff; border:1px solid #e0e0e0; border-radius:12px; padding:10px 12px; margin-bottom:16px; }
+    .chantier-bar label { display:block; font-size:12px; font-weight:700; color:#5a6673; margin-bottom:6px; }
+    .pigvs-select { width:100%; padding:11px; font-size:15px; border-radius:8px; border:1px solid #ccc; box-sizing:border-box; }
+
+    .kpi-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+    .kpi { background:#fff; border:1px solid #e0e0e0; border-radius:12px; padding:14px; text-align:center; }
+    .kpi .val { font-size:24px; font-weight:800; color:#0078D7; }
+    .kpi .lab { font-size:12px; color:#5a6673; margin-top:2px; }
+
+    .section-titre { font-size:15px; font-weight:700; margin:18px 0 8px; color:#334; display:flex; align-items:center; gap:8px; }
+
+    .planning { background:#fff; border:1px solid #e0e0e0; border-radius:12px; padding:6px 14px; }
+    .step { display:flex; align-items:center; gap:12px; padding:12px 0; border-bottom:1px solid #eef0f3; }
+    .step:last-child { border-bottom:0; }
+    .step .dot { width:16px; height:16px; border-radius:50%; flex:0 0 auto; border:3px solid #d0d7de; background:#fff; }
+    .step.done .dot { background:#1f9d55; border-color:#1f9d55; }
+    .step.current .dot { background:#0078D7; border-color:#0078D7; box-shadow:0 0 0 4px rgba(0,120,215,.18); }
+    .step .txt { flex:1; }
+    .step .nom { font-weight:700; font-size:15px; }
+    .step .sous { font-size:12px; color:#5a6673; }
+    .step .tag { font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; }
+    .tag.done { background:#e4f6ec; color:#166534; }
+    .tag.current { background:#e7f0fb; color:#083f78; }
+    .tag.todo { background:#f1f3f5; color:#8a94a1; }
+
+    .barre { height:10px; background:#e5e9ef; border-radius:6px; overflow:hidden; margin:6px 0 2px; }
+    .barre > div { height:100%; background:#1f9d55; }
+
+    .alerte { display:flex; gap:12px; background:#fff; border:1px solid #e0e0e0; border-left:5px solid #999;
+      border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+    .alerte.rouge  { border-left-color:#d93838; }
+    .alerte.orange { border-left-color:#e8a13a; }
+    .alerte.bleu   { border-left-color:#0078D7; }
+    .alerte .ico { font-size:22px; }
+    .alerte .titre { font-weight:700; font-size:15px; }
+    .alerte .desc { font-size:13px; color:#5a6673; margin-top:2px; }
+
+    .maj { text-align:center; font-size:12px; color:#8a94a1; margin-top:20px; }
+    .vide { text-align:center; color:#8a94a1; padding:40px 10px; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="back" href="index.html">‹</a>
+    <h1>ℹ️ Infos chantier</h1>
+  </header>
+  <div class="container">
+
+    <!-- SÉLECTEUR toujours visible -->
+    <div class="chantier-bar">
+      <label>🏭 Chantier</label>
+      <div id="chantierSelector"></div>
+    </div>
+
+    <div id="dashboard"></div>
+
+  </div>
+
+  <script src="pigvs-chantier.js"></script>
+  <script>
+    const dash = document.getElementById('dashboard');
+
+    PIGVS.loadChantiers().then(function () {
+      PIGVS.renderSelector(document.getElementById('chantierSelector'), function () {
+        afficher();
+      });
+      afficher();
+    });
+
+    function afficher(){
+      const c = PIGVS.getChantier();
+      if(!c){
+        dash.innerHTML = "<div class='vide'>👆 Sélectionne un chantier ci-dessus pour voir son tableau de bord.</div>";
+        return;
+      }
+      if(!c.infoData){
+        dash.innerHTML = "<div class='vide'>Aucune donnée d'info pour ce chantier.</div>";
+        return;
+      }
+      dash.innerHTML = "<div class='vide'>⏳ Chargement…</div>";
+      fetch(c.infoData).then(r=>r.json()).then(render)
+        .catch(()=>{ dash.innerHTML = "<div class='vide'>⚠️ Impossible de charger "+c.infoData+"</div>"; });
+    }
+
+    function render(d){
+      const planning = d.planning.map(function(s){
+        const tag = s.etat==='done' ? "<div class='tag done'>Fait</div>"
+                  : s.etat==='current' ? "<div class='tag current'>En cours</div>"
+                  : "<div class='tag todo'>À venir</div>";
+        return `<div class="step ${s.etat}">
+            <div class="dot"></div>
+            <div class="txt"><div class="nom">${s.nom}</div><div class="sous">${s.sous||''}</div></div>
+            ${tag}
+          </div>`;
+      }).join('');
+
+      const alertes = (d.alertes||[]).map(function(a){
+        return `<div class="alerte ${a.couleur||'bleu'}">
+            <div class="ico">${a.ico||'ℹ️'}</div>
+            <div><div class="titre">${a.titre}</div><div class="desc">${a.desc||''}</div></div>
+          </div>`;
+      }).join('');
+
+      dash.innerHTML = `
+        <div class="kpi" style="text-align:left; margin-bottom:16px;">
+          <div style="font-size:18px;font-weight:800;color:#083f78">🏭 ${d.titre}</div>
+          <div style="font-size:13px;color:#5a6673;margin-top:2px">${d.operation||''}</div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="val">${d.avancement}%</div><div class="lab">Avancement global</div></div>
+          <div class="kpi"><div class="val">${d.jour||'—'}</div><div class="lab">Jour de chantier</div></div>
+          <div class="kpi"><div class="val">${d.finPrev||'—'}</div><div class="lab">Fin prévisionnelle</div></div>
+          <div class="kpi"><div class="val">${(d.alertes||[]).length}</div><div class="lab">Infos importantes</div></div>
+        </div>
+
+        <div class="section-titre">📅 Avancement de l'opération</div>
+        <div class="barre"><div style="width:${d.avancement}%"></div></div>
+        <div class="planning">${planning}</div>
+
+        <div class="section-titre">⚠️ Informations importantes</div>
+        ${alertes || "<div class='vide'>Aucune info particulière.</div>"}
+
+        <div class="maj">Dernière mise à jour : ${d.maj||'—'}</div>
+      `;
+    }
+  </script>
+</body>
+</html>

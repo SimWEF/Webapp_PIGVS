@@ -1,0 +1,20 @@
+{
+  "titre": "PIGVS PAL4",
+  "operation": "Opération PIGVS PAL4",
+  "avancement": 62,
+  "jour": "J+14",
+  "finPrev": "18/07",
+  "planning": [
+    { "nom": "Montage & installation", "sous": "Terminé le 28/06", "etat": "done" },
+    { "nom": "Essais à blanc",         "sous": "Terminé le 02/07", "etat": "done" },
+    { "nom": "Lançage GV1",            "sous": "En cours · ~70%",  "etat": "current" },
+    { "nom": "Lançage GV2",            "sous": "Prévu 12/07",      "etat": "todo" },
+    { "nom": "Repli & démontage",      "sous": "Prévu 16/07",      "etat": "todo" }
+  ],
+  "alertes": [
+    { "couleur": "rouge",  "ico": "🛗", "titre": "Ascenseur en panne", "desc": "Utiliser l'escalier zone Est. Intervention prévue le 10/07." },
+    { "couleur": "orange", "ico": "🔧", "titre": "Privilégier l'utilisation du CART 5", "desc": "Le CART 2 est en cours de vérification (chez ECA)." },
+    { "couleur": "bleu",   "ico": "📄", "titre": "Étape de lançage modifiée", "desc": "Nouvelle séquence à appliquer — voir Fiche de Correction FC 01." }
+  ],
+  "maj": "04/07/2026 — 07:30 · Chef de projet"
+}

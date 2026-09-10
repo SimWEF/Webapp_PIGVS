@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Détail sous-ensemble</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+  <header class="app-header">
+    <a class="back" href="materiel.html">‹</a>
+    <h1 id="titre">Détail</h1>
+  </header>
+
+  <div class="container">
+    <div id="listeEquipements">
+      <div class="empty">Chargement…</div>
+    </div>
+    <a class="btn btn-secondary" href="materiel.html" style="margin-top:8px">‹ Retour à la liste</a>
+  </div>
+
+<script>
+const sousEnsemble = localStorage.getItem("sousEnsembleSelectionne");
+document.getElementById("titre").innerText = sousEnsemble || "Détail";
+
+fetch("etatEquipements.json")
+  .then(r => r.json())
+  .then(data => {
+    const container = document.getElementById("listeEquipements");
+    container.innerHTML = "";
+
+    const filtres = data.filter(eq => eq.sousEnsemble === sousEnsemble);
+
+    if (filtres.length === 0) {
+      container.innerHTML = '<div class="empty">Aucun équipement pour ce sous-ensemble.</div>';
+      return;
+    }
+
+    filtres.forEach(eq => {
+      let cls = "gris", emoji = "⚪", libelle = eq.etat;
+      if (eq.etat === "VERT")   { cls = "vert";   emoji = "🟢"; }
+      if (eq.etat === "ORANGE") { cls = "orange"; emoji = "🟠"; }
+      if (eq.etat === "ROUGE")  { cls = "rouge";  emoji = "🔴"; }
+
+      const card = document.createElement("div");
+      card.className = "card etat-" + cls;
+      card.innerHTML = `
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <div style="font-size:16px;font-weight:600">${eq.equipement}</div>
+          <span class="badge ${cls}">${emoji} ${libelle}</span>
+        </div>`;
+      container.appendChild(card);
+    });
+  })
+  .catch(() => {
+    document.getElementById("listeEquipements").innerHTML =
+      '<div class="empty">Impossible de charger les données.</div>';
+  });
+</script>
+</body>
+</html>

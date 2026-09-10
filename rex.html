@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retour d'expérience — PIGVS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .field-group { margin-bottom:14px; }
+    .field-group label { display:block; font-weight:700; margin-bottom:6px; font-size:15px; }
+    .field-group .req { color:#d93838; }
+    input, select, textarea { width:100%; padding:12px; font-size:16px; border-radius:8px;
+      border:1px solid #ccc; box-sizing:border-box; }
+    textarea { min-height:110px; resize:vertical; }
+    .btn { width:100%; padding:16px; font-size:17px; font-weight:700; border:none; border-radius:12px;
+      background:#1f9d55; color:#fff; cursor:pointer; margin-top:6px; }
+    .field-wrap { position:relative; }
+    .dropdown { position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ccc;
+      border-radius:8px; max-height:200px; overflow-y:auto; z-index:60; display:none;
+      box-shadow:0 6px 16px rgba(0,0,0,.14); }
+    .dropdown div { padding:11px 12px; font-size:15px; cursor:pointer; border-bottom:1px solid #f0f0f0; }
+    .dropdown div:hover { background:#e7f0fb; }
+    .status { text-align:center; font-size:14px; font-weight:700; padding:12px; border-radius:12px; margin-top:10px; display:none; }
+    .status.ok { display:block; background:#e4f6ec; color:#1f9d55; }
+    .status.erreur { display:block; background:#fdecec; color:#d93838; }
+    .adresse-bloc { display:flex; align-items:center; gap:10px; background:#f2f4f7;
+      border:1px dashed #0078D7; border-radius:10px; padding:10px; margin-top:6px; }
+    .adresse-bloc .mail { flex:1; font-family:monospace; font-size:13px; font-weight:700; color:#083f78; word-break:break-all; }
+    .btn-copy { background:#0078D7; color:#fff; border:none; border-radius:10px; padding:10px 14px;
+      font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap; }
+    .note { font-size:13px; color:#5a6673; margin-top:6px; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="back" href="index.html">‹</a>
+    <h1>💬 Retour d'expérience</h1>
+  </header>
+  <div class="container">
+    <p class="info">* champs obligatoires</p>
+
+    <div class="field-group">
+      <label>Site <span class="req">*</span></label>
+      <div class="field-wrap">
+        <input type="text" id="site" autocomplete="off" spellcheck="false" placeholder="Rechercher un site…">
+        <div id="siteList" class="dropdown"></div>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label>Type de GV</label>
+      <input type="text" id="gv" placeholder="(à préciser ultérieurement)">
+    </div>
+
+    <div class="field-group">
+      <label>Activité <span class="req">*</span></label>
+      <select id="activite">
+        <option value="">— choisir —</option>
+        <option>Lançage</option>
+        <option>ETV</option>
+        <option>PIGVS</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Thème <span class="req">*</span></label>
+      <select id="theme">
+        <option value="">— choisir —</option>
+        <option>Technique</option>
+        <option>Documentaire</option>
+        <option>Organisationnel</option>
+        <option>Proposition d'amélioration</option>
+        <option>Autre</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label>Description du REX <span class="req">*</span></label>
+      <textarea id="description" placeholder="Décrire le retour d'expérience à prendre en compte…"></textarea>
+    </div>
+
+    <div class="field-group">
+      <label>Nom de l'opérateur <span class="req">*</span></label>
+      <input type="text" id="operateur" placeholder="Votre nom">
+    </div>
+
+    <div class="field-group">
+      <label>📧 Adresse de destination</label>
+      <div class="adresse-bloc">
+        <span class="mail" id="mailDest">rex-pigvs@tasociete.fr</span>
+        <button type="button" class="btn-copy" id="copyBtn">Copier</button>
+      </div>
+      <div class="note">À l'envoi, choisis Outlook/Gmail et colle cette adresse dans le champ « À ».</div>
+    </div>
+
+    <button class="btn" id="sendBtn">Envoyer le REX 📤</button>
+    <div id="status" class="status"></div>
+  </div>
+
+<!-- ✅ Module chantier chargé AVANT le script principal -->
+<script src="pigvs-chantier.js"></script>
+<script>
+const DESTINATAIRE = "souarns@westinghouse.com"; // adresse dédiée REX
+const siteInput = document.getElementById('site');
+const siteList  = document.getElementById('siteList');
+const status    = document.getElementById('status');
+const copyBtn   = document.getElementById('copyBtn');
+document.getElementById('mailDest').textContent = DESTINATAIRE;
+let sites = [];
+
+function normalize(s){ return (s||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+
+fetch('sites.json').then(r=>r.json()).then(list=>{ sites=list; }).catch(()=>{});
+siteInput.addEventListener('focus', ()=>showSites(''));
+siteInput.addEventListener('input', ()=>showSites(siteInput.value));
+function showSites(filter){
+  const val = normalize(filter);
+  const res = sites.filter(s=>normalize(s).includes(val)).slice(0,100);
+  siteList.innerHTML = res.length ? res.map(s=>`<div>${s}</div>`).join('') : "<div>Aucun résultat</div>";
+  siteList.querySelectorAll('div').forEach(d=>d.addEventListener('mousedown',ev=>{
+    ev.preventDefault(); siteInput.value=d.textContent.trim(); siteList.style.display='none';
+  }));
+  siteList.style.display='block';
+}
+document.addEventListener('click', e=>{ if(!e.target.closest('.field-wrap')) siteList.style.display='none'; });
+
+// ✅ PRÉ-REMPLISSAGE DU SITE selon le chantier choisi
+if (window.PIGVS) {
+  PIGVS.loadChantiers().then(function () {
+    PIGVS.prefillSite(siteInput);
+  });
+}
+
+copyBtn.addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText(DESTINATAIRE); }
+  catch(err){ const t=document.createElement('textarea'); t.value=DESTINATAIRE;
+    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  copyBtn.textContent="Copié ✅"; setTimeout(()=>copyBtn.textContent="Copier",1800);
+});
+
+function setStatus(cls,msg){ status.className="status "+cls; status.textContent=msg; }
+
+document.getElementById('sendBtn').addEventListener('click', async ()=>{
+  const site        = document.getElementById('site').value.trim();
+  const gv          = document.getElementById('gv').value.trim();
+  const activite    = document.getElementById('activite').value;
+  const theme       = document.getElementById('theme').value;
+  const description = document.getElementById('description').value.trim();
+  const operateur   = document.getElementById('operateur').value.trim();
+
+  if(!site || !activite || !theme || !description || !operateur){
+    setStatus('erreur',"⚠️ Remplis tous les champs obligatoires (*)."); return;
+  }
+
+  const texte =
+`#REXPIGVS#
+Destinataire : ${DESTINATAIRE}
+Site : ${site}
+Type de GV : ${gv || 'N/C'}
+Activité : ${activite}
+Thème : ${theme}
+Opérateur : ${operateur}
+
+Description :
+${description}
+
+Envoi : ${new Date().toLocaleString('fr-FR')}`;
+
+  const donnees = { title:"REX PIGVS", text:texte };
+
+  if(navigator.share){
+    try{
+      await navigator.share(donnees);
+      setStatus('ok',"✅ Partage lancé. Choisis Outlook/Gmail, colle l'adresse puis envoie.");
+    }catch(err){
+      if(err && err.name==='AbortError'){ setStatus('erreur',"Partage annulé."); }
+      else{ copierTexte(texte); }
+    }
+  } else {
+    copierTexte(texte);
+  }
+});
+
+function copierTexte(texte){
+  try{
+    const t=document.createElement('textarea'); t.value=texte;
+    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
+    setStatus('ok',"✅ REX copié dans le presse-papiers. Colle-le dans un mail vers "+DESTINATAIRE+".");
+  }catch(e){
+    setStatus('erreur',"❌ Impossible de partager ici. Note le REX manuellement.");
+  }
+}
+</script>
+</body>
+</html>

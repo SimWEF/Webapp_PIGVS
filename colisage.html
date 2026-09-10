@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colisage — PIGVS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .search-box { position:relative; margin-bottom:14px; }
+    .search-box input { width:100%; padding:13px 40px 13px 14px; font-size:16px; border-radius:10px;
+      border:1px solid #ccc; box-sizing:border-box; }
+    .search-box .clear { position:absolute; right:10px; top:50%; transform:translateY(-50%);
+      border:none; background:transparent; font-size:20px; color:#8a94a1; cursor:pointer; display:none; }
+
+    .breadcrumb { font-size:14px; color:#5a6673; margin:4px 0 14px; display:flex; flex-wrap:wrap; gap:4px; align-items:center; }
+    .breadcrumb a { color:#0078D7; text-decoration:none; font-weight:600; cursor:pointer; }
+    .breadcrumb .sep { color:#b8c0cc; }
+
+    .cards { display:flex; flex-direction:column; gap:10px; }
+    .cont-card { display:flex; align-items:center; gap:14px; padding:16px; border-radius:12px;
+      border:1px solid #e0e0e0; background:#fff; cursor:pointer; text-align:left; width:100%; }
+    .cont-card:active { transform:scale(.99); }
+    .pastille { width:20px; height:44px; border-radius:6px; flex:0 0 auto; }
+    .cont-card .txt { flex:1; }
+    .cont-card .titre { font-size:17px; font-weight:700; }
+    .cont-card .sous { font-size:13px; color:#5a6673; margin-top:2px; }
+    .cont-card .chev { color:#b8c0cc; font-size:22px; }
+    .cont-card .compte { font-size:12px; color:#8a94a1; }
+
+    .caisse-card { display:flex; align-items:center; gap:12px; padding:14px; border-radius:12px;
+      border:1px solid #e0e0e0; background:#fff; cursor:pointer; width:100%; text-align:left; }
+    .caisse-card .ico { font-size:24px; }
+    .caisse-card .titre { flex:1; font-weight:700; font-size:16px; }
+    .caisse-card .compte { font-size:12px; color:#8a94a1; }
+    .caisse-card .chev { color:#b8c0cc; font-size:22px; }
+
+    .section-titre { display:flex; align-items:center; gap:10px; margin:18px 0 8px; font-weight:700; color:#334; }
+    .item-list { list-style:none; padding:0; margin:0; }
+    .item-list li { padding:12px 14px; border-bottom:1px solid #eef0f3; font-size:15px; display:flex; gap:10px; }
+    .item-list li:before { content:"🔧"; }
+
+    .result { background:#fff; border:1px solid #e0e0e0; border-radius:12px; padding:12px 14px; margin-bottom:10px; }
+    .result .item { font-weight:700; font-size:15px; }
+    .result .loc { font-size:13px; color:#5a6673; margin-top:4px; display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+    .chip { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius:14px;
+      font-size:12px; font-weight:700; color:#fff; }
+    .chip .dot { width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.9); }
+    .loc .caisse { background:#eef4fb; color:#083f78; padding:3px 10px; border-radius:14px; font-weight:700; }
+    .vide { text-align:center; color:#8a94a1; padding:30px 10px; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="back" href="index.html" id="backLink">‹</a>
+    <h1>📦 Colisage</h1>
+  </header>
+  <div class="container">
+
+    <div class="search-box">
+      <input type="text" id="search" placeholder="🔍 Rechercher un matériel (ex : sécheur, L23, caméra…)"
+             autocomplete="off" autocapitalize="off" spellcheck="false">
+      <button class="clear" id="clearBtn">×</button>
+    </div>
+
+    <div class="breadcrumb" id="breadcrumb"></div>
+    <div id="contenu"></div>
+
+  </div>
+
+<script>
+let DATA = { conteneurs: [] };
+
+const contenu    = document.getElementById('contenu');
+const breadcrumb = document.getElementById('breadcrumb');
+const searchInput= document.getElementById('search');
+const clearBtn   = document.getElementById('clearBtn');
+
+/* état de navigation : null | {conteneur} | {conteneur, caisse} */
+let vue = { conteneurId:null, caisseIdx:null };
+
+function normalize(s){ return (s||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+
+/* ---------- Chargement des données ---------- */
+fetch('colisage-data.json')
+  .then(r=>r.json())
+  .then(d=>{ DATA = d; render(); })
+  .catch(()=>{ contenu.innerHTML = "<div class='vide'>⚠️ Impossible de charger colisage-data.json</div>"; });
+
+/* ---------- Recherche globale ---------- */
+searchInput.addEventListener('input', ()=>{
+  clearBtn.style.display = searchInput.value ? 'block' : 'none';
+  render();
+});
+clearBtn.addEventListener('click', ()=>{
+  searchInput.value=''; clearBtn.style.display='none'; render(); searchInput.focus();
+});
+
+/* ---------- Rendu principal ---------- */
+function render(){
+  const q = normalize(searchInput.value.trim());
+  if(q){ renderRecherche(q); return; }
+
+  if(vue.conteneurId===null){ renderConteneurs(); }
+  else if(vue.caisseIdx===null){ renderCaisses(); }
+  else { renderItems(); }
+}
+
+/* Niveau 1 : conteneurs (groupés ETV / Équipement) */
+function renderConteneurs(){
+  breadcrumb.innerHTML = "<span>Tous les conteneurs</span>";
+  document.getElementById('backLink').setAttribute('href','index.html');
+
+  const groupes = {};
+  DATA.conteneurs.forEach(c=>{ (groupes[c.categorie] = groupes[c.categorie]||[]).push(c); });
+
+  let html = "";
+  Object.keys(groupes).forEach(cat=>{
+    html += `<div class="section-titre">${cat==='ETV'?'🚚':'🧰'} Conteneurs ${cat}</div><div class="cards">`;
+    groupes[cat].forEach(c=>{
+      const nbItems = c.caisses.reduce((s,k)=>s+k.items.length,0);
+      html += `<button class="cont-card" onclick="ouvrirConteneur('${c.id}')">
+        <div class="pastille" style="background:${c.couleur}"></div>
+        <div class="txt">
+          <div class="titre">${c.nom} <span class="compte">· ${c.couleurNom}</span></div>
+          <div class="sous">${c.ref}</div>
+          <div class="compte">${c.caisses.length} caisses · ${nbItems} éléments</div>
+        </div>
+        <div class="chev">›</div>
+      </button>`;
+    });
+    html += `</div>`;
+  });
+  contenu.innerHTML = html;
+}
+
+/* Niveau 2 : caisses d'un conteneur */
+function renderCaisses(){
+  const c = DATA.conteneurs.find(x=>x.id===vue.conteneurId);
+  breadcrumb.innerHTML =
+    `<a onclick="retourAccueil()">Conteneurs</a><span class="sep">›</span>` +
+    `<span>${c.nom}</span>`;
+
+  let html = `<div class="section-titre"><span class="chip" style="background:${c.couleur}"><span class="dot"></span>${c.nom}</span> <span style="font-weight:400;color:#5a6673">${c.ref}</span></div><div class="cards">`;
+  c.caisses.forEach((k,idx)=>{
+    html += `<button class="caisse-card" onclick="ouvrirCaisse(${idx})">
+      <div class="ico">📦</div>
+      <div class="titre">${k.nom}</div>
+      <div class="compte">${k.items.length} él.</div>
+      <div class="chev">›</div>
+    </button>`;
+  });
+  html += `</div>`;
+  contenu.innerHTML = html;
+}
+
+/* Niveau 3 : items d'une caisse */
+function renderItems(){
+  const c = DATA.conteneurs.find(x=>x.id===vue.conteneurId);
+  const k = c.caisses[vue.caisseIdx];
+  breadcrumb.innerHTML =
+    `<a onclick="retourAccueil()">Conteneurs</a><span class="sep">›</span>` +
+    `<a onclick="retourConteneur()">${c.nom}</a><span class="sep">›</span>` +
+    `<span>${k.nom}</span>`;
+
+  let html = `<div class="section-titre">📦 ${k.nom}</div><ul class="item-list">`;
+  k.items.forEach(it=> html += `<li>${it}</li>`);
+  html += `</ul>`;
+  contenu.innerHTML = html;
+}
+
+/* Recherche : liste tous les items correspondants + emplacement */
+function renderRecherche(q){
+  breadcrumb.innerHTML = `<span>Résultats pour « ${searchInput.value.trim()} »</span>`;
+  const res = [];
+  DATA.conteneurs.forEach(c=>{
+    c.caisses.forEach(k=>{
+      k.items.forEach(it=>{
+        if(normalize(it).includes(q)){
+          res.push({ item:it, conteneur:c, caisse:k.nom });
+        }
+      });
+    });
+  });
+
+  if(res.length===0){ contenu.innerHTML = "<div class='vide'>Aucun matériel trouvé 🔍</div>"; return; }
+
+  let html = `<div class="section-titre">${res.length} résultat(s)</div>`;
+  res.forEach(r=>{
+    html += `<div class="result">
+      <div class="item">${r.item}</div>
+      <div class="loc">
+        <span class="chip" style="background:${r.conteneur.couleur}"><span class="dot"></span>${r.conteneur.nom}</span>
+        <span class="caisse">📦 ${r.caisse}</span>
+      </div>
+    </div>`;
+  });
+  contenu.innerHTML = html;
+}
+
+/* ---------- Navigation ---------- */
+function ouvrirConteneur(id){ vue={conteneurId:id, caisseIdx:null}; render(); window.scrollTo(0,0); }
+function ouvrirCaisse(idx){ vue.caisseIdx=idx; render(); window.scrollTo(0,0); }
+function retourAccueil(){ vue={conteneurId:null, caisseIdx:null}; render(); }
+function retourConteneur(){ vue.caisseIdx=null; render(); }
+
+/* Le bouton retour du header : remonte d'un niveau, sinon accueil */
+document.getElementById('backLink').addEventListener('click', function(e){
+  if(searchInput.value){ e.preventDefault(); searchInput.value=''; clearBtn.style.display='none'; render(); return; }
+  if(vue.caisseIdx!==null){ e.preventDefault(); retourConteneur(); return; }
+  if(vue.conteneurId!==null){ e.preventDefault(); retourAccueil(); return; }
+  /* sinon : lien normal vers index.html */
+});
+</script>
+</body>
+</html>

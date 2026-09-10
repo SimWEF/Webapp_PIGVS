@@ -1,0 +1,19 @@
+{
+  "_note": "Liste centrale des chantiers actifs. 'site' sert à pré-remplir le champ Site des autres pages. 'infoData' pointe vers le dashboard Info du chantier.",
+  "chantiers": [
+    {
+      "id": "PIGVS PAL4",
+      "nom": "PIGVS PAL4",
+      "site": "PAL4",
+      "statut": "actif",
+      "infoData": "info-paluel4.json"
+    },
+    {
+      "id": "PIGVS CAT3",
+      "nom": "PIGVS CAT3",
+      "site": "CAT3",
+      "statut": "actif",
+      "infoData": "info-cattenom3.json"
+    }
+  ]
+}

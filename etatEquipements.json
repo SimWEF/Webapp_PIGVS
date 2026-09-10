@@ -1,0 +1,22 @@
+[
+    {
+      "sousEnsemble": "Mini-lance 1300",
+      "equipement": "Mini-lance #01",
+      "etat": "VERT"
+    },
+    {
+      "sousEnsemble": "Mini-lance 1300",
+      "equipement": "Mini-lance #02",
+      "etat": "ROUGE"
+    },
+    {
+      "sousEnsemble": "CART",
+      "equipement": "CART #01",
+      "etat": "VERT"
+    },
+    {
+      "sousEnsemble": "CART",
+      "equipement": "CART #02",
+      "etat": "ORANGE"
+    }
+  ]

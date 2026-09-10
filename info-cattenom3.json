@@ -1,0 +1,18 @@
+{
+  "titre": "PIGVS CAT3",
+  "operation": "Opération PIGVS CAT3",
+  "avancement": 25,
+  "jour": "J+5",
+  "finPrev": "02/08",
+  "planning": [
+    { "nom": "Montage & installation", "sous": "En cours · ~80%", "etat": "current" },
+    { "nom": "Essais à blanc",         "sous": "Prévu 12/07",     "etat": "todo" },
+    { "nom": "Lançage GV3",            "sous": "Prévu 18/07",     "etat": "todo" },
+    { "nom": "Repli & démontage",      "sous": "Prévu 30/07",     "etat": "todo" }
+  ],
+  "alertes": [
+    { "couleur": "orange", "ico": "🚧", "titre": "Accès chantier restreint", "desc": "Badge spécifique requis zone GV3 — voir sécurité site." },
+    { "couleur": "bleu",   "ico": "📦", "titre": "Livraison matériel attendue", "desc": "Conteneur ETV3 attendu le 11/07." }
+  ],
+  "maj": "08/07/2026 — 06:45 · Chef de projet"
+}

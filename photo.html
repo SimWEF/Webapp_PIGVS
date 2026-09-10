@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo — PIGVS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .adresse-bloc { display:flex; align-items:center; gap:10px; background:#f2f4f7;
+      border:1px dashed #0078D7; border-radius:12px; padding:12px; }
+    .adresse-bloc .mail { flex:1; font-family:monospace; font-size:14px; font-weight:bold;
+      color:#083f78; word-break:break-all; }
+    .btn-copy { background:#0078D7; color:#fff; border:none; border-radius:10px;
+      padding:12px 16px; font-size:14px; font-weight:bold; cursor:pointer; white-space:nowrap; }
+    .btn-photo { display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
+      padding:18px; font-size:17px; font-weight:bold; border:none; border-radius:12px; cursor:pointer;
+      background:#0078D7; color:#fff; }
+    .btn-gal { background:#4b5563; }
+    .btns-photo { display:flex; flex-direction:column; gap:10px; }
+    .btn-send { display:flex; align-items:center; justify-content:center; gap:10px; width:100%;
+      padding:18px; font-size:18px; font-weight:bold; border:none; border-radius:12px; cursor:pointer;
+      background:#1f9d55; color:#fff; }
+    .btn-send:disabled { opacity:.5; }
+    .btn-reset { width:100%; padding:14px; font-size:15px; font-weight:bold; border:2px solid #d93838;
+      border-radius:12px; cursor:pointer; background:#fff; color:#d93838; margin-top:10px; }
+    #camInput, #galInput { position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0; }
+    .champ { margin-bottom:12px; }
+    .champ label { display:block; font-weight:bold; margin-bottom:6px; font-size:15px; }
+    .champ .req { color:#d93838; }
+    input, select, textarea { width:100%; padding:12px; font-size:16px; border-radius:8px;
+      border:1px solid #ccc; box-sizing:border-box; }
+    textarea { min-height:70px; resize:none; }
+    .card > label { display:block; font-weight:bold; margin-bottom:8px; font-size:15px; }
+    .ac-wrap { position:relative; }
+    .ac-list { position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ccc;
+      border-radius:8px; max-height:220px; overflow-y:auto; z-index:60; display:none;
+      box-shadow:0 6px 16px rgba(0,0,0,.14); }
+    .ac-list div { padding:11px 12px; font-size:15px; cursor:pointer; border-bottom:1px solid #f0f0f0; }
+    .ac-list div:last-child { border-bottom:0; }
+    .ac-list div:hover { background:#e7f0fb; }
+    .ac-list .ac-empty { color:#8a94a1; cursor:default; }
+    #galerie.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:14px; }
+    #galerie.grid .vignette { position:relative; border-radius:10px; overflow:hidden; border:1px solid #d0d7de; aspect-ratio:1/1; }
+    #galerie.grid .vignette img { width:100%; height:100%; object-fit:cover; display:block; }
+    #galerie.grid .num { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.55);
+      color:#fff; font-size:12px; text-align:center; padding:2px 0; }
+    #galerie.grid .suppr { position:absolute; top:4px; right:4px; width:26px; height:26px;
+      background:rgba(217,56,56,.92); color:#fff; border:none; border-radius:50%;
+      font-size:15px; font-weight:bold; cursor:pointer; }
+    #galerie.liste { display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+    #galerie.liste .ligne { display:flex; align-items:center; gap:10px; border:1px solid #d0d7de;
+      border-radius:10px; padding:8px; }
+    #galerie.liste .ligne img { width:64px; height:64px; object-fit:cover; border-radius:8px; flex:0 0 auto; }
+    #galerie.liste .ligne .rep { flex:1; position:relative; }
+    #galerie.liste .ligne .rep select, #galerie.liste .ligne .rep input { padding:10px; font-size:15px; }
+    #galerie.liste .ligne .rep.manquant select,
+    #galerie.liste .ligne .rep.manquant input { border-color:#d93838; background:#fff5f5; }
+    #galerie.liste .ligne .suppr { width:34px; height:34px; background:#fff; color:#d93838;
+      border:2px solid #d93838; border-radius:50%; font-size:16px; font-weight:bold; cursor:pointer; flex:0 0 auto; }
+    .compteur { font-size:14px; color:var(--muted,#5a6673); text-align:center; margin-top:10px; }
+    .jauge { height:8px; background:#e5e9ef; border-radius:6px; overflow:hidden; margin-top:8px; }
+    .jauge > div { height:100%; width:0%; background:#1f9d55; transition:width .2s, background .2s; }
+    .chemin { font-size:12px; font-family:monospace; color:#083f78; background:#eef4fb;
+      border-radius:8px; padding:8px; margin-top:10px; word-break:break-all; }
+    .status { text-align:center; font-size:15px; font-weight:bold; padding:14px; border-radius:12px; margin-top:4px; display:none; }
+    .status.info  { display:block; background:#e7f0fb; color:#083f78; }
+    .status.ok    { display:block; background:#e4f6ec; color:#1f9d55; }
+    .status.erreur{ display:block; background:#fdecec; color:#d93838; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <a class="back" href="photos.html">‹</a>
+    <h1 id="titrePage">📷 Photo</h1>
+  </header>
+  <div class="container">
+    <div class="card">
+      <label>📧 Adresse de destination</label>
+      <div class="adresse-bloc">
+        <span class="mail" id="mailDest">photos-terrain@tasociete.fr</span>
+        <button class="btn-copy" id="copyBtn">Copier</button>
+      </div>
+      <div class="compteur">Colle cette adresse dans le champ « À » de ton mail.</div>
+    </div>
+    <div class="card">
+      <label>1. Renseigner les informations</label>
+      <div id="champs"></div>
+    </div>
+    <div class="card">
+      <label>2. Ajouter des photos</label>
+      <input type="file" accept="image/*" capture="environment" id="camInput">
+      <input type="file" accept="image/*" multiple id="galInput">
+      <div class="btns-photo">
+        <label for="camInput" class="btn-photo">📸 Prendre une photo</label>
+        <label for="galInput" class="btn-photo btn-gal">🖼️ Choisir dans la galerie</label>
+      </div>
+      <div id="aide-nom" class="compteur" style="display:none"></div>
+      <div id="galerie" class="grid"></div>
+      <div class="compteur" id="compteur"></div>
+      <div class="jauge"><div id="jaugeFill"></div></div>
+    </div>
+    <div class="card">
+      <label>3. Envoyer</label>
+      <div class="chemin" id="apercuChemin">Destination : …</div>
+      <button id="sendBtn" class="btn-send" style="margin-top:10px" disabled>Envoyer 📤</button>
+      <button id="resetBtn" class="btn-reset" style="display:none;">Tout effacer 🗑️</button>
+      <div id="statusPhoto" class="status"></div>
+    </div>
+  </div>
+
+<!-- ✅ Module chantier chargé AVANT le script principal -->
+<script src="pigvs-chantier.js"></script>
+<script>
+const DESTINATAIRE = "souarns@westinghouse.com";
+const QUALITE_JPEG   = 0.90;
+const MAX_LARGEUR    = 2500;
+const LIMITE_TOTALE  = 10 * 1024 * 1024;
+const GV_OPTIONS = ["GV1","GV2","GV3","GV4"];
+
+const TYPES = {
+  "colisage-conteneur": {
+    titre:"📦 Colisage conteneur",
+    champs:[
+      {id:"site",      label:"Site",      type:"json", source:"sites.json",      req:true},
+      {id:"conteneur", label:"Conteneur", type:"json", source:"conteneurs.json", req:true}
+    ],
+    path:v=>`photo-PIGVS/${v.site}/1- Colisage conteneur/${v.conteneur}`,
+    nomPhoto:{ type:"text", label:"Nom de la photo (facultatif)", req:false }
+  },
+  "colisage-caisse": {
+    titre:"🧰 Colisage caisse",
+    champs:[
+      {id:"site", label:"Site", type:"json", source:"sites.json", req:true}
+    ],
+    path:v=>`photo-PIGVS/${v.site}/2- Colisage caisse`,
+    nomPhoto:{ type:"json", source:"caisses.json", label:"Caisse (facultatif)", req:false }
+  },
+  "cahier-quart": {
+    titre:"📓 Cahier de quart",
+    champs:[
+      {id:"site",     label:"Site",     type:"json",  source:"sites.json", req:true},
+      {id:"gv",       label:"GV",       type:"liste", options:GV_OPTIONS, req:true},
+      {id:"activite", label:"Activité", type:"liste", options:["lançage","ETV"], req:true},
+      {id:"date",     label:"Date",     type:"date",  req:true},
+      {id:"poste",    label:"Poste",    type:"liste", options:["Matin","Après-midi","Nuit","Journée"], req:true}
+    ],
+    path:v=>`photo-PIGVS/${v.site}/3- Cahier de quart/${v.gv}/${v.activite}`,
+    nomBase:v=>`${v.date}_${v.poste}`,
+    nomPhoto:{ type:"text", label:"Nom de la photo (facultatif)", req:false }
+  },
+  "portee-joint": {
+    titre:"🔩 Portée de joint",
+    champs:[
+      {id:"site", label:"Site",            type:"json",  source:"sites.json", req:true},
+      {id:"gv",   label:"GV",              type:"liste", options:GV_OPTIONS, req:true},
+      {id:"sens", label:"Entrée / Sortie", type:"liste", options:["Entrée","Sortie"], req:true}
+    ],
+    path:v=>`photo-PIGVS/${v.site}/4- Portées de joint/${v.gv}/${v.sens}`,
+    nomPhoto:{ type:"liste", label:"Repère", req:true, options:[
+      {label:"TP 0",     value:"TP_0"},
+      {label:"TP 180",   value:"TP_180"},
+      {label:"TO 0DG",   value:"TO_0DG"},
+      {label:"TO 180DD", value:"TO_180DD"},
+      {label:"TO 90",    value:"TO_90"},
+      {label:"TO 270",   value:"TO_270"}
+    ]}
+  },
+  "condition-acces": {
+    titre:"🚪 Condition d'accès",
+    champs:[
+      {id:"site", label:"Site", type:"json", source:"sites.json", req:true}
+    ],
+    path:v=>`photo-PIGVS/${v.site}/5- Conditions d'accès`,
+    nomPhoto:{ type:"text", label:"Nom de la photo (facultatif)", req:false }
+  },
+  "autre": {
+    titre:"🗂️ Autre",
+    champs:[
+      {id:"site", label:"Site", type:"json", source:"sites.json", req:true}
+    ],
+    path:v=>`photo-PIGVS/${v.site}/6- Autre`,
+    nomPhoto:{ type:"text", label:"Nom de la photo (facultatif)", req:false }
+  }
+};
+
+const params = new URLSearchParams(location.search);
+const TYPE_ID = params.get('type');
+const TYPE = TYPES[TYPE_ID];
+
+const champsDiv    = document.getElementById('champs');
+const titrePage    = document.getElementById('titrePage');
+const apercuChemin = document.getElementById('apercuChemin');
+const aideNom      = document.getElementById('aide-nom');
+
+let photos = [];
+let nomPhotoOptions = [];
+const champData = {};
+
+const camInput   = document.getElementById('camInput');
+const galInput   = document.getElementById('galInput');
+const galerie    = document.getElementById('galerie');
+const compteur   = document.getElementById('compteur');
+const jaugeFill  = document.getElementById('jaugeFill');
+const sendBtn    = document.getElementById('sendBtn');
+const resetBtn   = document.getElementById('resetBtn');
+const statusPhoto= document.getElementById('statusPhoto');
+const copyBtn    = document.getElementById('copyBtn');
+
+document.getElementById('mailDest').textContent = DESTINATAIRE;
+
+function clean(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|#]/g,'-'); }
+function escAttr(s){ return (s||'').toString().replace(/"/g,'&quot;'); }
+function setStatusP(t,m){ statusPhoto.className="status "+t; statusPhoto.innerHTML=m; }
+function clearStatusP(){ statusPhoto.className="status"; statusPhoto.innerHTML=""; }
+function tailleTotale(){ return photos.reduce((s,p)=>s+p.file.size,0); }
+function fmtMo(o){ return (o/1048576).toFixed(1); }
+
+function normalize(str){ return (str||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+function editDistance(a,b){
+  const dp=[]; for(let i=0;i<=a.length;i++){dp[i]=[];dp[i][0]=i;} for(let j=0;j<=b.length;j++){dp[0][j]=j;}
+  for(let i=1;i<=a.length;i++){for(let j=1;j<=b.length;j++){
+    const cost=a[i-1]===b[j-1]?0:1;
+    dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+cost);
+    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]){dp[i][j]=Math.min(dp[i][j],dp[i-2][j-2]+1);}
+  }} return dp[a.length][b.length];
+}
+function wordScore(s,t){
+  if(!s) return 1;
+  if(t===s) return 120;
+  if(t.startsWith(s)) return 100;
+  if(t.includes(s)) return 80;
+  const tp=t.substring(0,s.length);
+  const d=Math.min(editDistance(s,t),editDistance(s,tp));
+  let th=0; if(s.length<=3)th=0; else if(s.length<=5)th=1; else if(s.length<=9)th=2; else th=3;
+  return d<=th ? 60-d*10 : 0;
+}
+function itemScore(search,item){
+  const q=normalize(search), text=normalize(item);
+  if(!q) return 1;
+  const qw=q.split(/\s+/).filter(Boolean), tw=text.split(/\s+/).filter(Boolean);
+  let total=0;
+  for(const w of qw){ let best=0; for(const t of tw){ const sc=wordScore(w,t); if(sc>best)best=sc; } if(best===0) return 0; total+=best; }
+  if(text.startsWith(q)) total+=50;
+  if(text.includes(q)) total+=30;
+  return total;
+}
+function attachAutocomplete(input, listEl, getData, onChange){
+  function show(filter){
+    const data = getData() || [];
+    const val = normalize(filter);
+    let results = data.map(item=>({original:item, score:itemScore(val,item)}))
+                      .filter(r=>r.score>0)
+                      .sort((a,b)=> b.score!==a.score ? b.score-a.score : a.original.localeCompare(b.original))
+                      .slice(0,100);
+    if(results.length===0){
+      listEl.innerHTML = "<div class='ac-empty'>Aucun résultat</div>";
+    } else {
+      listEl.innerHTML = results.map(r=>`<div>${r.original}</div>`).join('');
+      listEl.querySelectorAll('div').forEach(d=>{
+        d.addEventListener('mousedown', ev=>{
+          ev.preventDefault();
+          input.value = d.textContent.trim();
+          listEl.style.display = "none";
+          if(onChange) onChange(input.value);
+        });
+      });
+    }
+    listEl.style.display = "block";
+  }
+  input.addEventListener('focus', ()=> show(input.value));
+  input.addEventListener('input', ()=>{ show(input.value); if(onChange) onChange(input.value); });
+}
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.ac-wrap')){
+    document.querySelectorAll('.ac-list').forEach(l=> l.style.display='none');
+  }
+});
+
+function compresser(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onerror=()=>reject("lecture impossible");
+    reader.onload=ev=>{
+      const img=new Image();
+      img.onerror=()=>reject("image invalide");
+      img.onload=()=>{
+        const ratio=Math.min(1, MAX_LARGEUR/Math.max(img.width,img.height));
+        const canvas=document.createElement('canvas');
+        canvas.width =Math.round(img.width *ratio);
+        canvas.height=Math.round(img.height*ratio);
+        canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
+        canvas.toBlob(b=> b ? resolve(b) : reject("compression échouée"), 'image/jpeg', QUALITE_JPEG);
+      };
+      img.src=ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function construireChamps(){
+  TYPE.champs.forEach(c=>{
+    const wrap=document.createElement('div');
+    wrap.className='champ';
+    const req = c.req ? ' <span class="req">*</span>' : '';
+    let inner = `<label for="f_${c.id}">${c.label}${req}</label>`;
+    if(c.type==='json'){
+      inner += `<div class="ac-wrap">
+                  <input type="text" id="f_${c.id}" autocomplete="off" autocorrect="off"
+                         autocapitalize="off" spellcheck="false" placeholder="Rechercher…">
+                  <div class="ac-list" id="ac_f_${c.id}"></div>
+                </div>`;
+    } else if(c.type==='liste'){
+      inner += `<select id="f_${c.id}"><option value="">— choisir —</option>` +
+        c.options.map(o=>`<option value="${o}">${o}</option>`).join('') + `</select>`;
+    } else if(c.type==='date'){
+      inner += `<input type="date" id="f_${c.id}">`;
+    } else {
+      inner += `<input type="text" id="f_${c.id}">`;
+    }
+    wrap.innerHTML = inner;
+    champsDiv.appendChild(wrap);
+  });
+
+  TYPE.champs.forEach(c=>{
+    const el=document.getElementById('f_'+c.id);
+    if(c.type==='json'){
+      champData[c.id] = [];
+      fetch(c.source).then(r=>r.json()).then(list=>{ champData[c.id]=list; })
+        .catch(()=>{ el.placeholder='⚠️ '+c.source+' introuvable'; });
+      const listEl = document.getElementById('ac_f_'+c.id);
+      attachAutocomplete(el, listEl, ()=>champData[c.id], ()=>majEtat());
+    } else {
+      if(c.type==='date'){ el.value = new Date().toISOString().slice(0,10); }
+      el.addEventListener('input', majEtat);
+      el.addEventListener('change', majEtat);
+    }
+  });
+
+  if(TYPE.nomPhoto && TYPE.nomPhoto.type==='json'){
+    fetch(TYPE.nomPhoto.source).then(r=>r.json()).then(list=>{ nomPhotoOptions = list; })
+      .catch(()=>{ nomPhotoOptions = []; });
+  }
+
+  if(TYPE.nomPhoto){
+    galerie.className='liste';
+    aideNom.style.display='block';
+    aideNom.textContent = TYPE.nomPhoto.req
+      ? "Choisis une valeur sous chaque photo (elle servira de nom de fichier)."
+      : "Tu peux nommer chaque photo (facultatif). Sinon un nom automatique est utilisé.";
+  } else {
+    galerie.className='grid';
+    aideNom.style.display='none';
+  }
+  majEtat();
+}
+
+function lireValeurs(){
+  const v={};
+  TYPE.champs.forEach(c=>{
+    const el=document.getElementById('f_'+c.id);
+    v[c.id] = clean(el.value);
+  });
+  return v;
+}
+
+function champsOK(){
+  return TYPE.champs.every(c=>{
+    if(!c.req) return true;
+    return document.getElementById('f_'+c.id).value.trim() !== '';
+  });
+}
+
+function nomPhotoOK(){
+  if(!TYPE.nomPhoto || !TYPE.nomPhoto.req) return true;
+  return photos.length>0 && photos.every(p=>p.nom && p.nom.trim()!=='');
+}
+
+copyBtn.addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText(DESTINATAIRE); }
+  catch(err){ const t=document.createElement('textarea'); t.value=DESTINATAIRE;
+    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+  copyBtn.textContent="Copié ✅"; setTimeout(()=>copyBtn.textContent="Copier",1800);
+});
+
+async function traiterFichiers(fichiers){
+  if(!fichiers.length) return;
+  setStatusP('info','⏳ Compression en cours…');
+  let ajoutees=0, refusees=0;
+  for(const f of fichiers){
+    let blob;
+    try { blob = await compresser(f); }
+    catch(err){ console.error(err); refusees++; continue; }
+    if(tailleTotale() + blob.size > LIMITE_TOTALE){ refusees++; continue; }
+    const file = new File([blob], `tmp_${Date.now()}.jpg`, {type:'image/jpeg'});
+    photos.push({ file, url: URL.createObjectURL(file), nom:'' });
+    ajoutees++;
+  }
+  rendreGalerie();
+  if(refusees>0) setStatusP('erreur', `⚠️ ${ajoutees} ajoutée(s), ${refusees} refusée(s) : limite de 10 Mo atteinte.`);
+  else setStatusP('info', `✅ ${ajoutees} photo(s) ajoutée(s).`);
+}
+
+camInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files||[]); camInput.value=""; await traiterFichiers(f); });
+galInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files||[]); galInput.value=""; await traiterFichiers(f); });
+
+function rendreGalerie(){
+  galerie.innerHTML="";
+  if(TYPE.nomPhoto){
+    const np = TYPE.nomPhoto;
+    photos.forEach((p,i)=>{
+      const manquant = (np.req && !p.nom) ? ' manquant' : '';
+      let champHtml;
+      if(np.type==='text'){
+        champHtml = `<input type="text" class="np-text" data-i="${i}" placeholder="${escAttr(np.label)}" value="${escAttr(p.nom)}">`;
+      } else if(np.type==='json'){
+        champHtml = `<div class="ac-wrap">
+                       <input type="text" class="np-ac" data-i="${i}" autocomplete="off"
+                              placeholder="${escAttr(np.label)}" value="${escAttr(p.nom)}">
+                       <div class="ac-list" id="ac_np_${i}"></div>
+                     </div>`;
+      } else {
+        let opts = `<option value="">— ${np.req ? 'choisir' : 'facultatif'} —</option>` +
+          np.options.map(o=>`<option value="${o.value}" ${p.nom===o.value?'selected':''}>${o.label}</option>`).join('');
+        champHtml = `<select class="np-select" data-i="${i}">${opts}</select>`;
+      }
+      const ligne=document.createElement('div'); ligne.className='ligne';
+      ligne.innerHTML =
+        `<img src="${p.url}">
+         <div class="rep${manquant}">${champHtml}</div>
+         <button class="suppr" data-i="${i}">×</button>`;
+      galerie.appendChild(ligne);
+    });
+    galerie.querySelectorAll('.np-text').forEach(el=>{
+      el.addEventListener('input', ()=>{
+        const i=+el.dataset.i; photos[i].nom = el.value;
+        majEtat();
+      });
+    });
+    galerie.querySelectorAll('.np-select').forEach(el=>{
+      el.addEventListener('change', ()=>{
+        const i=+el.dataset.i; photos[i].nom = el.value;
+        if(np.req){ el.closest('.rep').classList.toggle('manquant', !el.value); }
+        majEtat();
+      });
+    });
+    galerie.querySelectorAll('.np-ac').forEach(el=>{
+      const i=+el.dataset.i;
+      const listEl = document.getElementById('ac_np_'+i);
+      attachAutocomplete(el, listEl, ()=>nomPhotoOptions, (val)=>{
+        photos[i].nom = val;
+        if(np.req){ el.closest('.rep').classList.toggle('manquant', !val); }
+        majEtat();
+      });
+    });
+  } else {
+    photos.forEach((p,i)=>{
+      const div=document.createElement('div'); div.className='vignette';
+      div.innerHTML=`<img src="${p.url}"><div class="num">${i+1}</div>
+        <button class="suppr" data-i="${i}">×</button>`;
+      galerie.appendChild(div);
+    });
+  }
+
+  galerie.querySelectorAll('.suppr').forEach(b=>b.addEventListener('click',()=>{
+    const i=+b.dataset.i; URL.revokeObjectURL(photos[i].url); photos.splice(i,1); rendreGalerie();
+  }));
+
+  const total=tailleTotale();
+  const pct = Math.min(100, Math.round(total/LIMITE_TOTALE*100));
+  compteur.textContent = photos.length ? `${photos.length} photo(s) · ${fmtMo(total)} / 10 Mo` : "";
+  jaugeFill.style.width = pct + '%';
+  jaugeFill.style.background = pct >= 90 ? '#d93838' : (pct >= 70 ? '#e8a13a' : '#1f9d55');
+  resetBtn.style.display = photos.length ? 'block':'none';
+  majEtat();
+}
+
+function majEtat(){
+  if(!TYPE) return;
+  const v=lireValeurs();
+  let chemin="…";
+  try{ chemin = TYPE.path(v); }catch(e){}
+  apercuChemin.textContent = "Destination : /"+chemin;
+  sendBtn.disabled = !(photos.length>0 && champsOK() && nomPhotoOK() && tailleTotale()<=LIMITE_TOTALE);
+}
+
+function nomsFichiers(){
+  const v = lireValeurs();
+  const used = {};
+  return photos.map((p,idx)=>{
+    let base;
+    if(TYPE.nomPhoto && p.nom && p.nom.trim()!==''){
+      base = clean(p.nom);
+    } else if(TYPE.nomBase){
+      base = clean(TYPE.nomBase(v)) + '_' + Date.now() + '_' + (idx+1);
+    } else {
+      base = 'photo_' + Date.now() + '_' + (idx+1);
+    }
+    let name = base;
+    if(used[base]!==undefined){ used[base]++; name = base + '_' + used[base]; }
+    else { used[base] = 1; }
+    return name + '.jpg';
+  });
+}
+
+sendBtn.addEventListener('click', async ()=>{
+  if(!photos.length){ setStatusP('erreur',"⚠️ Ajoute d'abord des photos."); return; }
+  if(!champsOK()){ setStatusP('erreur',"⚠️ Remplis les champs obligatoires (*)."); return; }
+  if(TYPE.nomPhoto && TYPE.nomPhoto.req && !nomPhotoOK()){ setStatusP('erreur',"⚠️ Renseigne le champ sous chaque photo."); return; }
+  if(tailleTotale() > LIMITE_TOTALE){ setStatusP('erreur',"⚠️ Total > 10 Mo. Retire une photo."); return; }
+
+  const v = lireValeurs();
+  const chemin = TYPE.path(v);
+  const recap = TYPE.champs.map(c=>{
+    const el=document.getElementById('f_'+c.id);
+    return `${c.label}: ${(el.value||'').replace(/#/g,'')}`;
+  }).join('\n');
+
+  const texte =
+`#PHOTOPIGVS#
+#PATH:${chemin}#
+Type: ${TYPE.titre}
+${recap}
+Envoi: ${new Date().toLocaleString('fr-FR')}`;
+
+  const noms = nomsFichiers();
+  const files = photos.map((p,idx)=> new File([p.file], noms[idx], {type:'image/jpeg'}));
+
+  if(navigator.canShare && navigator.canShare({files})){
+    try{
+      await navigator.share({ title:"Photo PIGVS", text:texte, files:files });
+      setStatusP('ok',"✅ Partage lancé. Choisis Outlook/Gmail, colle l'adresse puis envoie.");
+    }catch(err){
+      if(err && err.name==='AbortError'){ setStatusP('info',"Partage annulé."); }
+      else{ console.error(err); setStatusP('erreur',"❌ Partage impossible : "+(err.message||err)); }
+    }
+    return;
+  }
+  setStatusP('erreur',"⚠️ Partage de fichiers non supporté ici.<br>Teste sur Android + Chrome (HTTPS).");
+});
+
+resetBtn.addEventListener('click',()=>{
+  photos.forEach(p=>URL.revokeObjectURL(p.url));
+  photos=[]; clearStatusP(); rendreGalerie();
+});
+
+/* =========================================================
+   INITIALISATION
+   ========================================================= */
+if(!TYPE){
+  titrePage.textContent = "⚠️ Type inconnu";
+  champsDiv.innerHTML = "<p style='color:#d93838'>Type de photo non reconnu. Reviens au menu Photos.</p>";
+} else {
+  titrePage.textContent = TYPE.titre;
+  construireChamps();
+
+  // ✅ PRÉ-REMPLISSAGE DU SITE (champ f_site) selon le chantier choisi
+  if (window.PIGVS) {
+    PIGVS.loadChantiers().then(function () {
+      const s = document.getElementById('f_site');
+      if (s) { PIGVS.prefillSite(s); majEtat(); }
+    });
+  }
+}
+</script>
+</body>
+</html>

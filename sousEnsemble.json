@@ -1,0 +1,20 @@
+[
+  {
+    "nom": "Mini-lance 1300",
+    "utilisables": 8,
+    "total": 9,
+    "etat": "ORANGE"
+  },
+  {
+    "nom": "CART",
+    "utilisables": 3,
+    "total": 7,
+    "etat": "ROUGE"
+  },
+  {
+    "nom": "Support GV",
+    "utilisables": 15,
+    "total": 16,
+    "etat": "VERT"
+  }
+]
