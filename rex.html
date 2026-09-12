@@ -17,6 +17,7 @@
     textarea { min-height:110px; resize:vertical; }
     .btn { width:100%; padding:16px; font-size:17px; font-weight:700; border:none; border-radius:12px;
       background:#1f9d55; color:#fff; cursor:pointer; margin-top:6px; }
+    .btn:disabled { opacity:.5; }
     .field-wrap { position:relative; }
     .dropdown { position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ccc;
       border-radius:8px; max-height:200px; overflow-y:auto; z-index:60; display:none;
@@ -25,13 +26,8 @@
     .dropdown div:hover { background:#e7f0fb; }
     .status { text-align:center; font-size:14px; font-weight:700; padding:12px; border-radius:12px; margin-top:10px; display:none; }
     .status.ok { display:block; background:#e4f6ec; color:#1f9d55; }
+    .status.info { display:block; background:#e7f0fb; color:#083f78; }
     .status.erreur { display:block; background:#fdecec; color:#d93838; }
-    .adresse-bloc { display:flex; align-items:center; gap:10px; background:#f2f4f7;
-      border:1px dashed #0078D7; border-radius:10px; padding:10px; margin-top:6px; }
-    .adresse-bloc .mail { flex:1; font-family:monospace; font-size:13px; font-weight:700; color:#083f78; word-break:break-all; }
-    .btn-copy { background:#0078D7; color:#fff; border:none; border-radius:10px; padding:10px 14px;
-      font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap; }
-    .note { font-size:13px; color:#5a6673; margin-top:6px; }
   </style>
 </head>
 <body>
@@ -59,9 +55,7 @@
       <label>Activité <span class="req">*</span></label>
       <select id="activite">
         <option value="">— choisir —</option>
-        <option>Lançage</option>
-        <option>ETV</option>
-        <option>PIGVS</option>
+        <option>Lançage</option><option>ETV</option><option>PIGVS</option>
       </select>
     </div>
 
@@ -69,11 +63,8 @@
       <label>Thème <span class="req">*</span></label>
       <select id="theme">
         <option value="">— choisir —</option>
-        <option>Technique</option>
-        <option>Documentaire</option>
-        <option>Organisationnel</option>
-        <option>Proposition d'amélioration</option>
-        <option>Autre</option>
+        <option>Technique</option><option>Documentaire</option><option>Organisationnel</option>
+        <option>Proposition d'amélioration</option><option>Autre</option>
       </select>
     </div>
 
@@ -87,38 +78,29 @@
       <input type="text" id="operateur" placeholder="Votre nom">
     </div>
 
-    <div class="field-group">
-      <label>📧 Adresse de destination</label>
-      <div class="adresse-bloc">
-        <span class="mail" id="mailDest">rex-pigvs@tasociete.fr</span>
-        <button type="button" class="btn-copy" id="copyBtn">Copier</button>
-      </div>
-      <div class="note">À l'envoi, choisis Outlook/Gmail et colle cette adresse dans le champ « À ».</div>
-    </div>
-
     <button class="btn" id="sendBtn">Envoyer le REX 📤</button>
     <div id="status" class="status"></div>
   </div>
 
-<!-- ✅ Module chantier chargé AVANT le script principal -->
 <script src="pigvs-chantier.js"></script>
+<script src="pigvs-auth.js"></script>
+<script src="pigvs-envoi.js"></script>
 <script>
-const DESTINATAIRE = "souarns@westinghouse.com"; // adresse dédiée REX
-const siteInput = document.getElementById('site');
-const siteList  = document.getElementById('siteList');
-const status    = document.getElementById('status');
-const copyBtn   = document.getElementById('copyBtn');
-document.getElementById('mailDest').textContent = DESTINATAIRE;
-let sites = [];
+const siteInput=document.getElementById('site');
+const siteList=document.getElementById('siteList');
+const status=document.getElementById('status');
+const sendBtn=document.getElementById('sendBtn');
+let sites=[];
 
 function normalize(s){ return (s||'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+function setStatus(cls,msg){ status.className="status "+cls; status.textContent=msg; }
 
-fetch('sites.json').then(r=>r.json()).then(list=>{ sites=list; }).catch(()=>{});
+fetch('sites.json').then(r=>r.json()).then(l=>{ sites=l; }).catch(()=>{});
 siteInput.addEventListener('focus', ()=>showSites(''));
 siteInput.addEventListener('input', ()=>showSites(siteInput.value));
 function showSites(filter){
-  const val = normalize(filter);
-  const res = sites.filter(s=>normalize(s).includes(val)).slice(0,100);
+  const val=normalize(filter);
+  const res=sites.filter(s=>normalize(s).includes(val)).slice(0,100);
   siteList.innerHTML = res.length ? res.map(s=>`<div>${s}</div>`).join('') : "<div>Aucun résultat</div>";
   siteList.querySelectorAll('div').forEach(d=>d.addEventListener('mousedown',ev=>{
     ev.preventDefault(); siteInput.value=d.textContent.trim(); siteList.style.display='none';
@@ -127,72 +109,46 @@ function showSites(filter){
 }
 document.addEventListener('click', e=>{ if(!e.target.closest('.field-wrap')) siteList.style.display='none'; });
 
-// ✅ PRÉ-REMPLISSAGE DU SITE selon le chantier choisi
 if (window.PIGVS) {
-  PIGVS.loadChantiers().then(function () {
-    PIGVS.prefillSite(siteInput);
-  });
+  PIGVS.loadChantiers().then(function(){ PIGVS.prefillSite(siteInput); });
 }
 
-copyBtn.addEventListener('click', async ()=>{
-  try{ await navigator.clipboard.writeText(DESTINATAIRE); }
-  catch(err){ const t=document.createElement('textarea'); t.value=DESTINATAIRE;
-    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
-  copyBtn.textContent="Copié ✅"; setTimeout(()=>copyBtn.textContent="Copier",1800);
-});
+/* ============ ENVOI HTTP ============ */
+sendBtn.addEventListener('click', async ()=>{
+  const site=siteInput.value.trim();
+  const gv=document.getElementById('gv').value.trim();
+  const activite=document.getElementById('activite').value;
+  const theme=document.getElementById('theme').value;
+  const description=document.getElementById('description').value.trim();
+  const operateur=document.getElementById('operateur').value.trim();
 
-function setStatus(cls,msg){ status.className="status "+cls; status.textContent=msg; }
-
-document.getElementById('sendBtn').addEventListener('click', async ()=>{
-  const site        = document.getElementById('site').value.trim();
-  const gv          = document.getElementById('gv').value.trim();
-  const activite    = document.getElementById('activite').value;
-  const theme       = document.getElementById('theme').value;
-  const description = document.getElementById('description').value.trim();
-  const operateur   = document.getElementById('operateur').value.trim();
-
-  if(!site || !activite || !theme || !description || !operateur){
+  if(!site||!activite||!theme||!description||!operateur){
     setStatus('erreur',"⚠️ Remplis tous les champs obligatoires (*)."); return;
   }
 
-  const texte =
-`#REXPIGVS#
-Destinataire : ${DESTINATAIRE}
-Site : ${site}
-Type de GV : ${gv || 'N/C'}
-Activité : ${activite}
-Thème : ${theme}
-Opérateur : ${operateur}
+  sendBtn.disabled=true;
+  setStatus('info','⏳ Envoi en cours…');
 
-Description :
-${description}
+  const res = await PIGVS_ENVOI.envoyer({
+    type  : "REX",
+    path  : "",
+    champs: {
+      "Site":site, "GV":gv||"N/C", "Activite":activite,
+      "Theme":theme, "Description":description, "Operateur":operateur
+    },
+    photos: []
+  });
 
-Envoi : ${new Date().toLocaleString('fr-FR')}`;
-
-  const donnees = { title:"REX PIGVS", text:texte };
-
-  if(navigator.share){
-    try{
-      await navigator.share(donnees);
-      setStatus('ok',"✅ Partage lancé. Choisis Outlook/Gmail, colle l'adresse puis envoie.");
-    }catch(err){
-      if(err && err.name==='AbortError'){ setStatus('erreur',"Partage annulé."); }
-      else{ copierTexte(texte); }
-    }
+  if(res.ok){
+    setStatus('ok',"✅ REX envoyé, merci !");
+    document.getElementById('description').value="";
+    document.getElementById('gv').value="";
+    setTimeout(()=>{ sendBtn.disabled=false; }, 1500);
   } else {
-    copierTexte(texte);
+    setStatus('erreur',"❌ "+res.msg);
+    sendBtn.disabled=false;
   }
 });
-
-function copierTexte(texte){
-  try{
-    const t=document.createElement('textarea'); t.value=texte;
-    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove();
-    setStatus('ok',"✅ REX copié dans le presse-papiers. Colle-le dans un mail vers "+DESTINATAIRE+".");
-  }catch(e){
-    setStatus('erreur',"❌ Impossible de partager ici. Note le REX manuellement.");
-  }
-}
 </script>
 </body>
 </html>

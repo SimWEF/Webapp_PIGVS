@@ -35,7 +35,10 @@ const ASSETS = [
   "pigvs-chantier.js",
    "chantiers.json", 
    "info-paluel4.json",
-   "info-cattenom3.json"
+   "info-cattenom3.json",
+   "pigvs-envoi.js",
+   "pigvs-auth.js"
+   
 ];
 
 /* --- Installation : pré-cache de la coquille --- */

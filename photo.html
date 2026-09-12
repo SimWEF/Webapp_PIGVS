@@ -9,12 +9,6 @@
   <meta name="theme-color" content="#0078D7">
   <link rel="apple-touch-icon" href="icon-192.png">
   <style>
-    .adresse-bloc { display:flex; align-items:center; gap:10px; background:#f2f4f7;
-      border:1px dashed #0078D7; border-radius:12px; padding:12px; }
-    .adresse-bloc .mail { flex:1; font-family:monospace; font-size:14px; font-weight:bold;
-      color:#083f78; word-break:break-all; }
-    .btn-copy { background:#0078D7; color:#fff; border:none; border-radius:10px;
-      padding:12px 16px; font-size:14px; font-weight:bold; cursor:pointer; white-space:nowrap; }
     .btn-photo { display:flex; align-items:center; justify-content:center; gap:8px; width:100%;
       padding:18px; font-size:17px; font-weight:bold; border:none; border-radius:12px; cursor:pointer;
       background:#0078D7; color:#fff; }
@@ -33,7 +27,6 @@
     .champ .req { color:#d93838; }
     input, select, textarea { width:100%; padding:12px; font-size:16px; border-radius:8px;
       border:1px solid #ccc; box-sizing:border-box; }
-    textarea { min-height:70px; resize:none; }
     .card > label { display:block; font-weight:bold; margin-bottom:8px; font-size:15px; }
     .ac-wrap { position:relative; }
     .ac-list { position:absolute; top:100%; left:0; right:0; background:#fff; border:1px solid #ccc;
@@ -79,14 +72,6 @@
   </header>
   <div class="container">
     <div class="card">
-      <label>📧 Adresse de destination</label>
-      <div class="adresse-bloc">
-        <span class="mail" id="mailDest">photos-terrain@tasociete.fr</span>
-        <button class="btn-copy" id="copyBtn">Copier</button>
-      </div>
-      <div class="compteur">Colle cette adresse dans le champ « À » de ton mail.</div>
-    </div>
-    <div class="card">
       <label>1. Renseigner les informations</label>
       <div id="champs"></div>
     </div>
@@ -112,10 +97,10 @@
     </div>
   </div>
 
-<!-- ✅ Module chantier chargé AVANT le script principal -->
 <script src="pigvs-chantier.js"></script>
+<script src="pigvs-auth.js"></script>
+<script src="pigvs-envoi.js"></script>
 <script>
-const DESTINATAIRE = "souarns@westinghouse.com";
 const QUALITE_JPEG   = 0.90;
 const MAX_LARGEUR    = 2500;
 const LIMITE_TOTALE  = 10 * 1024 * 1024;
@@ -133,9 +118,7 @@ const TYPES = {
   },
   "colisage-caisse": {
     titre:"🧰 Colisage caisse",
-    champs:[
-      {id:"site", label:"Site", type:"json", source:"sites.json", req:true}
-    ],
+    champs:[ {id:"site", label:"Site", type:"json", source:"sites.json", req:true} ],
     path:v=>`photo-PIGVS/${v.site}/2- Colisage caisse`,
     nomPhoto:{ type:"json", source:"caisses.json", label:"Caisse (facultatif)", req:false }
   },
@@ -161,27 +144,20 @@ const TYPES = {
     ],
     path:v=>`photo-PIGVS/${v.site}/4- Portées de joint/${v.gv}/${v.sens}`,
     nomPhoto:{ type:"liste", label:"Repère", req:true, options:[
-      {label:"TP 0",     value:"TP_0"},
-      {label:"TP 180",   value:"TP_180"},
-      {label:"TO 0DG",   value:"TO_0DG"},
-      {label:"TO 180DD", value:"TO_180DD"},
-      {label:"TO 90",    value:"TO_90"},
-      {label:"TO 270",   value:"TO_270"}
+      {label:"TP 0",value:"TP_0"},{label:"TP 180",value:"TP_180"},
+      {label:"TO 0DG",value:"TO_0DG"},{label:"TO 180DD",value:"TO_180DD"},
+      {label:"TO 90",value:"TO_90"},{label:"TO 270",value:"TO_270"}
     ]}
   },
   "condition-acces": {
     titre:"🚪 Condition d'accès",
-    champs:[
-      {id:"site", label:"Site", type:"json", source:"sites.json", req:true}
-    ],
+    champs:[ {id:"site", label:"Site", type:"json", source:"sites.json", req:true} ],
     path:v=>`photo-PIGVS/${v.site}/5- Conditions d'accès`,
     nomPhoto:{ type:"text", label:"Nom de la photo (facultatif)", req:false }
   },
   "autre": {
     titre:"🗂️ Autre",
-    champs:[
-      {id:"site", label:"Site", type:"json", source:"sites.json", req:true}
-    ],
+    champs:[ {id:"site", label:"Site", type:"json", source:"sites.json", req:true} ],
     path:v=>`photo-PIGVS/${v.site}/6- Autre`,
     nomPhoto:{ type:"text", label:"Nom de la photo (facultatif)", req:false }
   }
@@ -200,19 +176,16 @@ let photos = [];
 let nomPhotoOptions = [];
 const champData = {};
 
-const camInput   = document.getElementById('camInput');
-const galInput   = document.getElementById('galInput');
-const galerie    = document.getElementById('galerie');
-const compteur   = document.getElementById('compteur');
-const jaugeFill  = document.getElementById('jaugeFill');
-const sendBtn    = document.getElementById('sendBtn');
-const resetBtn   = document.getElementById('resetBtn');
-const statusPhoto= document.getElementById('statusPhoto');
-const copyBtn    = document.getElementById('copyBtn');
+const camInput  = document.getElementById('camInput');
+const galInput  = document.getElementById('galInput');
+const galerie   = document.getElementById('galerie');
+const compteur  = document.getElementById('compteur');
+const jaugeFill = document.getElementById('jaugeFill');
+const sendBtn   = document.getElementById('sendBtn');
+const resetBtn  = document.getElementById('resetBtn');
+const statusPhoto = document.getElementById('statusPhoto');
 
-document.getElementById('mailDest').textContent = DESTINATAIRE;
-
-function clean(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|#]/g,'-'); }
+function clean(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|]/g,'-'); }
 function escAttr(s){ return (s||'').toString().replace(/"/g,'&quot;'); }
 function setStatusP(t,m){ statusPhoto.className="status "+t; statusPhoto.innerHTML=m; }
 function clearStatusP(){ statusPhoto.className="status"; statusPhoto.innerHTML=""; }
@@ -223,61 +196,43 @@ function normalize(str){ return (str||'').toLowerCase().normalize("NFD").replace
 function editDistance(a,b){
   const dp=[]; for(let i=0;i<=a.length;i++){dp[i]=[];dp[i][0]=i;} for(let j=0;j<=b.length;j++){dp[0][j]=j;}
   for(let i=1;i<=a.length;i++){for(let j=1;j<=b.length;j++){
-    const cost=a[i-1]===b[j-1]?0:1;
-    dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+cost);
-    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]){dp[i][j]=Math.min(dp[i][j],dp[i-2][j-2]+1);}
+    const c=a[i-1]===b[j-1]?0:1;
+    dp[i][j]=Math.min(dp[i-1][j]+1,dp[i][j-1]+1,dp[i-1][j-1]+c);
+    if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1])dp[i][j]=Math.min(dp[i][j],dp[i-2][j-2]+1);
   }} return dp[a.length][b.length];
 }
 function wordScore(s,t){
-  if(!s) return 1;
-  if(t===s) return 120;
-  if(t.startsWith(s)) return 100;
-  if(t.includes(s)) return 80;
-  const tp=t.substring(0,s.length);
-  const d=Math.min(editDistance(s,t),editDistance(s,tp));
+  if(!s)return 1; if(t===s)return 120; if(t.startsWith(s))return 100; if(t.includes(s))return 80;
+  const tp=t.substring(0,s.length); const d=Math.min(editDistance(s,t),editDistance(s,tp));
   let th=0; if(s.length<=3)th=0; else if(s.length<=5)th=1; else if(s.length<=9)th=2; else th=3;
-  return d<=th ? 60-d*10 : 0;
+  return d<=th?60-d*10:0;
 }
 function itemScore(search,item){
-  const q=normalize(search), text=normalize(item);
-  if(!q) return 1;
-  const qw=q.split(/\s+/).filter(Boolean), tw=text.split(/\s+/).filter(Boolean);
-  let total=0;
-  for(const w of qw){ let best=0; for(const t of tw){ const sc=wordScore(w,t); if(sc>best)best=sc; } if(best===0) return 0; total+=best; }
-  if(text.startsWith(q)) total+=50;
-  if(text.includes(q)) total+=30;
-  return total;
+  const q=normalize(search),text=normalize(item); if(!q)return 1;
+  const qw=q.split(/\s+/).filter(Boolean),tw=text.split(/\s+/).filter(Boolean); let tot=0;
+  for(const w of qw){let b=0;for(const t of tw){const sc=wordScore(w,t);if(sc>b)b=sc;}if(b===0)return 0;tot+=b;}
+  if(text.startsWith(q))tot+=50; if(text.includes(q))tot+=30; return tot;
 }
 function attachAutocomplete(input, listEl, getData, onChange){
   function show(filter){
-    const data = getData() || [];
-    const val = normalize(filter);
-    let results = data.map(item=>({original:item, score:itemScore(val,item)}))
-                      .filter(r=>r.score>0)
-                      .sort((a,b)=> b.score!==a.score ? b.score-a.score : a.original.localeCompare(b.original))
-                      .slice(0,100);
-    if(results.length===0){
-      listEl.innerHTML = "<div class='ac-empty'>Aucun résultat</div>";
-    } else {
-      listEl.innerHTML = results.map(r=>`<div>${r.original}</div>`).join('');
-      listEl.querySelectorAll('div').forEach(d=>{
-        d.addEventListener('mousedown', ev=>{
-          ev.preventDefault();
-          input.value = d.textContent.trim();
-          listEl.style.display = "none";
-          if(onChange) onChange(input.value);
-        });
-      });
+    const data=getData()||[]; const val=normalize(filter);
+    let r=data.map(it=>({original:it,score:itemScore(val,it)})).filter(x=>x.score>0)
+      .sort((a,b)=>b.score!==a.score?b.score-a.score:a.original.localeCompare(b.original)).slice(0,100);
+    if(r.length===0){ listEl.innerHTML="<div class='ac-empty'>Aucun résultat</div>"; }
+    else{
+      listEl.innerHTML=r.map(x=>`<div>${x.original}</div>`).join('');
+      listEl.querySelectorAll('div').forEach(d=>d.addEventListener('mousedown',ev=>{
+        ev.preventDefault(); input.value=d.textContent.trim(); listEl.style.display="none";
+        if(onChange) onChange(input.value);
+      }));
     }
-    listEl.style.display = "block";
+    listEl.style.display="block";
   }
-  input.addEventListener('focus', ()=> show(input.value));
-  input.addEventListener('input', ()=>{ show(input.value); if(onChange) onChange(input.value); });
+  input.addEventListener('focus',()=>show(input.value));
+  input.addEventListener('input',()=>{ show(input.value); if(onChange) onChange(input.value); });
 }
 document.addEventListener('click', function(e){
-  if(!e.target.closest('.ac-wrap')){
-    document.querySelectorAll('.ac-list').forEach(l=> l.style.display='none');
-  }
+  if(!e.target.closest('.ac-wrap')){ document.querySelectorAll('.ac-list').forEach(l=>l.style.display='none'); }
 });
 
 function compresser(file){
@@ -293,7 +248,7 @@ function compresser(file){
         canvas.width =Math.round(img.width *ratio);
         canvas.height=Math.round(img.height*ratio);
         canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-        canvas.toBlob(b=> b ? resolve(b) : reject("compression échouée"), 'image/jpeg', QUALITE_JPEG);
+        canvas.toBlob(b=> b?resolve(b):reject("compression échouée"), 'image/jpeg', QUALITE_JPEG);
       };
       img.src=ev.target.result;
     };
@@ -303,243 +258,190 @@ function compresser(file){
 
 function construireChamps(){
   TYPE.champs.forEach(c=>{
-    const wrap=document.createElement('div');
-    wrap.className='champ';
-    const req = c.req ? ' <span class="req">*</span>' : '';
-    let inner = `<label for="f_${c.id}">${c.label}${req}</label>`;
+    const wrap=document.createElement('div'); wrap.className='champ';
+    const req=c.req?' <span class="req">*</span>':'';
+    let inner=`<label for="f_${c.id}">${c.label}${req}</label>`;
     if(c.type==='json'){
-      inner += `<div class="ac-wrap">
-                  <input type="text" id="f_${c.id}" autocomplete="off" autocorrect="off"
-                         autocapitalize="off" spellcheck="false" placeholder="Rechercher…">
-                  <div class="ac-list" id="ac_f_${c.id}"></div>
-                </div>`;
+      inner+=`<div class="ac-wrap"><input type="text" id="f_${c.id}" autocomplete="off"
+               autocapitalize="off" spellcheck="false" placeholder="Rechercher…">
+               <div class="ac-list" id="ac_f_${c.id}"></div></div>`;
     } else if(c.type==='liste'){
-      inner += `<select id="f_${c.id}"><option value="">— choisir —</option>` +
-        c.options.map(o=>`<option value="${o}">${o}</option>`).join('') + `</select>`;
-    } else if(c.type==='date'){
-      inner += `<input type="date" id="f_${c.id}">`;
-    } else {
-      inner += `<input type="text" id="f_${c.id}">`;
-    }
-    wrap.innerHTML = inner;
-    champsDiv.appendChild(wrap);
+      inner+=`<select id="f_${c.id}"><option value="">— choisir —</option>`+
+        c.options.map(o=>`<option value="${o}">${o}</option>`).join('')+`</select>`;
+    } else if(c.type==='date'){ inner+=`<input type="date" id="f_${c.id}">`; }
+    else { inner+=`<input type="text" id="f_${c.id}">`; }
+    wrap.innerHTML=inner; champsDiv.appendChild(wrap);
   });
 
   TYPE.champs.forEach(c=>{
     const el=document.getElementById('f_'+c.id);
     if(c.type==='json'){
-      champData[c.id] = [];
-      fetch(c.source).then(r=>r.json()).then(list=>{ champData[c.id]=list; })
+      champData[c.id]=[];
+      fetch(c.source).then(r=>r.json()).then(l=>{ champData[c.id]=l; })
         .catch(()=>{ el.placeholder='⚠️ '+c.source+' introuvable'; });
-      const listEl = document.getElementById('ac_f_'+c.id);
-      attachAutocomplete(el, listEl, ()=>champData[c.id], ()=>majEtat());
+      attachAutocomplete(el, document.getElementById('ac_f_'+c.id), ()=>champData[c.id], ()=>majEtat());
     } else {
-      if(c.type==='date'){ el.value = new Date().toISOString().slice(0,10); }
+      if(c.type==='date'){ el.value=new Date().toISOString().slice(0,10); }
       el.addEventListener('input', majEtat);
       el.addEventListener('change', majEtat);
     }
   });
 
   if(TYPE.nomPhoto && TYPE.nomPhoto.type==='json'){
-    fetch(TYPE.nomPhoto.source).then(r=>r.json()).then(list=>{ nomPhotoOptions = list; })
-      .catch(()=>{ nomPhotoOptions = []; });
+    fetch(TYPE.nomPhoto.source).then(r=>r.json()).then(l=>{ nomPhotoOptions=l; }).catch(()=>{ nomPhotoOptions=[]; });
   }
-
   if(TYPE.nomPhoto){
-    galerie.className='liste';
-    aideNom.style.display='block';
+    galerie.className='liste'; aideNom.style.display='block';
     aideNom.textContent = TYPE.nomPhoto.req
       ? "Choisis une valeur sous chaque photo (elle servira de nom de fichier)."
       : "Tu peux nommer chaque photo (facultatif). Sinon un nom automatique est utilisé.";
-  } else {
-    galerie.className='grid';
-    aideNom.style.display='none';
-  }
+  } else { galerie.className='grid'; aideNom.style.display='none'; }
   majEtat();
 }
 
 function lireValeurs(){
   const v={};
-  TYPE.champs.forEach(c=>{
-    const el=document.getElementById('f_'+c.id);
-    v[c.id] = clean(el.value);
-  });
+  TYPE.champs.forEach(c=>{ v[c.id]=clean(document.getElementById('f_'+c.id).value); });
   return v;
 }
-
 function champsOK(){
-  return TYPE.champs.every(c=>{
-    if(!c.req) return true;
-    return document.getElementById('f_'+c.id).value.trim() !== '';
-  });
+  return TYPE.champs.every(c=> !c.req || document.getElementById('f_'+c.id).value.trim()!=='');
 }
-
 function nomPhotoOK(){
   if(!TYPE.nomPhoto || !TYPE.nomPhoto.req) return true;
   return photos.length>0 && photos.every(p=>p.nom && p.nom.trim()!=='');
 }
 
-copyBtn.addEventListener('click', async ()=>{
-  try{ await navigator.clipboard.writeText(DESTINATAIRE); }
-  catch(err){ const t=document.createElement('textarea'); t.value=DESTINATAIRE;
-    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
-  copyBtn.textContent="Copié ✅"; setTimeout(()=>copyBtn.textContent="Copier",1800);
-});
-
 async function traiterFichiers(fichiers){
   if(!fichiers.length) return;
   setStatusP('info','⏳ Compression en cours…');
-  let ajoutees=0, refusees=0;
+  let ok=0, ko=0;
   for(const f of fichiers){
-    let blob;
-    try { blob = await compresser(f); }
-    catch(err){ console.error(err); refusees++; continue; }
-    if(tailleTotale() + blob.size > LIMITE_TOTALE){ refusees++; continue; }
-    const file = new File([blob], `tmp_${Date.now()}.jpg`, {type:'image/jpeg'});
-    photos.push({ file, url: URL.createObjectURL(file), nom:'' });
-    ajoutees++;
+    let blob; try{ blob=await compresser(f); }catch(e){ ko++; continue; }
+    if(tailleTotale()+blob.size>LIMITE_TOTALE){ ko++; continue; }
+    const file=new File([blob], `tmp_${Date.now()}.jpg`, {type:'image/jpeg'});
+    photos.push({file, url:URL.createObjectURL(file), nom:''}); ok++;
   }
   rendreGalerie();
-  if(refusees>0) setStatusP('erreur', `⚠️ ${ajoutees} ajoutée(s), ${refusees} refusée(s) : limite de 10 Mo atteinte.`);
-  else setStatusP('info', `✅ ${ajoutees} photo(s) ajoutée(s).`);
+  if(ko>0) setStatusP('erreur', `⚠️ ${ok} ajoutée(s), ${ko} refusée(s) : limite de 10 Mo atteinte.`);
+  else setStatusP('info', `✅ ${ok} photo(s) ajoutée(s).`);
 }
-
 camInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files||[]); camInput.value=""; await traiterFichiers(f); });
 galInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files||[]); galInput.value=""; await traiterFichiers(f); });
+
+function champNomPhoto(p,i){
+  const np=TYPE.nomPhoto;
+  if(np.type==='text'){
+    return `<input type="text" class="np-text" data-i="${i}" placeholder="${escAttr(np.label)}" value="${escAttr(p.nom)}">`;
+  }
+  if(np.type==='json'){
+    return `<div class="ac-wrap"><input type="text" class="np-ac" data-i="${i}" autocomplete="off"
+             placeholder="${escAttr(np.label)}" value="${escAttr(p.nom)}">
+             <div class="ac-list" id="ac_np_${i}"></div></div>`;
+  }
+  let opts=`<option value="">— ${np.req?'choisir':'facultatif'} —</option>`+
+    np.options.map(o=>`<option value="${o.value}" ${p.nom===o.value?'selected':''}>${o.label}</option>`).join('');
+  return `<select class="np-select" data-i="${i}">${opts}</select>`;
+}
 
 function rendreGalerie(){
   galerie.innerHTML="";
   if(TYPE.nomPhoto){
-    const np = TYPE.nomPhoto;
+    const np=TYPE.nomPhoto;
     photos.forEach((p,i)=>{
-      const manquant = (np.req && !p.nom) ? ' manquant' : '';
-      let champHtml;
-      if(np.type==='text'){
-        champHtml = `<input type="text" class="np-text" data-i="${i}" placeholder="${escAttr(np.label)}" value="${escAttr(p.nom)}">`;
-      } else if(np.type==='json'){
-        champHtml = `<div class="ac-wrap">
-                       <input type="text" class="np-ac" data-i="${i}" autocomplete="off"
-                              placeholder="${escAttr(np.label)}" value="${escAttr(p.nom)}">
-                       <div class="ac-list" id="ac_np_${i}"></div>
-                     </div>`;
-      } else {
-        let opts = `<option value="">— ${np.req ? 'choisir' : 'facultatif'} —</option>` +
-          np.options.map(o=>`<option value="${o.value}" ${p.nom===o.value?'selected':''}>${o.label}</option>`).join('');
-        champHtml = `<select class="np-select" data-i="${i}">${opts}</select>`;
-      }
-      const ligne=document.createElement('div'); ligne.className='ligne';
-      ligne.innerHTML =
-        `<img src="${p.url}">
-         <div class="rep${manquant}">${champHtml}</div>
-         <button class="suppr" data-i="${i}">×</button>`;
-      galerie.appendChild(ligne);
+      const manq=(np.req && !p.nom)?' manquant':'';
+      const l=document.createElement('div'); l.className='ligne';
+      l.innerHTML=`<img src="${p.url}"><div class="rep${manq}">${champNomPhoto(p,i)}</div>
+                   <button class="suppr" data-i="${i}">×</button>`;
+      galerie.appendChild(l);
     });
-    galerie.querySelectorAll('.np-text').forEach(el=>{
-      el.addEventListener('input', ()=>{
-        const i=+el.dataset.i; photos[i].nom = el.value;
-        majEtat();
-      });
-    });
-    galerie.querySelectorAll('.np-select').forEach(el=>{
-      el.addEventListener('change', ()=>{
-        const i=+el.dataset.i; photos[i].nom = el.value;
-        if(np.req){ el.closest('.rep').classList.toggle('manquant', !el.value); }
-        majEtat();
-      });
-    });
+    galerie.querySelectorAll('.np-text').forEach(el=>el.addEventListener('input',()=>{
+      photos[+el.dataset.i].nom=el.value; majEtat();
+    }));
+    galerie.querySelectorAll('.np-select').forEach(el=>el.addEventListener('change',()=>{
+      const i=+el.dataset.i; photos[i].nom=el.value;
+      if(np.req) el.closest('.rep').classList.toggle('manquant', !el.value);
+      majEtat();
+    }));
     galerie.querySelectorAll('.np-ac').forEach(el=>{
       const i=+el.dataset.i;
-      const listEl = document.getElementById('ac_np_'+i);
-      attachAutocomplete(el, listEl, ()=>nomPhotoOptions, (val)=>{
-        photos[i].nom = val;
-        if(np.req){ el.closest('.rep').classList.toggle('manquant', !val); }
+      attachAutocomplete(el, document.getElementById('ac_np_'+i), ()=>nomPhotoOptions, (val)=>{
+        photos[i].nom=val;
+        if(np.req) el.closest('.rep').classList.toggle('manquant', !val);
         majEtat();
       });
     });
   } else {
     photos.forEach((p,i)=>{
-      const div=document.createElement('div'); div.className='vignette';
-      div.innerHTML=`<img src="${p.url}"><div class="num">${i+1}</div>
-        <button class="suppr" data-i="${i}">×</button>`;
-      galerie.appendChild(div);
+      const d=document.createElement('div'); d.className='vignette';
+      d.innerHTML=`<img src="${p.url}"><div class="num">${i+1}</div><button class="suppr" data-i="${i}">×</button>`;
+      galerie.appendChild(d);
     });
   }
-
   galerie.querySelectorAll('.suppr').forEach(b=>b.addEventListener('click',()=>{
     const i=+b.dataset.i; URL.revokeObjectURL(photos[i].url); photos.splice(i,1); rendreGalerie();
   }));
-
-  const total=tailleTotale();
-  const pct = Math.min(100, Math.round(total/LIMITE_TOTALE*100));
+  const total=tailleTotale(), pct=Math.min(100,Math.round(total/LIMITE_TOTALE*100));
   compteur.textContent = photos.length ? `${photos.length} photo(s) · ${fmtMo(total)} / 10 Mo` : "";
-  jaugeFill.style.width = pct + '%';
-  jaugeFill.style.background = pct >= 90 ? '#d93838' : (pct >= 70 ? '#e8a13a' : '#1f9d55');
-  resetBtn.style.display = photos.length ? 'block':'none';
+  jaugeFill.style.width=pct+'%';
+  jaugeFill.style.background = pct>=90?'#d93838':(pct>=70?'#e8a13a':'#1f9d55');
+  resetBtn.style.display = photos.length?'block':'none';
   majEtat();
 }
 
 function majEtat(){
   if(!TYPE) return;
-  const v=lireValeurs();
-  let chemin="…";
-  try{ chemin = TYPE.path(v); }catch(e){}
-  apercuChemin.textContent = "Destination : /"+chemin;
+  const v=lireValeurs(); let chemin="…";
+  try{ chemin=TYPE.path(v); }catch(e){}
+  apercuChemin.textContent="Destination : /"+chemin;
   sendBtn.disabled = !(photos.length>0 && champsOK() && nomPhotoOK() && tailleTotale()<=LIMITE_TOTALE);
 }
 
 function nomsFichiers(){
-  const v = lireValeurs();
-  const used = {};
+  const v=lireValeurs(); const used={};
   return photos.map((p,idx)=>{
     let base;
-    if(TYPE.nomPhoto && p.nom && p.nom.trim()!==''){
-      base = clean(p.nom);
-    } else if(TYPE.nomBase){
-      base = clean(TYPE.nomBase(v)) + '_' + Date.now() + '_' + (idx+1);
-    } else {
-      base = 'photo_' + Date.now() + '_' + (idx+1);
-    }
-    let name = base;
-    if(used[base]!==undefined){ used[base]++; name = base + '_' + used[base]; }
-    else { used[base] = 1; }
-    return name + '.jpg';
+    if(TYPE.nomPhoto && p.nom && p.nom.trim()!==''){ base=clean(p.nom); }
+    else if(TYPE.nomBase){ base=clean(TYPE.nomBase(v))+'_'+Date.now()+'_'+(idx+1); }
+    else { base='photo_'+Date.now()+'_'+(idx+1); }
+    let name=base;
+    if(used[base]!==undefined){ used[base]++; name=base+'_'+used[base]; } else { used[base]=1; }
+    return name+'.jpg';
   });
 }
 
+/* ============ ENVOI HTTP ============ */
 sendBtn.addEventListener('click', async ()=>{
   if(!photos.length){ setStatusP('erreur',"⚠️ Ajoute d'abord des photos."); return; }
   if(!champsOK()){ setStatusP('erreur',"⚠️ Remplis les champs obligatoires (*)."); return; }
   if(TYPE.nomPhoto && TYPE.nomPhoto.req && !nomPhotoOK()){ setStatusP('erreur',"⚠️ Renseigne le champ sous chaque photo."); return; }
-  if(tailleTotale() > LIMITE_TOTALE){ setStatusP('erreur',"⚠️ Total > 10 Mo. Retire une photo."); return; }
 
-  const v = lireValeurs();
-  const chemin = TYPE.path(v);
-  const recap = TYPE.champs.map(c=>{
-    const el=document.getElementById('f_'+c.id);
-    return `${c.label}: ${(el.value||'').replace(/#/g,'')}`;
-  }).join('\n');
+  sendBtn.disabled=true;
+  setStatusP('info','⏳ Envoi en cours…');
 
-  const texte =
-`#PHOTOPIGVS#
-#PATH:${chemin}#
-Type: ${TYPE.titre}
-${recap}
-Envoi: ${new Date().toLocaleString('fr-FR')}`;
+  const v=lireValeurs();
+  const chemin=TYPE.path(v);
+  const noms=nomsFichiers();
 
-  const noms = nomsFichiers();
-  const files = photos.map((p,idx)=> new File([p.file], noms[idx], {type:'image/jpeg'}));
+  const champs={};
+  TYPE.champs.forEach(c=>{ champs[c.label]=document.getElementById('f_'+c.id).value; });
+  champs["Type"]=TYPE.titre;
 
-  if(navigator.canShare && navigator.canShare({files})){
-    try{
-      await navigator.share({ title:"Photo PIGVS", text:texte, files:files });
-      setStatusP('ok',"✅ Partage lancé. Choisis Outlook/Gmail, colle l'adresse puis envoie.");
-    }catch(err){
-      if(err && err.name==='AbortError'){ setStatusP('info',"Partage annulé."); }
-      else{ console.error(err); setStatusP('erreur',"❌ Partage impossible : "+(err.message||err)); }
-    }
-    return;
+  const res = await PIGVS_ENVOI.envoyer({
+    type  : "PHOTO",
+    path  : chemin,
+    champs: champs,
+    photos: photos.map((p,idx)=>({ file:p.file, nom:noms[idx] }))
+  });
+
+  if(res.ok){
+    setStatusP('ok', `✅ ${photos.length} photo(s) envoyée(s) !`);
+    photos.forEach(p=>URL.revokeObjectURL(p.url));
+    photos=[]; rendreGalerie();
+  } else {
+    setStatusP('erreur', "❌ "+res.msg);
+    sendBtn.disabled=false;
   }
-  setStatusP('erreur',"⚠️ Partage de fichiers non supporté ici.<br>Teste sur Android + Chrome (HTTPS).");
 });
 
 resetBtn.addEventListener('click',()=>{
@@ -547,21 +449,17 @@ resetBtn.addEventListener('click',()=>{
   photos=[]; clearStatusP(); rendreGalerie();
 });
 
-/* =========================================================
-   INITIALISATION
-   ========================================================= */
+/* ============ INIT ============ */
 if(!TYPE){
-  titrePage.textContent = "⚠️ Type inconnu";
-  champsDiv.innerHTML = "<p style='color:#d93838'>Type de photo non reconnu. Reviens au menu Photos.</p>";
+  titrePage.textContent="⚠️ Type inconnu";
+  champsDiv.innerHTML="<p style='color:#d93838'>Type de photo non reconnu. Reviens au menu Photos.</p>";
 } else {
-  titrePage.textContent = TYPE.titre;
+  titrePage.textContent=TYPE.titre;
   construireChamps();
-
-  // ✅ PRÉ-REMPLISSAGE DU SITE (champ f_site) selon le chantier choisi
-  if (window.PIGVS) {
-    PIGVS.loadChantiers().then(function () {
-      const s = document.getElementById('f_site');
-      if (s) { PIGVS.prefillSite(s); majEtat(); }
+  if(window.PIGVS){
+    PIGVS.loadChantiers().then(function(){
+      const s=document.getElementById('f_site');
+      if(s){ PIGVS.prefillSite(s); majEtat(); }
     });
   }
 }

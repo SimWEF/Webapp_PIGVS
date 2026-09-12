@@ -35,12 +35,6 @@
     .status.ok    { display:block; background:#e4f6ec; color:#1f9d55; }
     .status.erreur{ display:block; background:#fdecec; color:#d93838; }
     .photo-note { font-size:13px; color:var(--muted); margin-top:6px; }
-    .adresse-bloc { display:flex; align-items:center; gap:10px; background:#f2f4f7;
-      border:1px dashed #0078D7; border-radius:10px; padding:10px; margin-top:8px; }
-    .adresse-bloc .mail { flex:1; font-family:monospace; font-size:13px; font-weight:bold;
-      color:#083f78; word-break:break-all; }
-    .btn-copy { background:#0078D7; color:#fff; border:none; border-radius:10px;
-      padding:10px 14px; font-size:13px; font-weight:bold; cursor:pointer; white-space:nowrap; }
     .section-title { font-size:15px; font-weight:700; margin:4px 0 10px; }
   </style>
 </head>
@@ -110,7 +104,7 @@
 
     <div class="card" style="margin-top:8px">
       <div class="section-title">📷 Photos (facultatif)</div>
-      <p class="photo-note">Ajoute des photos : elles seront envoyées <b>avec la fiche</b>, dans le même mail.</p>
+      <p class="photo-note">Les photos partent <b>avec la fiche</b>, en un seul envoi.</p>
       <input type="file" accept="image/*" capture="environment" id="camInput">
       <input type="file" accept="image/*" multiple id="galInput">
       <div class="btns-photo">
@@ -122,33 +116,18 @@
       <div class="jauge"><div id="jaugeFill"></div></div>
     </div>
 
-    <div class="adresse-bloc">
-      <span class="mail" id="mailDest">fdm-pigvs@tasociete.fr</span>
-      <button type="button" class="btn-copy" id="copyBtn">Copier</button>
-    </div>
-    <div class="photo-note">À l'envoi, choisis Outlook/Gmail et colle cette adresse dans le champ « À ».</div>
-
     <button class="btn" id="sendBtn" style="margin-top:12px">✅ Envoyer la fiche 📤</button>
     <div id="status" class="status"></div>
   </div>
 
 <script src="pigvs-chantier.js"></script>
+<script src="pigvs-auth.js"></script>
+<script src="pigvs-envoi.js"></script>
 <script>
-const DESTINATAIRE  = "souarns@westinghouse.com";
 const QUALITE_JPEG  = 0.90;
 const MAX_LARGEUR   = 2500;
 const LIMITE_TOTALE = 10 * 1024 * 1024;
 
-/* Nettoie pour un chemin/nom SharePoint MAIS conserve le # (autorisé par SharePoint) */
-function sanitizePath(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|]/g,'-'); }
-/* Nettoie strictement (numéro, site) — retire aussi le # */
-function cleanStrict(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|#]/g,'-'); }
-/* Valeur pour un marqueur : garde le #, supprime les retours ligne et neutralise le token de fin '#|' */
-function forMarker(s){ return (s||'').toString().replace(/[\r\n]+/g,' / ').replace(/#\|/g,'# |').trim(); }
-
-/* =========================================================
-   AUTOCOMPLÉTION
-   ========================================================= */
 function normalize(str){ return str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
 function editDistance(a,b){
   const dp=[]; for(let i=0;i<=a.length;i++){dp[i]=[];dp[i][0]=i;} for(let j=0;j<=b.length;j++){dp[0][j]=j;}
@@ -213,35 +192,29 @@ if (window.PIGVS) {
   });
 }
 
-/* =========================================================
-   NUMÉRO DE FICHE : FDM-{SITE}-{AAAAMMJJ}-{HHMMSS}
-   ========================================================= */
+/* Numéro de fiche : FDM-{SITE}-{AAAAMMJJ}-{HHMMSS} */
 let NUM_FICHE = "";
+function cleanStrict(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|#]/g,'-'); }
+function sanitizePath(s){ return (s||'').toString().trim().replace(/[\\\/:*?"<>|]/g,'-'); }
 function majNumero(){
-  const site = cleanStrict(document.getElementById('site').value) || "SITE";
-  const d = new Date();
-  const p = n => String(n).padStart(2,'0');
-  const stamp = `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
-  NUM_FICHE = `FDM-${site}-${stamp}`;
-  document.getElementById('numFicheVal').textContent = NUM_FICHE;
+  const site=cleanStrict(document.getElementById('site').value)||"SITE";
+  const d=new Date(), p=n=>String(n).padStart(2,'0');
+  NUM_FICHE=`FDM-${site}-${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`;
+  document.getElementById('numFicheVal').textContent=NUM_FICHE;
 }
 majNumero();
 
-/* =========================================================
-   PHOTOS
-   ========================================================= */
-let photos = [];
-const camInput   = document.getElementById('camInput');
-const galInput   = document.getElementById('galInput');
-const galerie    = document.getElementById('galerie');
-const compteur   = document.getElementById('compteur');
-const jaugeFill  = document.getElementById('jaugeFill');
-const status     = document.getElementById('status');
-const copyBtn    = document.getElementById('copyBtn');
-document.getElementById('mailDest').textContent = DESTINATAIRE;
+/* PHOTOS */
+let photos=[];
+const camInput=document.getElementById('camInput');
+const galInput=document.getElementById('galInput');
+const galerie=document.getElementById('galerie');
+const compteur=document.getElementById('compteur');
+const jaugeFill=document.getElementById('jaugeFill');
+const status=document.getElementById('status');
+const sendBtn=document.getElementById('sendBtn');
 
 function setStatus(t,m){ status.className="status "+t; status.innerHTML=m; }
-function clearStatus(){ status.className="status"; status.innerHTML=""; }
 function tailleTotale(){ return photos.reduce((s,p)=>s+p.file.size,0); }
 function fmtMo(o){ return (o/1048576).toFixed(1); }
 
@@ -265,14 +238,6 @@ function compresser(file){
     reader.readAsDataURL(file);
   });
 }
-
-copyBtn.addEventListener('click', async ()=>{
-  try{ await navigator.clipboard.writeText(DESTINATAIRE); }
-  catch(err){ const t=document.createElement('textarea'); t.value=DESTINATAIRE;
-    document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
-  copyBtn.textContent="Copié ✅"; setTimeout(()=>copyBtn.textContent="Copier",1800);
-});
-
 async function traiterFichiers(fichiers){
   if(!fichiers.length) return;
   setStatus('info','⏳ Compression en cours…');
@@ -293,84 +258,71 @@ galInput.addEventListener('change', async e=>{ const f=Array.from(e.target.files
 function rendreGalerie(){
   galerie.innerHTML="";
   photos.forEach((p,i)=>{
-    const div=document.createElement('div'); div.className='vignette';
-    div.innerHTML=`<img src="${p.url}"><div class="num">${i+1}</div><button class="suppr" data-i="${i}">×</button>`;
-    galerie.appendChild(div);
+    const d=document.createElement('div'); d.className='vignette';
+    d.innerHTML=`<img src="${p.url}"><div class="num">${i+1}</div><button class="suppr" data-i="${i}">×</button>`;
+    galerie.appendChild(d);
   });
   galerie.querySelectorAll('.suppr').forEach(b=>b.addEventListener('click',()=>{
     const i=+b.dataset.i; URL.revokeObjectURL(photos[i].url); photos.splice(i,1); rendreGalerie();
   }));
   const total=tailleTotale(), pct=Math.min(100,Math.round(total/LIMITE_TOTALE*100));
   compteur.textContent = photos.length ? `${photos.length} photo(s) · ${fmtMo(total)} / 10 Mo` : "";
-  jaugeFill.style.width = pct+'%';
+  jaugeFill.style.width=pct+'%';
   jaugeFill.style.background = pct>=90?'#d93838':(pct>=70?'#e8a13a':'#1f9d55');
 }
 
-/* =========================================================
-   ENVOI UNIQUE : fiche + photos dans le même mail
-   ========================================================= */
-document.getElementById('sendBtn').addEventListener('click', async ()=>{
-  const equipement = document.getElementById("equipement").value.trim();
-  const description = document.getElementById("description").value.trim();
-  const date = document.getElementById("date").value;
-  const site = document.getElementById("site").value.trim();
-  const materiel = document.getElementById("materiel").value;
-  const action1 = document.getElementById("action1").value.trim();
-  const action2 = document.getElementById("action2").value.trim();
-  const redacteur = document.getElementById("redacteur").value.trim();
+/* ============ ENVOI HTTP ============ */
+sendBtn.addEventListener('click', async ()=>{
+  const equipement=document.getElementById("equipement").value.trim();
+  const description=document.getElementById("description").value.trim();
+  const date=document.getElementById("date").value;
+  const site=document.getElementById("site").value.trim();
+  const materiel=document.getElementById("materiel").value;
+  const action1=document.getElementById("action1").value.trim();
+  const action2=document.getElementById("action2").value.trim();
+  const redacteur=document.getElementById("redacteur").value.trim();
 
-  if(!equipement || !description || !date || !site || !materiel || !redacteur){
+  if(!equipement||!description||!date||!site||!materiel||!redacteur){
     setStatus('erreur',"⚠️ Remplis tous les champs obligatoires (*)."); return;
   }
-  if(tailleTotale() > LIMITE_TOTALE){ setStatus('erreur',"⚠️ Total photos > 10 Mo."); return; }
+  if(tailleTotale()>LIMITE_TOTALE){ setStatus('erreur',"⚠️ Total photos > 10 Mo."); return; }
+
+  sendBtn.disabled=true;
+  setStatus('info','⏳ Envoi en cours…');
 
   majNumero();
-  const num = NUM_FICHE;
+  const num=NUM_FICHE;
+  const chemin=`fiches de maintenance/${sanitizePath(equipement)}`;
 
-  /* Chemin : # conservé (SharePoint l'accepte), autres caractères illégaux nettoyés */
-  const chemin = `fiches de maintenance/${sanitizePath(equipement)}`;
+  const res = await PIGVS_ENVOI.envoyer({
+    type  : "FDM",
+    path  : chemin,
+    champs: {
+      "NumFiche"   : num,
+      "Equipement" : equipement,
+      "Description": description,
+      "Date"       : date,
+      "Site"       : site,
+      "Materiel"   : materiel,
+      "Action1"    : action1,
+      "Action2"    : action2,
+      "Redacteur"  : redacteur
+    },
+    photos: photos.map((p,idx)=>({ file:p.file, nom:`${num}_${idx+1}.jpg` }))
+  });
 
-  /* Marqueurs fermés par '#|' -> les valeurs peuvent contenir des '#' (ex : CART #03) */
-  const texte =
-`#FDMPIGVS#
-#NUM:${num}#|
-#PATH:${chemin}#|
-#EQUIP:${forMarker(equipement)}#|
-#SITE:${forMarker(site)}#|
-#DATE:${date}#|
-#MATERIEL:${forMarker(materiel)}#|
-#ACTION1:${forMarker(action1)}#|
-#ACTION2:${forMarker(action2)}#|
-#REDACTEUR:${forMarker(redacteur)}#|
-#DESC:${forMarker(description)}#|
-
---- Fiche de maintenance ${num} ---
-Équipement : ${equipement}
-Site : ${site}
-Date : ${date}
-Matériel utilisable : ${materiel}
-Action immédiate : ${action1 || 'N/C'}
-Action à effectuer : ${action2 || 'N/C'}
-Rédacteur : ${redacteur}
-Description : ${description}
-Photos : ${photos.length}`;
-
-  const files = photos.map((p,idx)=> new File([p.file], `${num}_${idx+1}.jpg`, {type:'image/jpeg'}));
-  const donnees = { title:"Fiche de maintenance "+num, text:texte };
-  if(files.length) donnees.files = files;
-
-  const peutPartager = files.length ? (navigator.canShare && navigator.canShare({files})) : !!navigator.share;
-  if(peutPartager){
-    try{
-      await navigator.share(donnees);
-      setStatus('ok',"✅ Partage lancé ("+num+"). Choisis Outlook/Gmail, colle l'adresse puis envoie.");
-    }catch(err){
-      if(err && err.name==='AbortError'){ setStatus('info',"Envoi annulé."); }
-      else{ console.error(err); setStatus('erreur',"❌ Partage impossible : "+(err.message||err)); }
-    }
-    return;
+  if(res.ok){
+    setStatus('ok', `✅ Fiche ${num} envoyée !`);
+    photos.forEach(p=>URL.revokeObjectURL(p.url));
+    photos=[]; rendreGalerie();
+    document.getElementById("description").value="";
+    document.getElementById("action1").value="";
+    document.getElementById("action2").value="";
+    setTimeout(()=>{ sendBtn.disabled=false; majNumero(); }, 1500);
+  } else {
+    setStatus('erreur', "❌ "+res.msg);
+    sendBtn.disabled=false;
   }
-  setStatus('erreur',"⚠️ Partage non supporté ici. Teste sur Android + Chrome (HTTPS).");
 });
 </script>
 </body>
