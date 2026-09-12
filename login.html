@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accès — PIGVS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0078D7">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    .login-box { max-width:380px; margin:40px auto; text-align:center; }
+    .login-box .logo { font-size:52px; }
+    .login-box h2 { margin:12px 0 6px; font-size:20px; }
+    .login-box p { color:var(--muted,#5a6673); font-size:14px; margin-bottom:22px; }
+    .login-box input { width:100%; padding:16px; font-size:20px; text-align:center;
+      letter-spacing:2px; border:1px solid #ccc; border-radius:10px; box-sizing:border-box; }
+    .login-box button { width:100%; padding:16px; margin-top:12px; font-size:17px; font-weight:700;
+      border:none; border-radius:12px; background:#0078D7; color:#fff; cursor:pointer; }
+    .login-box button:disabled { opacity:.6; }
+    .msg { margin-top:14px; padding:12px; border-radius:10px; font-size:14px; font-weight:700; display:none; }
+    .msg.err { display:block; background:#fdecec; color:#b91c1c; }
+    .msg.ok  { display:block; background:#e4f6ec; color:#166534; }
+    .msg.info{ display:block; background:#e7f0fb; color:#083f78; }
+    .note { font-size:12px; color:#8a94a1; margin-top:18px; }
+  </style>
+</head>
+<body>
+  <header class="app-header">
+    <h1>🔧 PIGVS</h1>
+  </header>
+
+  <div class="container">
+    <div class="login-box">
+      <div class="logo">🔐</div>
+      <h2>Accès chantier</h2>
+      <p>Saisis le code communiqué par le chef de projet.</p>
+
+      <input type="text" id="code" placeholder="CODE CHANTIER"
+             autocomplete="off" autocapitalize="characters" spellcheck="false">
+      <button id="btn">Valider</button>
+      <div id="msg" class="msg"></div>
+
+      <div class="note">Le code n'est demandé qu'une fois par appareil (30 jours).</div>
+    </div>
+  </div>
+
+<script src="pigvs-auth.js"></script>
+<script>
+  const input = document.getElementById('code');
+  const btn   = document.getElementById('btn');
+  const msg   = document.getElementById('msg');
+
+  function setMsg(cls, txt){ msg.className = "msg " + cls; msg.textContent = txt; }
+
+  /* Si déjà authentifié, on repart directement vers la destination */
+  if (PIGVS_AUTH.estAuthentifie()) { redirection(); }
+
+  function redirection(){
+    const p = new URLSearchParams(location.search);
+    const next = p.get('next');
+    location.replace(next ? decodeURIComponent(next) : "index.html");
+  }
+
+  async function valider(){
+    const code = input.value.trim();
+    if(!code){ setMsg('err', "⚠️ Saisis le code."); return; }
+    btn.disabled = true;
+    setMsg('info', "⏳ Vérification…");
+    const r = await PIGVS_AUTH.verifierCode(code);
+    if(r.ok){
+      setMsg('ok', "✅ Accès autorisé.");
+      setTimeout(redirection, 500);
+    } else {
+      setMsg('err', "❌ " + r.msg);
+      btn.disabled = false;
+    }
+  }
+
+  btn.addEventListener('click', valider);
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter') valider(); });
+</script>
+</body>
+</html>

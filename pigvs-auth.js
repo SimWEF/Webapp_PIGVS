@@ -14,7 +14,7 @@
 
     /* URL du flux "Vérifier le code" (générée par Power Automate).
        ⚠️ Cette URL est visible, mais elle ne révèle PAS le code. */
-    const URL_VERIF = "COLLER_ICI_URL_DU_FLUX_VERIFICATION";
+    const URL_VERIF = "https://default516ec17ab92f438b8594e11b6f6bec.79.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/22/workflows/a1f9cc6711c64d44916c7f64f9d8671d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DfYjV_9q9LNYDi8WeTYeJvfQq-b9R9iHY6oo94keDfM";
   
     const KEY_OK     = "pigvs_auth_ok";        // jeton de session local
     const KEY_CODE   = "pigvs_auth_code";      // code validé (renvoyé dans les envois)
@@ -44,7 +44,7 @@
         const rep = await fetch(URL_VERIF, {
           method: "POST",
           /* text/plain évite le préflight CORS (OPTIONS) que Power Automate ne gère pas */
-          headers: { "Content-Type": "text/plain" },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ code: code })
         });
   
