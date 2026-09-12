@@ -12,7 +12,7 @@
       importante pour forcer le rafraîchissement du cache.
    ========================================================= */
 
-const CACHE_VERSION = "pigvs-v2";
+const CACHE_VERSION = "pigvs-v3";
 const CACHE_NAME = CACHE_VERSION;
 
 /* Fichiers "coquille" mis en cache à l'installation.
