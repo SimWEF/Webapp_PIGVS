@@ -12,7 +12,7 @@
       importante pour forcer le rafraîchissement du cache.
    ========================================================= */
 
-const CACHE_VERSION = "pigvs-v1";
+const CACHE_VERSION = "pigvs-v2";
 const CACHE_NAME = CACHE_VERSION;
 
 /* Fichiers "coquille" mis en cache à l'installation.
@@ -37,7 +37,9 @@ const ASSETS = [
    "info-paluel4.json",
    "info-cattenom3.json",
    "pigvs-envoi.js",
-   "pigvs-auth.js"
+   "pigvs-auth.js",
+   "login.html",
+   "detailSousEnsemble.html"
    
 ];
 
