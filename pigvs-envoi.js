@@ -12,7 +12,7 @@
    window.PIGVS_ENVOI = (function () {
 
     /* 1️⃣ URL du flux "PIGVS - Reception" (trigger HTTP) */
-    const URL_FLUX = "https://default516ec17ab92f438b8594e11b6f6bec.79.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/04/workflows/7ee4645413cd4d43aaf312a6fe97fbf4/triggers/manual/paths/invoke?api-version=1";
+    const URL_FLUX = "https://default516ec17ab92f438b8594e11b6f6bec.79.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/04/workflows/7ee4645413cd4d43aaf312a6fe97fbf4/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-uzPwa9IbvsUrxX4D26HGUMER7LS0dT3-mr2dfwKITw";
   
     /* 2️⃣ Code chantier utilisé tant que le login n'est pas actif.
           Doit correspondre à la condition de déclenchement du flux. */
