@@ -966,9 +966,9 @@
   "ref": "§10.1.2.3",
   "q": "Quel est le diamètre des tuyaux de flux d'eau périphérique tirés depuis la bâche à eau propre ?",
   "o": [
-   "1 pouce 1/2",
-   "1 pouce",
    "2 pouces",
+   "1 pouce",
+   "1 pouce 1/2",
    "3/4 de pouce"
   ],
   "a": 0,
@@ -1176,9 +1176,9 @@
   "ref": "§10.2.1.1",
   "q": "À quelle valeur fixe-t-on le point de fonctionnement du circuit HP avant démarrage des pompes ?",
   "o": [
-   "20 bar",
-   "50 bar",
    "10 bar",
+   "50 bar",
+   "20 bar",
    "100 bar"
   ],
   "a": 0,

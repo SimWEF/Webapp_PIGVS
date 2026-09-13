@@ -21,6 +21,14 @@
     const KEY_EXP    = "pigvs_auth_exp";       // date d'expiration
     const DUREE_JOURS = 3650;                    // re-saisie du code tous les 30 jours
   
+    const MAX_ERREURS_LOCAL = 5;
+    const BLOCAGE_MINUTES   = 30;
+    const DELAI_TENTATIVE   = 2000; // 2 secondes
+
+    const KEY_FAIL = "pigvs_auth_fail";
+    const KEY_LOCK = "pigvs_auth_lock";
+
+    
     /* --- Statut --- */
     function estAuthentifie() {
       const ok  = localStorage.getItem(KEY_OK);
@@ -40,33 +48,122 @@
   
     /* --- Vérification auprès du flux Power Automate --- */
     async function verifierCode(code) {
-      try {
-        const rep = await fetch(URL_VERIF, {
-          method: "POST",
-          /* text/plain évite le préflight CORS (OPTIONS) que Power Automate ne gère pas */
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code: code })
-        });
+
+      if(estBloqueLocalement()){
   
-        if (!rep.ok) return { ok: false, msg: "Code refusé." };
+          return {
+              ok:false,
+              msg:
+               "Connexion bloquée pendant "
+               + tempsRestantBlocage()
+               + " min."
+          };
   
-        const txt = await rep.text();
-        let res;
-        try { res = JSON.parse(txt); } catch (e) { res = { valide: txt.trim() === "OK" }; }
-  
-        if (res.valide === true || res.valide === "true") {
-          localStorage.setItem(KEY_OK, "1");
-          localStorage.setItem(KEY_CODE, code);
-          localStorage.setItem(KEY_EXP, String(Date.now() + DUREE_JOURS * 86400000));
-          return { ok: true };
-        }
-        return { ok: false, msg: "Code incorrect." };
-  
-      } catch (err) {
-        console.error(err);
-        return { ok: false, msg: "Vérification impossible (réseau)." };
       }
-    }
+  
+      await attendre(DELAI_TENTATIVE);
+  
+      try {
+  
+          const rep = await fetch(URL_VERIF, {
+  
+              method: "POST",
+  
+              headers: {
+                  "Content-Type": "application/json"
+              },
+  
+              body: JSON.stringify({
+                  code: code.trim()
+              })
+          });
+  
+  
+          if(rep.ok){
+  
+              localStorage.setItem(KEY_OK,"1");
+  
+              localStorage.setItem(
+                  KEY_CODE,
+                  code.trim()
+              );
+  
+              localStorage.setItem(
+                  KEY_EXP,
+                  String(
+                      Date.now()
+                      +
+                      DUREE_JOURS * 86400000
+                  )
+              );
+  
+              localStorage.removeItem(KEY_FAIL);
+              localStorage.removeItem(KEY_LOCK);
+  
+              return { ok:true };
+          }
+  
+  
+          let nbEchecs =
+              parseInt(
+                  localStorage.getItem(KEY_FAIL) || "0",
+                  10
+              );
+  
+          nbEchecs++;
+  
+          localStorage.setItem(
+              KEY_FAIL,
+              nbEchecs
+          );
+  
+          if(nbEchecs >= MAX_ERREURS_LOCAL){
+  
+              localStorage.setItem(
+                  KEY_LOCK,
+                  String(
+                      Date.now()
+                      +
+                      BLOCAGE_MINUTES
+                      * 60
+                      * 1000
+                  )
+              );
+  
+              return {
+                  ok:false,
+                  msg:
+                    "Trop d'erreurs. "
+                    +
+                    "Connexion bloquée "
+                    +
+                    BLOCAGE_MINUTES
+                    +
+                    " minutes."
+              };
+          }
+  
+          return {
+              ok:false,
+              msg:
+                  "Code incorrect. "
+                  +
+                  (MAX_ERREURS_LOCAL - nbEchecs)
+                  +
+                  " tentative(s) restante(s)."
+          };
+  
+      }
+      catch(err){
+  
+          console.error(err);
+  
+          return {
+              ok:false,
+              msg:"Erreur réseau."
+          };
+      }
+  }
   
     /* --- Garde-fou : redirige vers login.html si non authentifié --- */
     function protegerPage() {
@@ -78,4 +175,35 @@
   
     return { estAuthentifie, verifierCode, protegerPage, getCode, deconnecter, URL_VERIF };
   })();
-  
+
+    function attendre(ms){
+      return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  function estBloqueLocalement() {
+
+    const lock = parseInt(
+        localStorage.getItem(KEY_LOCK) || "0",
+        10
+    );
+
+    return Date.now() < lock;
+}
+
+
+  function tempsRestantBlocage(){
+
+    const lock = parseInt(
+        localStorage.getItem(KEY_LOCK) || "0",
+        10
+    );
+
+    if(Date.now() >= lock){
+        return "";
+    }
+
+    const minutes =
+        Math.ceil((lock - Date.now()) / 60000);
+
+    return minutes;
+  }
