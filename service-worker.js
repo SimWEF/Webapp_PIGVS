@@ -29,8 +29,8 @@ const ASSETS = [
    Version : 3.0
    ========================================================== */
 
-   const APP_CACHE = "pigvs-app-v3";
-   const DATA_CACHE = "pigvs-data-v1";
+   const APP_CACHE = "pigvs-app-v4";
+   const DATA_CACHE = "pigvs-data-v2";
    
    /* ==========================================================
       Fichiers statiques
@@ -59,6 +59,7 @@ const ASSETS = [
    "login.html",
    "detailSousEnsemble.html",
    "quizz.html",
+   "validateur-questions.html"
    ];
    
    /* ==========================================================

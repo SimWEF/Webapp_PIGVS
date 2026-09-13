@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Validation de la banque de questions PIGVS</title>
+<style>
+:root{--blue:#0078d4;--blue2:#004578;--bg:#f3f6f9;--card:#fff;--text:#17212b;--muted:#627182;--line:#d8e0e8;--green:#16803c;--red:#b42318;--orange:#b54708}
+*{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+header{background:linear-gradient(135deg,var(--blue2),var(--blue));color:#fff;padding:18px 20px;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px #001a3326}
+header .wrap{max-width:1050px;margin:auto;display:flex;align-items:center;gap:14px} h1{font-size:19px;margin:0;flex:1} header small{opacity:.85}
+main{max-width:1050px;margin:auto;padding:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:15px;box-shadow:0 2px 8px #1e3a5f0d}
+.grid{display:grid;gap:14px}.grid2{grid-template-columns:1fr 1fr}.grid4{grid-template-columns:repeat(4,1fr)}
+label{display:block;font-size:13px;font-weight:700;color:#425466;margin:0 0 6px} input,select,textarea{width:100%;font:inherit;color:inherit;border:1px solid #b9c5d1;border-radius:9px;padding:11px;background:#fff} textarea{min-height:84px;resize:vertical} input:focus,select:focus,textarea:focus{outline:3px solid #0078d426;border-color:var(--blue)}
+button,.button{border:0;border-radius:9px;padding:11px 15px;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none}.primary{background:var(--blue);color:#fff}.secondary{background:#eaf3fb;color:var(--blue2)}.danger{background:#fff1f0;color:var(--red);border:1px solid #f3b7b1}.ghost{background:#fff;color:#45576a;border:1px solid var(--line)}button:disabled{opacity:.45;cursor:not-allowed}
+.toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.toolbar .spacer{flex:1}.drop{border:2px dashed #9fb3c8;border-radius:13px;padding:30px;text-align:center;background:#f8fbfe}.drop.drag{border-color:var(--blue);background:#eaf4ff}.drop input{display:none}.drop p{margin:7px 0;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.stat{background:#f7f9fb;border-radius:10px;padding:12px;text-align:center}.stat b{display:block;font-size:24px;color:var(--blue2)}.stat span{font-size:12px;color:var(--muted)}
+.progress{height:8px;background:#e3e9ef;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--blue);width:0;transition:.2s}.meta{display:flex;justify-content:space-between;gap:10px;margin:8px 0 0;font-size:13px;color:var(--muted)}
+.answer{display:grid;grid-template-columns:42px 1fr auto;gap:8px;align-items:center;margin-bottom:9px}.answer .letter{width:36px;height:36px;border-radius:50%;background:#eaf3fb;color:var(--blue2);font-weight:800;display:grid;place-items:center}.correct{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--green);font-weight:700;white-space:nowrap}.correct input{width:auto;accent-color:var(--green)}
+.pill{display:inline-block;border-radius:99px;padding:4px 9px;background:#eef3f7;color:#4b5d70;font-size:12px;font-weight:700}.notice{border-left:4px solid var(--blue);background:#eef7ff;padding:12px;border-radius:8px;color:#29465f}.warning{border-left-color:var(--orange);background:#fff7ed}.ok{border-left-color:var(--green);background:#edf9f0}.deleted{border:1px solid #efb3ad;background:#fff7f6;color:var(--red);padding:10px;border-radius:9px;margin-top:10px}.hidden{display:none!important}
+.list{max-height:360px;overflow:auto;border:1px solid var(--line);border-radius:10px}.row{display:grid;grid-template-columns:55px 1fr 105px;gap:9px;padding:9px 11px;border-bottom:1px solid #edf1f4;align-items:center;font-size:13px}.row:last-child{border:0}.row.current{background:#eaf4ff}.row.del{opacity:.5;text-decoration:line-through}.row button{padding:6px 8px;font-size:12px}.footer-note{font-size:12px;color:var(--muted);text-align:center;padding:5px 0 20px}
+@media(max-width:720px){.grid2,.grid4,.stats{grid-template-columns:1fr}.answer{grid-template-columns:36px 1fr}.correct{grid-column:2}.row{grid-template-columns:48px 1fr}.row button{grid-column:2}.toolbar button,.toolbar .button{flex:1}header small{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div><h1>Validateur de questions PIGVS</h1><small>Révision séquentielle et export JSON, 100 % local</small></div></div></header>
+<main>
+<section id="loadCard" class="card">
+  <h2>1. Charger la banque de questions</h2>
+  <div id="drop" class="drop">
+    <strong>Déposez ici le fichier <code>quizz-questions.json</code></strong>
+    <p>ou sélectionnez-le depuis votre ordinateur</p>
+    <label class="button primary" for="fileInput">📂 Choisir le fichier JSON</label>
+    <input id="fileInput" type="file" accept="application/json,.json">
+  </div>
+  <div class="notice" style="margin-top:12px">Le fichier reste entièrement dans votre navigateur. Aucune donnée n'est envoyée sur Internet.</div>
+</section>
+
+<section id="setupCard" class="card hidden">
+  <h2>2. Choisir la procédure à relire</h2>
+  <div class="grid grid2">
+    <div><label for="procedure">Procédure</label><select id="procedure"></select></div>
+    <div><label for="order">Ordre de passage</label><select id="order"><option value="source">Ordre du fichier JSON</option><option value="id">Identifiant de question</option></select></div>
+  </div>
+  <div class="stats" style="margin-top:14px">
+    <div class="stat"><b id="sTotal">0</b><span>questions dans la banque</span></div>
+    <div class="stat"><b id="sProc">0</b><span>dans cette procédure</span></div>
+    <div class="stat"><b id="sEdited">0</b><span>modifiées</span></div>
+    <div class="stat"><b id="sDeleted">0</b><span>supprimées</span></div>
+  </div>
+  <button id="start" class="primary" style="margin-top:14px">▶ Commencer la relecture</button>
+</section>
+
+<section id="editor" class="hidden">
+  <div class="card">
+    <div class="toolbar"><span id="themePill" class="pill"></span><span id="docPill" class="pill"></span><span class="spacer"></span><button id="showList" class="ghost">☰ Liste</button></div>
+    <div class="progress" style="margin-top:12px"><i id="bar"></i></div><div class="meta"><span id="counter"></span><span id="state"></span></div>
+  </div>
+
+  <div class="card">
+    <div class="grid grid4">
+      <div><label for="qid">ID</label><input id="qid"></div>
+      <div><label for="qtheme">Thème</label><input id="qtheme"></div>
+      <div style="grid-column:span 2"><label for="qdoc">Document</label><input id="qdoc"></div>
+    </div>
+    <div style="margin-top:12px"><label for="qref">Référence / paragraphe</label><input id="qref"></div>
+    <div style="margin-top:12px"><label for="qq">Énoncé</label><textarea id="qq"></textarea></div>
+    <div style="margin-top:12px"><label>Réponses, cochez la bonne réponse</label><div id="answers"></div></div>
+    <div style="margin-top:12px"><label for="qe">Explication affichée après réponse</label><textarea id="qe"></textarea></div>
+    <div id="deletedMsg" class="deleted hidden">Cette question est marquée pour suppression. Elle ne figurera pas dans le JSON exporté.</div>
+  </div>
+
+  <div class="card toolbar">
+    <button id="prev" class="secondary">← Précédente</button>
+    <button id="delete" class="danger">🗑 Supprimer</button>
+    <button id="restore" class="secondary hidden">↩ Restaurer</button>
+    <span class="spacer"></span>
+    <button id="saveNext" class="primary">Enregistrer et suivante →</button>
+  </div>
+
+  <div id="listCard" class="card hidden"><h2>Questions de la procédure</h2><div id="questionList" class="list"></div></div>
+
+  <div id="finishCard" class="card hidden">
+    <h2>3. Relecture terminée</h2>
+    <div class="notice ok">Les modifications sont prêtes. L'export conserve toutes les autres procédures de la banque et retire uniquement les questions marquées pour suppression.</div>
+    <div class="toolbar" style="margin-top:14px">
+      <button id="downloadAll" class="primary">⬇ Télécharger le JSON complet</button>
+      <button id="downloadProc" class="secondary">⬇ JSON de cette procédure</button>
+      <button id="restart" class="ghost">Revoir depuis le début</button>
+    </div>
+  </div>
+</section>
+
+<div class="footer-note">Fonctionne hors connexion. Les procédures approuvées restent la référence.</div>
+</main>
+<script>
+'use strict';
+let bank=[], originalText='', procIndexes=[], pos=0, selectedDoc='', deleted=new Set(), edited=new Set();
+const $=id=>document.getElementById(id);
+const fields=['qid','qtheme','qdoc','qref','qq','qe'];
+const ansLetters=['A','B','C','D'];
+
+function readFile(file){
+ const r=new FileReader(); r.onload=()=>{
+  try{const data=JSON.parse(r.result); if(!Array.isArray(data)) throw Error('Le JSON doit contenir un tableau de questions.');
+   data.forEach((q,i)=>validateQuestion(q,i)); bank=data; originalText=r.result; afterLoad();
+  }catch(e){alert('Fichier non valide : '+e.message)}
+ }; r.readAsText(file,'utf-8');
+}
+function validateQuestion(q,i){
+ if(!q||typeof q!=='object') throw Error('Question '+(i+1)+' invalide.');
+ if(!Array.isArray(q.o)||q.o.length<2) throw Error('Question '+(i+1)+' : le champ o doit contenir au moins 2 réponses.');
+ if(!Number.isInteger(q.a)||q.a<0||q.a>=q.o.length) throw Error('Question '+(i+1)+' : index de bonne réponse a invalide.');
+}
+function afterLoad(){
+ $('loadCard').classList.add('hidden'); $('setupCard').classList.remove('hidden');
+ const docs=[...new Set(bank.map(q=>String(q.doc||'Sans document')))];
+ $('procedure').innerHTML=docs.map(d=>'<option>'+esc(d)+'</option>').join('');
+ $('sTotal').textContent=bank.length; updateSetupStats();
+}
+function updateSetupStats(){
+ selectedDoc=$('procedure').value;
+ $('sProc').textContent=bank.filter(q=>String(q.doc||'Sans document')===selectedDoc).length;
+ $('sEdited').textContent=edited.size; $('sDeleted').textContent=deleted.size;
+}
+$('procedure').onchange=updateSetupStats;
+$('order').onchange=()=>{if(procIndexes.length){buildIndexes();pos=0;showQuestion()}};
+$('start').onclick=()=>{selectedDoc=$('procedure').value;buildIndexes();pos=0;$('setupCard').classList.add('hidden');$('editor').classList.remove('hidden');showQuestion()};
+function buildIndexes(){
+ procIndexes=bank.map((q,i)=>({q,i})).filter(x=>String(x.q.doc||'Sans document')===selectedDoc);
+ if($('order').value==='id') procIndexes.sort((x,y)=>String(x.q.id||'').localeCompare(String(y.q.id||''),undefined,{numeric:true}));
+ procIndexes=procIndexes.map(x=>x.i);
+}
+function showQuestion(){
+ if(!procIndexes.length) return;
+ const bi=procIndexes[pos],q=bank[bi];
+ $('qid').value=q.id||'';$('qtheme').value=q.theme||'';$('qdoc').value=q.doc||'';$('qref').value=q.ref||'';$('qq').value=q.q||'';$('qe').value=q.e||'';
+ $('answers').innerHTML=q.o.map((o,i)=>`<div class="answer"><span class="letter">${ansLetters[i]||i+1}</span><input class="ans" data-i="${i}" value="${attr(o)}"><label class="correct"><input type="radio" name="correct" value="${i}" ${i===q.a?'checked':''}>Bonne</label></div>`).join('');
+ $('themePill').textContent=q.theme||'Sans thème';$('docPill').textContent=q.doc||'Sans document';
+ $('counter').textContent=`Question ${pos+1} / ${procIndexes.length}`;$('bar').style.width=((pos+1)/procIndexes.length*100)+'%';
+ $('prev').disabled=pos===0;$('saveNext').textContent=pos===procIndexes.length-1?'Enregistrer et terminer':'Enregistrer et suivante →';
+ const del=deleted.has(bi);$('deletedMsg').classList.toggle('hidden',!del);$('delete').classList.toggle('hidden',del);$('restore').classList.toggle('hidden',!del);
+ $('state').textContent=del?'Supprimée':edited.has(bi)?'Modifiée':'Non modifiée';renderList();window.scrollTo({top:0,behavior:'smooth'});
+}
+function collect(){
+ const bi=procIndexes[pos],q=bank[bi];
+ const vals={id:$('qid').value.trim(),theme:$('qtheme').value.trim(),doc:$('qdoc').value.trim(),ref:$('qref').value.trim(),q:$('qq').value.trim(),e:$('qe').value.trim()};
+ const opts=[...document.querySelectorAll('.ans')].map(x=>x.value.trim());
+ const radio=document.querySelector('input[name="correct"]:checked');
+ if(!vals.q) return alert('L’énoncé ne peut pas être vide.'),false;
+ if(opts.some(x=>!x)) return alert('Chaque réponse doit être renseignée.'),false;
+ if(!radio) return alert('Sélectionnez la bonne réponse.'),false;
+ Object.assign(q,vals,{o:opts,a:Number(radio.value)}); edited.add(bi);updateSetupStats();return true;
+}
+$('saveNext').onclick=()=>{if(!collect())return;if(pos<procIndexes.length-1){pos++;showQuestion()}else{$('finishCard').classList.remove('hidden');$('finishCard').scrollIntoView({behavior:'smooth'})}};
+$('prev').onclick=()=>{if(!collect())return;if(pos>0){pos--;showQuestion()}};
+$('delete').onclick=()=>{if(confirm('Supprimer cette question du futur fichier JSON ?')){deleted.add(procIndexes[pos]);updateSetupStats();showQuestion()}};
+$('restore').onclick=()=>{deleted.delete(procIndexes[pos]);updateSetupStats();showQuestion()};
+$('showList').onclick=()=>{$('listCard').classList.toggle('hidden');renderList()};
+function renderList(){if($('listCard').classList.contains('hidden'))return;$('questionList').innerHTML=procIndexes.map((bi,i)=>{const q=bank[bi];return `<div class="row ${i===pos?'current ':''}${deleted.has(bi)?'del':''}"><b>${esc(q.id||String(i+1))}</b><span>${esc(q.q||'Sans énoncé')}</span><button class="ghost" data-pos="${i}">Ouvrir</button></div>`}).join('');document.querySelectorAll('[data-pos]').forEach(b=>b.onclick=()=>{if(!collect())return;pos=Number(b.dataset.pos);showQuestion()})}
+function exportJson(onlyProc){
+ if(!collect())return;
+ const out=bank.filter((q,i)=>!deleted.has(i)&&(!onlyProc||String(q.doc||'Sans document')===selectedDoc));
+ const blob=new Blob([JSON.stringify(out,null,2)+'\n'],{type:'application/json;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+ const safe=selectedDoc.replace(/[^a-z0-9_-]+/gi,'_').replace(/^_+|_+$/g,'').slice(0,60);
+ a.download=onlyProc?`questions_${safe||'procedure'}.json`:'quizz-questions-modifie.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+$('downloadAll').onclick=()=>exportJson(false);$('downloadProc').onclick=()=>exportJson(true);$('restart').onclick=()=>{pos=0;$('finishCard').classList.add('hidden');showQuestion()};
+$('fileInput').onchange=e=>{if(e.target.files[0])readFile(e.target.files[0])};
+const drop=$('drop');['dragenter','dragover'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.add('drag')}));['dragleave','drop'].forEach(n=>drop.addEventListener(n,e=>{e.preventDefault();drop.classList.remove('drag')}));drop.addEventListener('drop',e=>{if(e.dataTransfer.files[0])readFile(e.dataTransfer.files[0])});
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}function attr(s){return esc(s).replace(/`/g,'&#96;')}
+window.addEventListener('beforeunload',e=>{if(edited.size||deleted.size){e.preventDefault();e.returnValue=''}});
+</script>
+</body>
+</html>
