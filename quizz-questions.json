@@ -1,0 +1,2252 @@
+[
+ {
+  "id": "ETV-01",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§1",
+  "q": "Quel est l'objet de la procédure WEF-16-ETV-GENE-PRO-0338 ?",
+  "o": [
+   "Le mode opératoire des examens télévisuels inter-faisceaux de la partie secondaire des GV",
+   "Le nettoyage haute pression de la plaque tubulaire",
+   "La maintenance préventive des pompes HP",
+   "Le contrôle radiochimique de l'eau de lançage"
+  ],
+  "a": 0,
+  "e": "Le document présente le mode opératoire à mettre en œuvre lors des examens télévisuels inter-faisceaux de la partie secondaire des générateurs de vapeur."
+ },
+ {
+  "id": "ETV-02",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§3 Glossaire",
+  "q": "Que signifie l'acronyme SPICE ?",
+  "o": [
+   "Support Plate Inspection for Clogging Examination",
+   "Steam Plate Inspection Camera Equipment",
+   "Secondary Pipe Inspection Control Equipment",
+   "Sludge Pressure Injection Cleaning Equipment"
+  ],
+  "a": 0,
+  "e": "SPICE : Support Plate Inspection for Clogging Examination (glossaire §3)."
+ },
+ {
+  "id": "ETV-03",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§3 Glossaire",
+  "q": "Que signifie CAVALRI ?",
+  "o": [
+   "Central Audio and Video Access Link for Remote Inspection",
+   "Camera Vision And Live Recording Interface",
+   "Control And Video Acquisition Link for Robot Inspection",
+   "Central Acquisition Video Assisted Live Remote Imaging"
+  ],
+  "a": 0,
+  "e": "CAVALRI : Central Audio and Video Access Link for Remote Inspection."
+ },
+ {
+  "id": "ETV-04",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§6",
+  "q": "En combien de sous-ensembles l'ensemble robot SPICE est-il décomposé ?",
+  "o": [
+   "5",
+   "3",
+   "4",
+   "7"
+  ],
+  "a": 0,
+  "e": "5 sous-ensembles : l'interface avec le GV, le bloc principal, le galet d'entrainement sabre, la bobine sabre, la tête de guide et ses allonges."
+ },
+ {
+  "id": "ETV-05",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.1.1",
+  "q": "Quel type de sabre est utilisé pour l'inspection de la plaque tubulaire (PT) ?",
+  "o": [
+   "Le sabre axial avec déflecteur rigide",
+   "Le sabre 20°",
+   "Le sabre PE5",
+   "Le sabre articulé"
+  ],
+  "a": 0,
+  "e": "Pour la PT, on utilise le sabre axial avec déflecteur rigide (§8.1.1)."
+ },
+ {
+  "id": "ETV-06",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.1.1",
+  "q": "Quel sabre est utilisé pour l'inspection de la PE1 ?",
+  "o": [
+   "Le sabre 20°",
+   "Le sabre axial",
+   "Le sabre PE5",
+   "Le sabre droit court"
+  ],
+  "a": 0,
+  "e": "La PE1 s'inspecte avec le sabre 20° (déflecteur rigide ou béquillable selon le GV)."
+ },
+ {
+  "id": "ETV-07",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.1.1",
+  "q": "Quel matériel est utilisé pour l'inspection des PE4 sur GV 56F / 58F ?",
+  "o": [
+   "Le sabre PE5 avec déflecteur béquillable",
+   "Le sabre axial avec déflecteur rigide",
+   "Le sabre 20° avec déflecteur rigide",
+   "Aucun sabre, uniquement la perche"
+  ],
+  "a": 0,
+  "e": "Pour les PE4 (56F/58F), le tableau §8.1.1 impose le sabre PE5 avec déflecteur béquillable."
+ },
+ {
+  "id": "ETV-08",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.1.2",
+  "q": "Dans quelles conditions peut-on utiliser un sabre ou un déflecteur alternatif ?",
+  "o": [
+   "En mode dégradé, sous FNC",
+   "Librement, au choix du pilote",
+   "Uniquement avec l'accord verbal du CNPE",
+   "Jamais, aucune alternative n'est prévue"
+  ],
+  "a": 0,
+  "e": "Les configurations alternatives (sabre axial, déflecteur articulé) ne sont admises qu'en mode dégradé sous FNC (§8.1.2)."
+ },
+ {
+  "id": "ETV-09",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.1.3",
+  "q": "Quelle est la particularité de l'adaptateur Type 4 ?",
+  "o": [
+   "Les vis de bridage sont soudées sur l'interface et il n'y a pas de pion de centrage",
+   "Il se monte sans aucune vis",
+   "Il nécessite quatre pions de centrage",
+   "Il s'installe uniquement sur les TP des GV 51B"
+  ],
+  "a": 0,
+  "e": "L'adaptateur Type 4 s'installe uniquement sur les TO supérieurs du GV 68/19 ; les vis de bridage sont soudées et il n'y a pas de pion de centrage."
+ },
+ {
+  "id": "ETV-10",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.1.3",
+  "q": "Sur quels GV l'adaptateur Type 2 s'installe-t-il ?",
+  "o": [
+   "Sur les TP des GV 51B / 51BR et sur GV 74/19",
+   "Sur tous les GV 1300 MWe",
+   "Uniquement sur les TO du 68/19",
+   "Sur les GV 56F et 58F"
+  ],
+  "a": 0,
+  "e": "Cet adaptateur s'installe uniquement sur les TP GV 51B / 51BR et sur GV 74/19."
+ },
+ {
+  "id": "ETV-11",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.2",
+  "q": "Quel outil est utilisé pour serrer les 2 vis de bridage de l'interface sur la bride GV ?",
+  "o": [
+   "Une clé Allen de 6",
+   "Une clé plate de 10",
+   "Une clé dynamométrique réglée à 30 N.m",
+   "Un tournevis cruciforme"
+  ],
+  "a": 0,
+  "e": "Le serrage des 2 vis de bridage se fait à l'aide d'une clé Allen de 6, quel que soit le type d'adaptateur."
+ },
+ {
+  "id": "ETV-12",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.2",
+  "q": "Comment doit être positionné le détrompeur lors de la mise en place de l'interface ?",
+  "o": [
+   "En haut à droite du trou de la bride GV",
+   "En bas à gauche du trou de la bride GV",
+   "Face au ru central",
+   "Indifféremment, il n'est pas orienté"
+  ],
+  "a": 0,
+  "e": "L'interface se positionne de telle façon que le détrompeur soit en haut à droite du trou de la bride GV."
+ },
+ {
+  "id": "ETV-13",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.2",
+  "q": "Quelle action sensible est associée au montage des vis de l'adaptateur ?",
+  "o": [
+   "Contrôle croisé : s'assurer d'avoir engagé la totalité du filetage de la vis dans la platine",
+   "Autocontrôle du couple au moyen d'une clé dynamométrique",
+   "Contrôle technique par le client EDF",
+   "Aucune, c'est une action standard"
+  ],
+  "a": 0,
+  "e": "Au montage de la vis, une action sensible avec contrôle croisé impose de vérifier que la totalité du filetage est engagée (partie non filetée prisonnière du taraudage)."
+ },
+ {
+  "id": "ETV-14",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.4.1",
+  "q": "Combien d'allonges guides longs faut-il insérer sur un GV 1300 MWe ?",
+  "o": [
+   "4",
+   "3",
+   "11",
+   "15"
+  ],
+  "a": 0,
+  "e": "Sur 1300 MWe : 4 allonges longues et 15 allonges courtes ; sur 900 MWe : 3 longues et 11 courtes."
+ },
+ {
+  "id": "ETV-15",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.4.1",
+  "q": "Combien d'allonges guides courts faut-il insérer sur un GV 900 MWe ?",
+  "o": [
+   "11",
+   "15",
+   "3",
+   "4"
+  ],
+  "a": 0,
+  "e": "900 MWe : 11 allonges guides courts (en plus de la tête de guide) et 3 allonges longues."
+ },
+ {
+  "id": "ETV-16",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.4.2",
+  "q": "Avec quel angle et dans quel sens présente-t-on une allonge guide pour l'insérer ?",
+  "o": [
+   "15° dans le sens anti-horaire",
+   "15° dans le sens horaire",
+   "45° dans le sens horaire",
+   "90°, sans notion de sens"
+  ],
+  "a": 0,
+  "e": "On présente l'allonge à 15° en sens anti-horaire pour faire correspondre les dentures, puis on la tourne de 15° en sens horaire pour aligner les crémaillères."
+ },
+ {
+  "id": "ETV-17",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.5.4.2",
+  "q": "Qu'est-ce qui empêche de dépasser les 15° de rotation lors de l'assemblage d'une allonge ?",
+  "o": [
+   "2 têtes de vis servant de butée mécanique",
+   "Un capteur d'angle sur l'IHM",
+   "Un ergot plastique fusible",
+   "Rien, c'est au ressenti de l'opérateur"
+  ],
+  "a": 0,
+  "e": "Note du §8.5.4.2 : 2 têtes de vis servent de butée mécanique pour ne pas tourner au-delà des 15° nécessaires."
+ },
+ {
+  "id": "ETV-18",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.1",
+  "q": "Lors de l'inspection d'une PT, dans quel sens doit se faire le mouvement du sabre ?",
+  "o": [
+   "Toujours dans un mouvement continu du haut vers le bas",
+   "Toujours du bas vers le haut",
+   "Alternativement dans les deux sens",
+   "Par à-coups, du bas vers le haut"
+  ],
+  "a": 0,
+  "e": "Sur PT le mouvement doit être continu du haut vers le bas : un mouvement du bas vers le haut présente un risque important d'endommagement."
+ },
+ {
+  "id": "ETV-19",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.1",
+  "q": "Lors de l'inspection d'une PE1, dans quel sens doit se faire le mouvement du sabre ?",
+  "o": [
+   "Du bas vers le haut",
+   "Du haut vers le bas",
+   "Indifféremment",
+   "En rotation uniquement"
+  ],
+  "a": 0,
+  "e": "En PE1, le mouvement doit se faire du bas vers le haut ; l'inverse présente un risque important d'endommagement."
+ },
+ {
+  "id": "ETV-20",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.1",
+  "q": "Que fait le contrôle-commande lorsque le sabre est sorti à plus de 20 mm ?",
+  "o": [
+   "Il limite la translation à une demi-inter-colonne en avance ou en recul",
+   "Il coupe l'alimentation des moteurs",
+   "Il déclenche une alarme sonore sans bridage",
+   "Il force le retour du sabre en position de sécurité"
+  ],
+  "a": 0,
+  "e": "Par sécurité, au-delà de 20 mm de sortie, le contrôle-commande limite la translation à une demi-inter-colonne."
+ },
+ {
+  "id": "ETV-21",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.1",
+  "q": "Dans quelle position doit se trouver le sabre lors des translations de guide ?",
+  "o": [
+   "En position de sécurité dans la tête de guide / effecteur",
+   "Sorti de 25 mm minimum",
+   "Totalement inséré dans l'inter-colonne",
+   "Bloqué par le frein bobine uniquement"
+  ],
+  "a": 0,
+  "e": "Lors des translations de guide, le sabre doit être en position de sécurité dans la tête de guide / effecteur."
+ },
+ {
+  "id": "ETV-22",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Quel est le programme d'inspection minimal d'un ETV-G IF PT ?",
+  "o": [
+   "10 inter-colonnes en boîte chaude et 5 en boîte froide",
+   "5 inter-colonnes en boîte chaude et 10 en boîte froide",
+   "10 inter-colonnes par boîte",
+   "Une inter-colonne par quart de GV"
+  ],
+  "a": 0,
+  "e": "L'ETV-G IF est à réaliser a minima sur 10 IC en boîte chaude et 5 IC en boîte froide."
+ },
+ {
+  "id": "ETV-23",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Qui rédige le programme d'inspection initial de l'ETV-G IF PT ?",
+  "o": [
+   "EDF",
+   "Westinghouse",
+   "Le chargé de travaux",
+   "L'ASN"
+  ],
+  "a": 0,
+  "e": "Le programme d'inspection initial est défini en phase de préparation, au plus tard en levée des préalables, et il est rédigé par EDF."
+ },
+ {
+  "id": "ETV-24",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "À quelle condition le programme d'inspection étendu est-il considéré comme terminé ?",
+  "o": [
+   "Lorsque 2 inter-colonnes consécutives ne présentent plus de boues dures",
+   "Lorsque 15 inter-colonnes ont été inspectées",
+   "Dès que la boue dure n'est plus visible sur une IC",
+   "Après accord verbal du CNPE"
+  ],
+  "a": 0,
+  "e": "Le programme est terminé lorsque 2 inter-colonnes consécutives ne présentent plus de boues dures, dans la limite des zones accessibles et qualifiées."
+ },
+ {
+  "id": "ETV-25",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Quelle est la vitesse maximale de translation lors de l'inspection ETV IF ?",
+  "o": [
+   "70 % sur l'interface",
+   "50 % sur l'interface",
+   "100 %, sans limitation",
+   "25 % sur l'interface"
+  ],
+  "a": 0,
+  "e": "L'IC est inspectée en reculant le sabre, la vitesse maximale de translation étant de 70 % sur l'interface."
+ },
+ {
+  "id": "ETV-26",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Quel critère de conformité vidéo concerne la hauteur de visualisation en ETV-G IF PT ?",
+  "o": [
+   "Une visualisation du tube environ 10 mm au-dessus de la plaque à tubes",
+   "Une visualisation à 50 mm au-dessus de la plaque",
+   "Une visée depuis la PRD",
+   "Une visualisation au niveau de la première interligne"
+  ],
+  "a": 0,
+  "e": "La conformité impose une visualisation du tube à environ 10 mm au-dessus de la plaque à tubes, ce qui correspond à la tête de sabre affleurante de la PT."
+ },
+ {
+  "id": "ETV-27",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Combien de captures vidéo par GV sont requises a minima en ETV-G IF PT ?",
+  "o": [
+   "10",
+   "5",
+   "15",
+   "20"
+  ],
+  "a": 0,
+  "e": "10 captures vidéo par GV sont requises a minima, caractéristiques de la propreté de la plaque, plus 5 captures supplémentaires dans des zones définies."
+ },
+ {
+  "id": "ETV-28",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Sur un GV 68/19, quelle zone fait l'objet des captures d'images supplémentaires ?",
+  "o": [
+   "Entre les colonnes 65 et 68 et entre les lignes 5 et 15",
+   "Entre les colonnes 51 et 54 et entre les lignes 2 et 8",
+   "Entre les colonnes 56 et 60 et entre les lignes 1 et 10",
+   "La zone cruciforme uniquement"
+  ],
+  "a": 0,
+  "e": "Pour le 68/19, les inter-tubes d'intérêt sont entre les colonnes 65 et 68 et entre les lignes 5 et 15."
+ },
+ {
+  "id": "ETV-29",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Sur un GV 51B ou 47/22, quelle zone fait l'objet des captures d'images supplémentaires ?",
+  "o": [
+   "Entre les colonnes 51 et 54 et entre les lignes 2 et 8",
+   "Entre les colonnes 65 et 68 et entre les lignes 5 et 15",
+   "Entre les colonnes 56 et 60 et entre les lignes 1 et 10",
+   "Aucune zone n'est spécifiée"
+  ],
+  "a": 0,
+  "e": "Pour les 51B et 47/22, les inter-tubes d'intérêt sont entre les colonnes 51 et 54 et entre les lignes 2 et 8."
+ },
+ {
+  "id": "ETV-30",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.2",
+  "q": "Pour les GV de remplacement 74/19 et 80F, que prévoit la procédure sur les captures supplémentaires ?",
+  "o": [
+   "Elles ne sont pas spécifiées dans les CSCT et seront à préciser en amont des chantiers",
+   "Elles sont identiques à celles du 68/19",
+   "Elles sont supprimées",
+   "Elles sont doublées"
+  ],
+  "a": 0,
+  "e": "Nota §9.2 : pour les GV de remplacement (74/19 et 80F), les captures supplémentaires ne sont pas spécifiées dans les CSCT et seront à préciser en amont des chantiers concernés."
+ },
+ {
+  "id": "ETV-31",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.3",
+  "q": "Quel est l'objectif de l'inspection ETV-IF PRD ?",
+  "o": [
+   "Visualiser la PRD et détecter la présence de corps migrants",
+   "Mesurer le colmatage des foliés",
+   "Contrôler l'état de la plaque tubulaire",
+   "Vérifier l'étanchéité des tubes"
+  ],
+  "a": 0,
+  "e": "L'ETV IF PRD a pour but de visualiser la plaque de répartition de débit et de détecter la présence de corps migrants."
+ },
+ {
+  "id": "ETV-32",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.4",
+  "q": "Que doit permettre d'apprécier l'ETV PE1 ?",
+  "o": [
+   "Le degré de colmatage des foliés, sans conduire à un calcul de colmatage",
+   "Le taux de colmatage chiffré de la plaque",
+   "L'épaisseur des dépôts sur la plaque tubulaire",
+   "Le débit résiduel dans le ru central"
+  ],
+  "a": 0,
+  "e": "L'ETV PE1 doit permettre d'apprécier le degré de colmatage des foliés ; l'inspection ne conduit pas à un calcul de colmatage."
+ },
+ {
+  "id": "ETV-33",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.4",
+  "q": "Comment est réalisée l'inspection PE1 ?",
+  "o": [
+   "Par le dessous de la plaque, sabre monté en suivant le tube 3, puis inspection en avançant",
+   "Par le dessus de la plaque, en reculant le sabre",
+   "Par le ru central, en rotation continue",
+   "Par le dessous, en reculant le sabre"
+  ],
+  "a": 0,
+  "e": "L'inspection PE1 est réalisée par le dessous : le sabre est monté au niveau de la face inférieure en suivant le tube 3, puis la plaque est inspectée en avançant le sabre."
+ },
+ {
+  "id": "ETV-34",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.4",
+  "q": "Pourquoi la vue du lobe supérieur n'est-elle pas requise en inspection PE1 ?",
+  "o": [
+   "Compte tenu des caractéristiques du sabre 20°, il est quasi-impossible de visualiser les deux lobes en même temps",
+   "Parce que le lobe supérieur n'est jamais colmaté",
+   "Parce que l'éclairage est insuffisant en partie haute",
+   "Parce que le CSCT ne le demande pas pour les 900 MWe"
+  ],
+  "a": 0,
+  "e": "La procédure précise que compte tenu des caractéristiques du sabre 20°, il est quasi-impossible de visualiser les lobes inférieur et supérieur en même temps."
+ },
+ {
+  "id": "ETV-35",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.5",
+  "q": "Sur les GV 55/19, l'IC 54/55 du programme CSCT n'est pas réalisable. Quelle IC est réalisée en remplacement ?",
+  "o": [
+   "L'IC 52/53",
+   "L'IC 56/57",
+   "L'IC 40/41",
+   "L'IC 11/12"
+  ],
+  "a": 0,
+  "e": "L'IC 54/55 n'est pas réalisable du fait de la géométrie des GV 55/19 : l'IC 52/53 est réalisée en remplacement, avec une tolérance de ±2 colonnes."
+ },
+ {
+  "id": "ETV-36",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6",
+  "q": "Comment est réalisée l'inspection ETV PE5 (68/19, 55/19) ou PE4 (56F, 58F) ?",
+  "o": [
+   "Par le dessus de la plaque entretoise, foliés inspectés en reculant le sabre",
+   "Par le dessous de la plaque, en avançant le sabre",
+   "Depuis le trou de poing inférieur uniquement",
+   "Avec la perche d'inspection"
+  ],
+  "a": 0,
+  "e": "L'inspection est réalisée par le dessus de la plaque entretoise : le sabre est inséré jusqu'au dernier tube de l'IC, puis les foliés sont inspectés en reculant."
+ },
+ {
+  "id": "ETV-37",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6",
+  "q": "À quelle pression maximale doivent être réglés le kit de filtration d'air et le détendeur pour le ballon du sabre PE5 ?",
+  "o": [
+   "3 bar",
+   "2 bar",
+   "5 bar",
+   "7 bar"
+  ],
+  "a": 0,
+  "e": "Le kit de filtration d'air en amont du CAVALRI et le détendeur sur le boitier de commande doivent être réglés au maximum à 3 bar."
+ },
+ {
+  "id": "ETV-38",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6",
+  "q": "De combien le sabre PE5 doit-il être sorti au minimum pour pouvoir gonfler le ballon ?",
+  "o": [
+   "140 mm",
+   "25 mm",
+   "60 mm",
+   "20 mm"
+  ],
+  "a": 0,
+  "e": "Le sabre doit être sorti de 140 mm minimum pour pouvoir gonfler le ballon ; il ne faut jamais le rentrer dans le déflecteur si le ballon n'est pas totalement dégonflé."
+ },
+ {
+  "id": "ETV-39",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6.3",
+  "q": "Après avoir béquillé le déflecteur, à quelle valeur rentre-t-on le sabre pour faire une initialisation affleurant ?",
+  "o": [
+   "25 mm",
+   "140 mm",
+   "0 mm",
+   "60 mm"
+  ],
+  "a": 0,
+  "e": "Mode opératoire §9.6.3 : sortir le sabre de 140 mm, béquiller doucement, puis rentrer le sabre jusqu'à 25 mm et faire une initialisation affleurant."
+ },
+ {
+  "id": "ETV-40",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6.3",
+  "q": "Pourquoi ne faut-il pas effectuer de rotation du robot quand la position du déflecteur béquillé n'est connue qu'approximativement ?",
+  "o": [
+   "Le couple du moteur de rotation est très important : risque de tordre la béquille du déflecteur",
+   "Cela déclenche un arrêt d'urgence du contrôle-commande",
+   "Cela fausse l'incrustation de l'enregistrement",
+   "Cela dégonfle le ballon du sabre"
+  ],
+  "a": 0,
+  "e": "Le couple du moteur de rotation est très important : une rotation à l'aveugle risque de tordre la béquille du déflecteur, rendant le béquillage impossible."
+ },
+ {
+  "id": "ETV-41",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6.5",
+  "q": "À combien est évaluée la flèche du sabre PE5 en bout de l'IC la plus longue ?",
+  "o": [
+   "16° environ",
+   "3,9°",
+   "45°",
+   "25°"
+  ],
+  "a": 0,
+  "e": "Suite aux essais internes, la flèche du sabre est évaluée à environ 16° en bout de l'IC la plus longue ; l'angle d'insertion doit en tenir compte."
+ },
+ {
+  "id": "ETV-42",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6.5",
+  "q": "Quelle est la largeur du ru central d'un GV 68/19 selon le tableau d'aide à l'inspection PE5 ?",
+  "o": [
+   "131 mm",
+   "123 mm",
+   "141 mm",
+   "168 mm"
+  ],
+  "a": 0,
+  "e": "Tableau §9.6.5 : largeur du ru central 68/19 = 131 mm (123 mm pour 55/19, 141 mm pour 56F, 168 mm pour 58F)."
+ },
+ {
+  "id": "ETV-43",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6",
+  "q": "Combien de photos de folié sont attendues au minimum en livrable d'une inspection PE4/PE5 ?",
+  "o": [
+   "1 photo de folié par tube",
+   "1 photo par inter-colonne",
+   "10 photos par GV",
+   "5 photos par boîte"
+  ],
+  "a": 0,
+  "e": "Les livrables imposent a minima 1 photo de folié par tube, en plus du fichier vidéo et de la cartographie."
+ },
+ {
+  "id": "ETV-44",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§9.6",
+  "q": "Quelle marge est exigée entre les contours supérieurs et inférieurs sur les photos de foliés PE4/PE5 ?",
+  "o": [
+   "1 mm en taille réelle",
+   "10 mm en taille réelle",
+   "Aucune marge n'est exigée",
+   "5 mm à l'écran"
+  ],
+  "a": 0,
+  "e": "La conformité impose une visualisation des deux lobes sur la même image avec une marge de 1 mm (taille réelle) entre les contours supérieurs et inférieurs."
+ },
+ {
+  "id": "ETV-45",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§11.1",
+  "q": "En mode dégradé, quelle translation du sabre obtient-on pour un tour de manivelle ?",
+  "o": [
+   "48,5 mm",
+   "2 mm",
+   "10 mm",
+   "100 mm"
+  ],
+  "a": 0,
+  "e": "Note §11.1 : un tour de manivelle entraîne une translation du sabre dans les guides de 48,5 mm, pour un effort de l'ordre de 3 kg."
+ },
+ {
+  "id": "ETV-46",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§11.3",
+  "q": "En mode dégradé de rotation du bloc, quelle rotation obtient-on pour un tour de manivelle ?",
+  "o": [
+   "2°",
+   "15°",
+   "45°",
+   "0,5°"
+  ],
+  "a": 0,
+  "e": "Note §11.3 : un tour de manivelle a pour effet une rotation du bloc de 2°, pour un effort de l'ordre de 0,5 kg."
+ },
+ {
+  "id": "ETV-47",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§4",
+  "q": "Lequel de ces éléments N'EST PAS un prérequis à la mise en œuvre de la procédure ETV ?",
+  "o": [
+   "La présence du représentant de l'ASN en casemate",
+   "Un régime de travail radiologique valide",
+   "Des équipements déchargés",
+   "Une plaque à inspecter suffisamment sèche"
+  ],
+  "a": 0,
+  "e": "Les prérequis sont : équipements déchargés, RTR valide, vérification des conditions d'intervention, organigramme conforme, régime de consignation, plaque suffisamment sèche."
+ },
+ {
+  "id": "ETV-48",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§5",
+  "q": "Comment doit être formalisé tout dysfonctionnement d'équipement, même une panne mineure ?",
+  "o": [
+   "Par une fiche de maintenance",
+   "Par une simple information orale au chef de quart",
+   "Par une FNC systématique",
+   "Par une note interne en fin de chantier"
+  ],
+  "a": 0,
+  "e": "§5 Précautions : tout dysfonctionnement (panne même mineure, pièce manquante, défaut de colisage, risque de fiabilité détecté) est formalisé par une fiche de maintenance."
+ },
+ {
+  "id": "ETV-49",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§5",
+  "q": "Selon les précautions du §5, quelle est la priorité absolue de la prestation ?",
+  "o": [
+   "La sécurité, la sûreté nucléaire et la sécurité industrielle, avant tout autre élément",
+   "Le respect des durées contractuelles",
+   "Le nombre d'inter-colonnes inspectées par poste",
+   "La dosimétrie collective"
+  ],
+  "a": 0,
+  "e": "La sécurité et la sûreté nucléaire, les normes environnementales et la sécurité industrielle sont prioritaires ; la qualité d'exécution prime aussi sur le respect des durées contractuelles."
+ },
+ {
+  "id": "ETV-50",
+  "theme": "ETV",
+  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+  "ref": "§8.3 / §9",
+  "q": "Quelle vérification est réalisée avant chaque entrée et après chaque sortie d'élément, et tracée dans le journal FME ?",
+  "o": [
+   "Une vérification visio-tactile de la conformité des équipements",
+   "Une mesure dosimétrique de l'élément",
+   "Une pesée de l'équipement",
+   "Un contrôle d'étanchéité à l'air"
+  ],
+  "a": 0,
+  "e": "Une vérification visio-tactile de la conformité est réalisée avant chaque entrée ou après chaque sortie, tracée dans le journal FME ; tous les écarts sont formalisés."
+ },
+ {
+  "id": "SLA-01",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§1",
+  "q": "Quel est l'objet de la procédure WEF-SLA-PWX-PRO-122 ?",
+  "o": [
+   "L'installation, l'utilisation et le repli des Groupes de lançage Intérieur Bâtiment Réacteur (GIBR)",
+   "L'inspection télévisuelle des plaques entretoises",
+   "La définition des besoins EDF pour la PIGVS",
+   "Le contrôle radiochimique des effluents"
+  ],
+  "a": 0,
+  "e": "Cette procédure présente l'installation, l'utilisation et le repli des GIBR des GV des centrales REP 900, 1300 et 1450 MWe."
+ },
+ {
+  "id": "SLA-02",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§2",
+  "q": "Quelle prestation N'EST PAS couverte par cette procédure ?",
+  "o": [
+   "L'inspection ETV des GV, qui fait appel à sa propre procédure",
+   "Le lançage de la partie basse des GV",
+   "La pesée des boues",
+   "Le repli des équipements de lançage"
+  ],
+  "a": 0,
+  "e": "La procédure concerne exclusivement les équipements de lançage et de pesée des boues ; l'inspection ETV fait appel à sa propre procédure."
+ },
+ {
+  "id": "SLA-03",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§3",
+  "q": "Que signifient les abréviations BEP et BES ?",
+  "o": [
+   "Bâche à eau propre et bâche à eau sale",
+   "Bâche d'eau primaire et bâche d'eau secondaire",
+   "Bloc eau pompe et bloc eau skid",
+   "Bâche d'effluents propres et bâche d'effluents sales"
+  ],
+  "a": 0,
+  "e": "BEP : bâche à eau propre ; BES : bâche à eau sale (§3 Abréviations)."
+ },
+ {
+  "id": "SLA-04",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§3",
+  "q": "Que signifie l'abréviation DAV ?",
+  "o": [
+   "Système Audio et Vidéo",
+   "Dispositif d'Aspiration Variable",
+   "Débit d'Alimentation Vanne",
+   "Diagramme d'Acquisition Vidéo"
+  ],
+  "a": 0,
+  "e": "DAV : Système Audio et Vidéo, permettant la communication entre le pupitre de commande et les techniciens au pied des GV."
+ },
+ {
+  "id": "SLA-05",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§7",
+  "q": "Quel est le principe de fonctionnement hydraulique du système de lançage ?",
+  "o": [
+   "Un fonctionnement en boucle fermée permettant de réutiliser l'eau filtrée",
+   "Un circuit ouvert avec rejet direct au puisard",
+   "Une alimentation continue en eau SED sans recyclage",
+   "Un circuit sous vide sans pompe"
+  ],
+  "a": 0,
+  "e": "§7 : le fonctionnement en boucle fermée du système permet de réutiliser l'eau filtrée pour poursuivre le nettoyage."
+ },
+ {
+  "id": "SLA-06",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§7",
+  "q": "Quel est le rôle du flux d'eau périphérique (JP) ?",
+  "o": [
+   "Entraîner les boues jusqu'aux têtes d'aspiration interfacées au GV",
+   "Découper les boues dures sur la plaque tubulaire",
+   "Refroidir les pompes haute pression",
+   "Remplir la bâche à eau propre"
+  ],
+  "a": 0,
+  "e": "En parallèle du circuit HP, le flux d'eau périphérique permet l'entrainement des boues jusqu'à des têtes d'aspiration interfacées au générateur de vapeur."
+ },
+ {
+  "id": "SLA-07",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.1.2",
+  "q": "Quelle valeur de résistance d'isolement est attendue, interrupteur général 001JS ouvert ?",
+  "o": [
+   "> 5 Mohms par phase",
+   "< 1 ohm par phase",
+   "> 0,5 Mohm par phase",
+   "> 2 ohms par phase"
+  ],
+  "a": 0,
+  "e": "Chaque phase doit avoir une résistance > 5 Mohms interrupteur ouvert et < 1 ohm interrupteur fermé."
+ },
+ {
+  "id": "SLA-08",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.1.2",
+  "q": "Que faire si la mesure de continuité de terre donne une résistance supérieure à 2 ohms ?",
+  "o": [
+   "Refaire la mise à la terre",
+   "Poursuivre, la valeur est acceptable",
+   "Remplacer le pupitre de commande",
+   "Baisser la tension d'alimentation"
+  ],
+  "a": 0,
+  "e": "GIBR hors tension, on mesure la continuité de terre : en cas de résistance > 2 ohms, il faut refaire la mise à la terre."
+ },
+ {
+  "id": "SLA-09",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.1.2",
+  "q": "Quelle résistance minimale est attendue entre chaque phase et entre phase et terre, disjoncteur 002JS ouvert ?",
+  "o": [
+   "> 0,5 Mohm",
+   "> 5 Mohms",
+   "> 2 ohms",
+   "< 1 ohm"
+  ],
+  "a": 0,
+  "e": "Après ouverture du disjoncteur 002JS, la résistance mesurée entre chaque phase et entre phase et terre doit être > 0,5 Mohm."
+ },
+ {
+  "id": "SLA-10",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.1.2",
+  "q": "Qui doit réaliser le branchement de l'alimentation électrique sur le pupitre de commande ?",
+  "o": [
+   "Un électricien habilité",
+   "Le chargé de travaux lançage",
+   "Un opérateur de quart",
+   "Le représentant EDF"
+  ],
+  "a": 0,
+  "e": "La procédure impose de faire appel à un électricien habilité pour le branchement et la mise sous tension via le sectionneur principal."
+ },
+ {
+  "id": "SLA-11",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.1",
+  "q": "Quel équipement permet de gérer les consignes des moteurs de lances et les signaux du DAV ?",
+  "o": [
+   "L'Enclosure box",
+   "L'Inline Filter",
+   "Le module de régulation HP",
+   "La bâche à eau propre"
+  ],
+  "a": 0,
+  "e": "L'enclosure box est l'interface électronique permettant le pilotage des lances et du système DAV."
+ },
+ {
+  "id": "SLA-12",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.2",
+  "q": "Avec quel type de câble l'Enclosure box est-elle reliée au pupitre de commande ?",
+  "o": [
+   "Un câble RJ45",
+   "Un câble coaxial",
+   "Une fibre optique",
+   "Un câble USB"
+  ],
+  "a": 0,
+  "e": "L'Enclosure box est reliée au pupitre de commande avec un câble RJ45, de même que la boîte I/O sur l'Enclosure box."
+ },
+ {
+  "id": "SLA-13",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.3",
+  "q": "Où doit être installé l'Inline Filter ?",
+  "o": [
+   "En casemate GV, au plus proche du GV",
+   "Au pied du module de régulation HP",
+   "Sur la bâche à eau propre",
+   "À la sortie de la pompe à membrane"
+  ],
+  "a": 0,
+  "e": "IMPORTANT §10.1.2.3 : l'inline filter doit être installé en casemate GV, au plus proche du GV. Il peut être désolidarisé du T HP pour faciliter son accès."
+ },
+ {
+  "id": "SLA-14",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.3",
+  "q": "Quel est le diamètre des tuyaux de lançage HP tirés du module de régulation jusqu'au GV ?",
+  "o": [
+   "1 pouce",
+   "3/4 de pouce",
+   "1 pouce 1/2",
+   "2 pouces"
+  ],
+  "a": 0,
+  "e": "Les tuyaux HP 1'' vont du module de régulation HP au GV ; les tuyaux HP des lances raccordés sur le T HP sont en 3/4''."
+ },
+ {
+  "id": "SLA-15",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.3",
+  "q": "Quel est le diamètre des tuyaux de flux d'eau périphérique tirés depuis la bâche à eau propre ?",
+  "o": [
+   "1 pouce 1/2",
+   "1 pouce",
+   "2 pouces",
+   "3/4 de pouce"
+  ],
+  "a": 0,
+  "e": "Les tuyaux de flux d'eau périphérique tirés de la BEP jusqu'au GV sont en 1''1/2 ; les tuyaux des têtes de flux périphérique sont en 1''."
+ },
+ {
+  "id": "SLA-16",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.4",
+  "q": "Que faut-il vérifier avant toute action sur les tuyaux HP ?",
+  "o": [
+   "Que le circuit HP est arrêté et en sécurité",
+   "Que les pompes à membrane sont en marche",
+   "Que la BEP est pleine",
+   "Que le DAV est replié"
+  ],
+  "a": 0,
+  "e": "Attention §10.1.2.4 : avant de réaliser toute action sur les tuyaux HP, il faut vérifier que le circuit HP est arrêté et en sécurité."
+ },
+ {
+  "id": "SLA-17",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.4",
+  "q": "Quel outil permet de vérifier la qualité de l'accouplement de deux tuyaux HP ?",
+  "o": [
+   "La cale étalon ou gabarit « High Pressure Hose Coupling GO Gage »",
+   "Un pied à coulisse numérique",
+   "Une clé dynamométrique",
+   "Un manomètre de contrôle"
+  ],
+  "a": 0,
+  "e": "La qualité de l'accouplement se vérifie à l'aide de la cale étalon, ou gabarit « High Pressure Hose Coupling GO Gage »."
+ },
+ {
+  "id": "SLA-18",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.4",
+  "q": "À quoi sert la bague de sécurité installée derrière le raccord femelle HP ?",
+  "o": [
+   "Elle rend impossible tout désaccouplement intempestif",
+   "Elle assure l'étanchéité du raccord",
+   "Elle limite la pression du circuit",
+   "Elle sert de repère de couleur pour le lignage"
+  ],
+  "a": 0,
+  "e": "Une fois la bague de sécurité installée et serrée, tout désaccouplement intempestif est impossible car elle empêche le désengagement du raccord femelle."
+ },
+ {
+  "id": "SLA-19",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.4",
+  "q": "Que faire si le raccordement de deux embouts HP ne peut pas se faire « en douceur » ?",
+  "o": [
+   "Nettoyer la saleté gênant le montage ou lubrifier si besoin",
+   "Forcer progressivement avec un levier",
+   "Chauffer le raccord",
+   "Changer immédiatement les deux flexibles"
+  ],
+  "a": 0,
+  "e": "Attention : ne pas forcer. Si l'opération ne se fait pas en douceur, nettoyer la saleté pouvant gêner le montage ou lubrifier si besoin."
+ },
+ {
+  "id": "SLA-20",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.5",
+  "q": "Combien de pompes à membrane sont nécessaires par GV ?",
+  "o": [
+   "2",
+   "1",
+   "4",
+   "3"
+  ],
+  "a": 0,
+  "e": "Les circuits de retour d'aspiration comportent 2 pompes à membrane par GV, avec 2 lignes d'aspiration, 2 bacs de rétention et 2 manomètres par GV."
+ },
+ {
+  "id": "SLA-21",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.5",
+  "q": "Comment la pompe à membrane est-elle fixée à son bac de rétention ?",
+  "o": [
+   "Par des sangles de maintien",
+   "Par quatre vis traversantes",
+   "Par un système magnétique",
+   "Elle est simplement posée"
+  ],
+  "a": 0,
+  "e": "L'étape de connexion impose de fixer la pompe à son bac de rétention grâce à des sangles de maintien."
+ },
+ {
+  "id": "SLA-22",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.2.5",
+  "q": "Où doit être placé le bouchon retiré côté aspiration/refoulement de la pompe ?",
+  "o": [
+   "Dans le bac de rétention",
+   "Dans la caisse à outils",
+   "Sur le raccord voisin",
+   "Au pied de la casemate"
+  ],
+  "a": 0,
+  "e": "Lors du retrait des bouchons côté aspiration et refoulement, la procédure impose de placer le bouchon dans le bac de rétention."
+ },
+ {
+  "id": "SLA-23",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.3.1",
+  "q": "Quels sont les deux tests réalisés pour vérifier l'étanchéité et la non obstruction du réseau hydraulique (GIBR4) ?",
+  "o": [
+   "Test n°1 tuyau périphérique + aspiration n°1, test n°2 tuyau HP + aspiration n°2",
+   "Test d'isolement électrique et test de continuité",
+   "Test de débit et test de conductivité",
+   "Test de pression d'air et test de vide"
+  ],
+  "a": 0,
+  "e": "Deux tests sont réalisés : le test n°1 vérifie le tuyau périphérique et les tuyaux d'aspiration n°1, le test n°2 le tuyau haute pression et les tuyaux d'aspiration n°2."
+ },
+ {
+  "id": "SLA-24",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.3.2",
+  "q": "Quel débit typique est fixé pour le flux d'eau périphérique lors du test n°1 ?",
+  "o": [
+   "Entre 90 et 110 l/min",
+   "Entre 20 et 40 l/min",
+   "Entre 150 et 200 l/min",
+   "Exactement 70 l/min"
+  ],
+  "a": 0,
+  "e": "Lors du test n°1, on fixe le débit du flux d'eau périphérique typiquement entre 90 et 110 l/min, maintenu 15 minutes."
+ },
+ {
+  "id": "SLA-25",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.3.2",
+  "q": "Combien de temps le flux d'eau périphérique est-il maintenu lors du test n°1 ?",
+  "o": [
+   "15 minutes",
+   "5 minutes",
+   "20 minutes",
+   "1 heure"
+  ],
+  "a": 0,
+  "e": "Le flux d'eau périphérique est maintenu pendant 15 minutes en surveillant la pression et le débit pour s'assurer qu'il n'y a pas d'obstruction."
+ },
+ {
+  "id": "SLA-26",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.3.3",
+  "q": "À quelle pression la pompe HP est-elle maintenue lors du test n°2 ?",
+  "o": [
+   "10 bar pendant 15 minutes",
+   "20 bar pendant 5 minutes",
+   "100 bar pendant 15 minutes",
+   "210 bar pendant 1 minute"
+  ],
+  "a": 0,
+  "e": "Test n°2 : la pompe HP est réglée et maintenue à 10 bar pendant 15 minutes, en surveillant pression et débit."
+ },
+ {
+  "id": "SLA-27",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.1.3.2",
+  "q": "Pourquoi le flexible en aspiration doit-il être déconnecté et à l'air libre lors des purges ?",
+  "o": [
+   "Pour éviter l'effet ventouse de la pompe à membrane",
+   "Pour accélérer la vidange",
+   "Pour éviter la cavitation de la pompe HP",
+   "Pour permettre la mesure de conductivité"
+  ],
+  "a": 0,
+  "e": "La procédure précise que, pour éviter l'effet ventouse de la pompe à membrane, le flexible en aspiration doit être déconnecté et à l'air libre."
+ },
+ {
+  "id": "SLA-28",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.1.1",
+  "q": "Quel débit et quelle pression délivre chaque pompe HP ?",
+  "o": [
+   "95 l/min à 210 bar",
+   "70 l/min à 150 bar",
+   "110 l/min à 100 bar",
+   "95 l/min à 20 bar"
+  ],
+  "a": 0,
+  "e": "La procédure rappelle à plusieurs reprises que chaque pompe HP délivre 95 l/min à 210 bar."
+ },
+ {
+  "id": "SLA-29",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.1.1",
+  "q": "À quelle valeur fixe-t-on le point de fonctionnement du circuit HP avant démarrage des pompes ?",
+  "o": [
+   "20 bar",
+   "50 bar",
+   "10 bar",
+   "100 bar"
+  ],
+  "a": 0,
+  "e": "La configuration du circuit HP commence par fixer le point de fonctionnement à 20 bar avant ouverture des vannes et démarrage des pompes."
+ },
+ {
+  "id": "SLA-30",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.1.1",
+  "q": "Combien de temps faut-il rester sur chaque palier lors de la montée en pression HP ?",
+  "o": [
+   "5 secondes",
+   "1 minute",
+   "30 secondes",
+   "Aucune attente n'est requise"
+  ],
+  "a": 0,
+  "e": "La montée en pression HP se fait par palier en restant 5 secondes sur chaque palier."
+ },
+ {
+  "id": "SLA-31",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.1.1",
+  "q": "Quelle est la séquence de montée en pression recommandée pour la Mini-lance ?",
+  "o": [
+   "20 → 50 → 100 → 150 bar → consigne du plan de lançage",
+   "20 → 50 → 100 bar → consigne du plan de lançage",
+   "0 → 100 → 210 bar",
+   "50 → 150 → consigne du plan de lançage"
+  ],
+  "a": 0,
+  "e": "Pour la Mini-lance : 20 bar => 50 bar => 100 bar => 150 bar => consigne du plan de lançage. Pour la lance Série 1, le palier 150 bar n'est pas listé."
+ },
+ {
+  "id": "SLA-32",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.2.2",
+  "q": "Comment doit s'effectuer l'arrêt du circuit haute pression ?",
+  "o": [
+   "Par une baisse de pression progressive et par palier jusqu'à 0 bar",
+   "Par un arrêt immédiat des pompes HP",
+   "Par ouverture de la vanne d'air comprimé",
+   "Par coupure du sectionneur principal"
+  ],
+  "a": 0,
+  "e": "L'arrêt du circuit HP se fait en baissant la pression de manière progressive et par palier (consigne => 150 => 100 => 50 => 20 => 0 bar) avant d'arrêter les pompes."
+ },
+ {
+  "id": "SLA-33",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.5",
+  "q": "Lors d'un changement de tronçon de lance, quel circuit doit obligatoirement être à l'arrêt ?",
+  "o": [
+   "Le circuit HP uniquement",
+   "Tous les circuits hydrauliques",
+   "Le circuit de flux d'eau périphérique uniquement",
+   "Le circuit d'aspiration uniquement"
+  ],
+  "a": 0,
+  "e": "Lors d'un changement de tronçon de lance, il n'est pas nécessaire de stopper tous les circuits : seul le circuit HP doit obligatoirement être à l'arrêt."
+ },
+ {
+  "id": "SLA-34",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.5",
+  "q": "Pourquoi maintient-on le flux d'eau périphérique à l'issue d'une passe de lançage ?",
+  "o": [
+   "Pour éliminer les boues résiduelles",
+   "Pour refroidir les pompes HP",
+   "Pour remplir la bâche à eau propre",
+   "Pour purger le circuit d'air"
+  ],
+  "a": 0,
+  "e": "À l'arrêt des circuits, on veille à maintenir le flux d'eau périphérique à l'issue du lançage afin d'éliminer les boues résiduelles."
+ },
+ {
+  "id": "SLA-35",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.5.4",
+  "q": "Quelle est la première action avant d'ajouter un tronçon de lance ?",
+  "o": [
+   "Arrêter l'indexation de la lance, buses en position initiale après fin d'oscillation",
+   "Purger la bâche à eau sale",
+   "Fermer la vanne HPR-A-1",
+   "Déconnecter l'Enclosure box"
+  ],
+  "a": 0,
+  "e": "L'étape 1 impose d'arrêter l'indexation de la lance en attendant la fin de l'oscillation, les buses devant être à leur position initiale."
+ },
+ {
+  "id": "SLA-36",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.5.4",
+  "q": "Comment les tronçons de Mini-lance sont-ils assemblés ?",
+  "o": [
+   "Vissés de haut en bas par 2 vis, méplat de la tige de positionnement sur 12h",
+   "Par emmanchement conique et goupille",
+   "Par un quart de tour avec clic sonore",
+   "Par raccord rapide à bague"
+  ],
+  "a": 0,
+  "e": "Pour la Mini-lance : respecter la position du méplat de la tige de positionnement sur 12h, puis visser de haut en bas les sections entre elles (2 vis), sans forcer le serrage."
+ },
+ {
+  "id": "SLA-37",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.5.4",
+  "q": "Les tronçons de Mini-lance ont-ils un sens de mise en place particulier ?",
+  "o": [
+   "Non, tous les tronçons sont identiques",
+   "Oui, ils sont repérés 2A, 2B, etc.",
+   "Oui, le sens dépend de la boîte inspectée",
+   "Oui, seul le premier tronçon est orienté"
+  ],
+  "a": 0,
+  "e": "Attention : pour la mini-lance, tous les tronçons sont identiques, donc aucun sens de mise en place particulier. C'est la lance Série 1 qui impose 2A avec 2A, 2B avec 2B."
+ },
+ {
+  "id": "SLA-38",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.5.4",
+  "q": "Comment sait-on qu'un tronçon de lance Série 1 est correctement assemblé ?",
+  "o": [
+   "Une fois en butée, on pivote doucement jusqu'au son d'un « clic »",
+   "Le voyant de l'IHM passe au vert",
+   "La pression HP chute de 10 bar",
+   "Les deux vis de blocage arrivent en butée"
+  ],
+  "a": 0,
+  "e": "Pour la lance Series 1 : une fois en butée, faire pivoter doucement le tronçon inséré et stopper le mouvement de rotation au son d'un « clic »."
+ },
+ {
+  "id": "SLA-39",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.1",
+  "q": "À partir de quelle pression différentielle faut-il basculer sur l'autre préfiltre PALL ?",
+  "o": [
+   "Supérieure à 2,5 bar",
+   "Supérieure à 3,5 bar",
+   "Supérieure à 1 bar",
+   "Supérieure à 5 bar"
+  ],
+  "a": 0,
+  "e": "Préfiltres PALL : pression différentielle > 2,5 bar (ou flux d'eau arrêté entre les deux réservoirs) impose le passage d'un préfiltre à l'autre."
+ },
+ {
+  "id": "SLA-40",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.1",
+  "q": "À partir de quelle pression différentielle faut-il basculer sur l'autre préfiltre TECHNOFILTRE ?",
+  "o": [
+   "Supérieure à 3,5 bar",
+   "Supérieure à 2,5 bar",
+   "Supérieure à 2 bar",
+   "Supérieure à 5 bar"
+  ],
+  "a": 0,
+  "e": "Préfiltres TECHNOFILTRE : le critère de colmatage est une pression différentielle > 3,5 bar, contre 2,5 bar pour les PALL."
+ },
+ {
+  "id": "SLA-41",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.1",
+  "q": "À partir de quelle pression différentielle faut-il changer de filtre (filtration finale) ?",
+  "o": [
+   "Supérieure à 2,5 bar",
+   "Supérieure à 3,5 bar",
+   "Supérieure à 1,5 bar",
+   "Supérieure à 4 bar"
+  ],
+  "a": 0,
+  "e": "Filtres : pression différentielle > 2,5 bar impose le passage d'un filtre à l'autre."
+ },
+ {
+  "id": "SLA-42",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.5",
+  "q": "Combien de temps et à quelle pression souffle-t-on un filtre avant sa pesée ?",
+  "o": [
+   "20 minutes à 2 bar",
+   "5 minutes à 2 bar",
+   "20 minutes à 5 bar",
+   "15 minutes à 3 bar"
+  ],
+  "a": 0,
+  "e": "Pesée et remplacement d'un filtre : souffler le filtre concerné pendant 20 minutes à 2 bar (contre 5 minutes à 2 bar pour un préfiltre)."
+ },
+ {
+  "id": "SLA-43",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.6",
+  "q": "Combien de temps et à quelle pression souffle-t-on un préfiltre avant sa pesée (GIBR4) ?",
+  "o": [
+   "5 minutes à 2 bar",
+   "20 minutes à 2 bar",
+   "15 minutes à 5 bar",
+   "10 minutes à 3 bar"
+  ],
+  "a": 0,
+  "e": "Pesée et remplacement d'un préfiltre : souffler le préfiltre concerné pendant 5 minutes à 2 bar."
+ },
+ {
+  "id": "SLA-44",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.5",
+  "q": "Combien de nouveaux filtres met-on en place lors du remplacement des cartouches ?",
+  "o": [
+   "12",
+   "6",
+   "10",
+   "24"
+  ],
+  "a": 0,
+  "e": "L'étape 7 de la pesée et du remplacement d'un filtre impose la mise en place de nouveaux filtres en quantité 12."
+ },
+ {
+  "id": "SLA-45",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.8",
+  "q": "Que dit la règle concernant le soufflage des éléments de filtration ?",
+  "o": [
+   "Il est interdit de souffler plusieurs filtres à la fois",
+   "Il faut souffler tous les filtres simultanément",
+   "Le soufflage se fait uniquement en fin de chantier",
+   "Le soufflage doit se faire à pression maximale d'emblée"
+  ],
+  "a": 0,
+  "e": "§10.2.7.8 : il est interdit de souffler plusieurs filtres à la fois ; il faut aussi vérifier que le filtre à purger n'est pas en cours d'utilisation."
+ },
+ {
+  "id": "SLA-46",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.2.7.4",
+  "q": "Quand les opérations de pesée de la boue sèche récoltée sont-elles réalisées ?",
+  "o": [
+   "Quand un élément de filtration est plein et doit être changé, et à la fin du lançage d'un GV",
+   "Uniquement en fin de chantier",
+   "Toutes les 8 heures",
+   "À chaque changement de passe"
+  ],
+  "a": 0,
+  "e": "Les pesées sont réalisées lorsqu'un des éléments de filtration est plein et doit être changé, et lorsque l'opération de lançage sur un GV est terminée."
+ },
+ {
+  "id": "SLA-47",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.3.2",
+  "q": "Quel équipement doit être replié en dernier lors du démontage en casemate GV ?",
+  "o": [
+   "Le système DAV",
+   "L'Enclosure box",
+   "Les tuyaux HP",
+   "Les pompes à membrane"
+  ],
+  "a": 0,
+  "e": "Pour le démontage de l'ensemble du matériel, la procédure impose de replier le DAV en dernier."
+ },
+ {
+  "id": "SLA-48",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.3.1",
+  "q": "Quelle vérification est un préalable au repli des équipements dans le BR ?",
+  "o": [
+   "Que les circuits HP et de flux d'eau périphérique sont arrêtés et purgés",
+   "Que les filtres sont neufs",
+   "Que la BEP est pleine",
+   "Que le pupitre est sous tension"
+  ],
+  "a": 0,
+  "e": "Avant tout repli, il faut vérifier l'arrêt des circuits de flux d'eau périphérique, la purge du circuit HP et du flux périphérique, et la dépose des interfaces GV."
+ },
+ {
+  "id": "SLA-49",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.3.3.1",
+  "q": "Quelle interdiction concerne la purge du module de refroidissement ?",
+  "o": [
+   "Interdiction de le souffler en air",
+   "Interdiction de le vidanger par gravité",
+   "Interdiction d'y mettre un bac de rétention",
+   "Interdiction d'utiliser une pompe à membrane"
+  ],
+  "a": 0,
+  "e": "Deux méthodes sont admises (aspiration par pompe à membrane ou vidange par gravité) mais il y a interdiction de souffler en air le module de refroidissement."
+ },
+ {
+  "id": "SLA-50",
+  "theme": "Lançage",
+  "doc": "WEF-SLA-PWX-PRO-122 R08",
+  "ref": "§10.3.4",
+  "q": "Que doit-on poser sur tous les raccords ouverts lors de la préparation des modules au transport ?",
+  "o": [
+   "Des bouchons FME",
+   "Des rubans adhésifs de repérage",
+   "Des joints toriques neufs",
+   "Des brides pleines boulonnées"
+  ],
+  "a": 0,
+  "e": "La préparation au transport impose de déconnecter les flexibles puis de poser des bouchons FME sur tous les raccords ouverts."
+ },
+ {
+  "id": "PIG-01",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§1",
+  "q": "Quel est l'objet de la note WEF-16-PIGVS-GENE-NTD-0821 ?",
+  "o": [
+   "Décrire les besoins enveloppes pour l'opération de PIGVS sur le parc REP français",
+   "Décrire le mode opératoire des inspections télévisuelles",
+   "Définir les critères de propreté des GV",
+   "Fixer les règles de radioprotection du chantier"
+  ],
+  "a": 0,
+  "e": "Ce document décrit les besoins enveloppes pour l'opération de PIGVS (lançage et examens télévisuels) sur le parc REP français."
+ },
+ {
+  "id": "PIG-02",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§2",
+  "q": "À quels paliers cette note s'applique-t-elle ?",
+  "o": [
+   "Aux tranches 900 MWe, 1300 MWe et 1450 MWe",
+   "Uniquement aux tranches 900 MWe",
+   "Uniquement aux tranches 1300 MWe",
+   "À l'EPR uniquement"
+  ],
+  "a": 0,
+  "e": "La note s'applique aux opérations de PIGVS sur les tranches 900 MWe, 1300 MWe et 1450 MWe, en PIGVS seule ou en post NCGV/NPGV."
+ },
+ {
+  "id": "PIG-03",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§4",
+  "q": "Que signifie l'acronyme PIGVS ?",
+  "o": [
+   "Prestation Intégrée des Générateurs de Vapeur Secondaire",
+   "Programme d'Inspection des Générateurs de Vapeur Standard",
+   "Procédure Intégrée de Gestion de la Vapeur Secondaire",
+   "Prestation Industrielle des GV Spécifiques"
+  ],
+  "a": 0,
+  "e": "PIGVS : Prestation Intégrée des Générateurs de Vapeur Secondaire (glossaire §4)."
+ },
+ {
+  "id": "PIG-04",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§4",
+  "q": "Que signifie l'acronyme GIBR ?",
+  "o": [
+   "Groupe Intérieur Bâtiment Réacteur",
+   "Groupe d'Intervention Bâtiment Réacteur",
+   "Gestion Interne du Bâtiment Réacteur",
+   "Groupe d'Inspection du Bâtiment Réacteur"
+  ],
+  "a": 0,
+  "e": "GIBR : Groupe Intérieur Bâtiment Réacteur, groupe hydraulique de lançage installé dans le BR."
+ },
+ {
+  "id": "PIG-05",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§4",
+  "q": "Que signifie CART dans le glossaire de la note ?",
+  "o": [
+   "Cleanliness Assessment Robot for outer Tubes",
+   "Camera Assisted Remote Tool",
+   "Control And Recording Tool",
+   "Cleaning Auxiliary Robot for Tubes"
+  ],
+  "a": 0,
+  "e": "CART : Cleanliness Assessment Robot for outer Tubes (glossaire §4)."
+ },
+ {
+  "id": "PIG-06",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§4",
+  "q": "Que signifient NPGV et NCGV ?",
+  "o": [
+   "Nettoyage Préventif et Nettoyage Chimique des Générateurs de Vapeur",
+   "Nettoyage Programmé et Nettoyage Complémentaire des GV",
+   "Note Préalable et Note Comparative GV",
+   "Nouvelle Procédure et Nouveau Contrôle GV"
+  ],
+  "a": 0,
+  "e": "NPGV : Nettoyage Préventif des Générateurs de Vapeur ; NCGV : Nettoyage Chimique des Générateurs de Vapeur (§4)."
+ },
+ {
+  "id": "PIG-07",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§4",
+  "q": "Que signifie SLA dans le glossaire de la note PIGVS ?",
+  "o": [
+   "Sludge Lancing",
+   "Service Level Agreement",
+   "Système de Lançage Automatisé",
+   "Skid de Lançage Annulaire"
+  ],
+  "a": 0,
+  "e": "SLA : Sludge Lancing, c'est-à-dire le lançage (glossaire §4)."
+ },
+ {
+  "id": "PIG-08",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.1.1",
+  "q": "Quelle surface est requise par GIBR pour la zone de travail SLA 1 ?",
+  "o": [
+   "30 m² non morcelable",
+   "10 m² non morcelable",
+   "8 m²",
+   "50 m² morcelables"
+  ],
+  "a": 0,
+  "e": "La surface requise par GIBR est de 30 m² non morcelable, à multiplier par le nombre de GIBR utilisés."
+ },
+ {
+  "id": "PIG-09",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.1.1",
+  "q": "Où est idéalement positionné le premier GIBR si un seul est utilisé ?",
+  "o": [
+   "Dans l'espace annulaire du BR, à gauche ou à droite du SAS d'introduction BR",
+   "Dans l'espace intra-annulaire",
+   "En casemate GV",
+   "Au niveau du poste de pilotage ETV"
+  ],
+  "a": 0,
+  "e": "Si un seul GIBR est utilisé, il est idéalement positionné dans l'espace annulaire du BR, à gauche ou à droite du SAS d'introduction BR ; le 2ème en intra-annulaire."
+ },
+ {
+  "id": "PIG-10",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.1.1",
+  "q": "Combien de modules Pompe HP sont nécessaires pour 2 GV lancés en parallèle ?",
+  "o": [
+   "4 (+2)",
+   "2 (+1)",
+   "6 (+3)",
+   "2 sans spare"
+  ],
+  "a": 0,
+  "e": "Le tableau des modules donne 2 (+1) modules pompe HP pour 1 GV, 4 (+2) pour 2 GV en parallèle et 6 (+3) pour 3 GV."
+ },
+ {
+  "id": "PIG-11",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.1.1",
+  "q": "Quelles sont les dimensions du pupitre de commande d'un GIBR ?",
+  "o": [
+   "1500 x 1400 x 1800 mm",
+   "1950 x 1200 x 1800 mm",
+   "1200 x 1200 x 1800 mm",
+   "1000 x 1000 x 1400 mm"
+  ],
+  "a": 0,
+  "e": "Le tableau des caractéristiques dimensionnelles donne 1500 x 1400 x 1800 mm pour le pupitre de commande."
+ },
+ {
+  "id": "PIG-12",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.1.1",
+  "q": "Pourquoi les accès aux casemates GV sont-ils interdits durant l'intervention ?",
+  "o": [
+   "Afin d'éviter l'endommagement du matériel",
+   "Pour des raisons de dosimétrie uniquement",
+   "Parce que les casemates sont consignées électriquement",
+   "Pour limiter le nombre d'intervenants au RTR"
+  ],
+  "a": 0,
+  "e": "Les casemates des GV traités sont des zones de travail pendant toute la durée de l'intervention et les accès sont interdits afin d'éviter l'endommagement du matériel."
+ },
+ {
+  "id": "PIG-13",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.2.1",
+  "q": "Quelle surface d'entreposage est requise pour le stockage SLA 1 avec 3 GV en parallèle ?",
+  "o": [
+   "20 m²",
+   "10 m²",
+   "15 m²",
+   "30 m²"
+  ],
+  "a": 0,
+  "e": "Stockage SLA 1 : 10 m² pour des GV lancés en série, 15 m² pour 2 GV en parallèle et 20 m² pour 3 GV en parallèle."
+ },
+ {
+  "id": "PIG-14",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.2.1",
+  "q": "Quelle surface est requise pour le stockage SLA 2 (équipements en spare) ?",
+  "o": [
+   "10 m²",
+   "2 m²",
+   "20 m²",
+   "6 m²"
+  ],
+  "a": 0,
+  "e": "Le stockage SLA 2 des modules GIBR complémentaires (pompe HP, pupitre, RHP, groupe froid) requiert 10 m²."
+ },
+ {
+  "id": "PIG-15",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.2.1",
+  "q": "Quelle surface est requise pour le stockage SLA 3 (pompes à membrane) ?",
+  "o": [
+   "2 m² au pied de chaque casemate",
+   "10 m² dans l'espace annulaire",
+   "1 m² en face de chaque casemate",
+   "6 m² près de la baie de commande"
+  ],
+  "a": 0,
+  "e": "Stockage SLA 3 : pompes à membrane et flexibles de lançage, 2 m² au pied de chaque casemate."
+ },
+ {
+  "id": "PIG-16",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§5.2.1",
+  "q": "Quelle surface est requise pour le stockage SLA 4 (enclosure box et matériel lançage) ?",
+  "o": [
+   "1 m² en face de chaque casemate + 2 m²",
+   "2 m² au pied de chaque casemate",
+   "10 m² près du SAS",
+   "6 m² en espace annulaire"
+  ],
+  "a": 0,
+  "e": "Stockage SLA 4 : 1 m² en face de chaque casemate + 2 m²."
+ },
+ {
+  "id": "PIG-17",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "Quelle surface est requise pour la zone de travail ETV 1 (zone de pilotage) ?",
+  "o": [
+   "8 m²",
+   "30 m²",
+   "1 m²",
+   "10 m²"
+  ],
+  "a": 0,
+  "e": "La zone de travail ETV 1 correspond à la baie de commande depuis laquelle les opérateurs pilotent les outils : surface requise 8 m²."
+ },
+ {
+  "id": "PIG-18",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "Quelle surface est requise au pied du trou d'accès en zone de travail ETV 2 ?",
+  "o": [
+   "1 m²",
+   "8 m²",
+   "2 m²",
+   "6 m²"
+  ],
+  "a": 0,
+  "e": "Zone de travail ETV 2 (casemate) : surface requise au pied du trou d'accès de 1 m², où sont installés le CAVALRI et les outillages SPICE, CART, perche."
+ },
+ {
+  "id": "PIG-19",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "Dans quel cylindre minimal le sabre doit-il s'inscrire pour l'inspection SPICE ?",
+  "o": [
+   "Un cylindre de 40 mm de diamètre axé sur le ru central",
+   "Un cylindre de 420 mm de diamètre",
+   "Un cylindre de 100 mm de diamètre",
+   "Un cylindre de 26,25 mm de diamètre"
+  ],
+  "a": 0,
+  "e": "Inspection : le sabre s'inscrit dans un cylindre de 40 mm de diamètre minimum axé sur le ru central."
+ },
+ {
+  "id": "PIG-20",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "Quel recul est nécessaire par rapport au trou d'accès lors de l'installation du SPICE ?",
+  "o": [
+   "600 mm",
+   "550 mm",
+   "420 mm",
+   "300 mm"
+  ],
+  "a": 0,
+  "e": "Le recul nécessaire par rapport au trou d'accès est de 600 mm à l'installation et de 550 mm en opération."
+ },
+ {
+  "id": "PIG-21",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "Quel recul est nécessaire par rapport au trou d'accès en opération avec le SPICE ?",
+  "o": [
+   "550 mm",
+   "600 mm",
+   "420 mm",
+   "500 mm"
+  ],
+  "a": 0,
+  "e": "L'encombrement maximal en profondeur est de 550 mm en opération, contre 600 mm à l'installation."
+ },
+ {
+  "id": "PIG-22",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "Dans quel cylindre le robot SPICE s'inscrit-il, centré sur le trou d'accès ?",
+  "o": [
+   "420 mm de diamètre",
+   "40 mm de diamètre",
+   "600 mm de diamètre",
+   "250 mm de diamètre"
+  ],
+  "a": 0,
+  "e": "Le robot s'inscrit dans un cylindre de 420 mm de diamètre centré sur le trou d'accès, auxquels s'ajoutent les cotes 1, 2 et 3."
+ },
+ {
+  "id": "PIG-23",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.1.1",
+  "q": "De combien dépasse le moteur du bloc entrainement sabre (Cote 2) ?",
+  "o": [
+   "26,25 mm",
+   "9,50 mm",
+   "22,5 mm",
+   "40 mm"
+  ],
+  "a": 0,
+  "e": "Cote 1 = 9,50 mm (ouverture de mâchoire), Cote 2 = 26,25 mm (moteur du bloc entrainement sabre), Cote 3 = 22,5 mm (flasque de la bobine)."
+ },
+ {
+  "id": "PIG-24",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.2.1",
+  "q": "Quelle surface est requise pour la zone de stockage ETV 1 (rolls et sécheurs) ?",
+  "o": [
+   "10 m² à proximité du SAS d'entrée matériel",
+   "6 m² en espace annulaire",
+   "8 m² près de la baie de commande",
+   "2 m² au pied de la casemate"
+  ],
+  "a": 0,
+  "e": "Stockage ETV 1 : rolls de rangement ETV et sécheurs, à proximité du SAS d'entrée matériel, 10 m², zone morcelable."
+ },
+ {
+  "id": "PIG-25",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§6.2.1",
+  "q": "Quelle surface est requise pour les zones de stockage ETV 2 et ETV 3 ?",
+  "o": [
+   "6 m² chacune",
+   "10 m² chacune",
+   "8 m² chacune",
+   "2 m² chacune"
+  ],
+  "a": 0,
+  "e": "Les stockages ETV 2 (colisage et pièces de rechange CART) et ETV 3 (colisage et pièces de rechange SPICE) requièrent 6 m² chacun, en espace annulaire."
+ },
+ {
+  "id": "PIG-26",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§7.1",
+  "q": "Y a-t-il des zones de travail à prévoir hors BR ?",
+  "o": [
+   "Non, aucune zone de travail n'est à prévoir hors BR",
+   "Oui, 30 m² pour le GIBR de secours",
+   "Oui, 8 m² pour un second poste ETV",
+   "Oui, une zone de colisage de 10 m²"
+  ],
+  "a": 0,
+  "e": "§7.1 : il n'y a pas de zone de travail à prévoir hors BR (seules des zones de stockage de conteneurs sont nécessaires)."
+ },
+ {
+  "id": "PIG-27",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§7.2",
+  "q": "Combien de conteneurs chauds de stockage lançage faut-il pour 2 GV lancés en parallèle ?",
+  "o": [
+   "6",
+   "3",
+   "8",
+   "2"
+  ],
+  "a": 0,
+  "e": "Conteneurs chauds de stockage lançage : 3 pour 1 GV, 6 pour 2 GV et 8 pour 3 GV en parallèle."
+ },
+ {
+  "id": "PIG-28",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§7.2",
+  "q": "Quelle est la masse d'un conteneur de stockage lançage Type A/IP2 de 20 pieds ?",
+  "o": [
+   "3400 kg",
+   "1800 kg",
+   "2500 kg",
+   "5000 kg"
+  ],
+  "a": 0,
+  "e": "Le conteneur de stockage lançage (610x244x260 cm) pèse 3400 kg ; le conteneur ETV de 10 pieds pèse 1800 kg."
+ },
+ {
+  "id": "PIG-29",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§7.2",
+  "q": "Quelles sont les dimensions du conteneur de stockage ETV (10 pieds) ?",
+  "o": [
+   "305 x 244 x 260 cm",
+   "610 x 244 x 260 cm",
+   "244 x 244 x 260 cm",
+   "400 x 200 x 250 cm"
+  ],
+  "a": 0,
+  "e": "Le conteneur de stockage ETV Type A/IP2 de 10 pieds mesure 305 x 244 x 260 cm pour 1800 kg."
+ },
+ {
+  "id": "PIG-30",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§7.3",
+  "q": "Pourquoi les conteneurs froids doivent-ils rester accessibles et dégagés ?",
+  "o": [
+   "Parce qu'on peut avoir besoin à tout moment des équipements et pièces de rechange qui y sont stockés",
+   "Pour permettre leur pesée régulière",
+   "Pour respecter les règles incendie du CNPE",
+   "Pour faciliter leur évacuation en fin de chantier"
+  ],
+  "a": 0,
+  "e": "§7.3 : ces conteneurs doivent rester accessibles car à tout moment on peut avoir besoin des équipements et pièces de rechange ; l'espace devant leur porte doit rester dégagé."
+ },
+ {
+  "id": "PIG-31",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§8",
+  "q": "Combien de locaux ou bungalows Westinghouse demande-t-il en configuration standard ?",
+  "o": [
+   "4 locaux (5 en délai réduit), plus 1 par sous-traitant",
+   "2 locaux seulement",
+   "6 locaux quelle que soit la configuration",
+   "1 local par GV traité"
+  ],
+  "a": 0,
+  "e": "Westinghouse demande 4 locaux ou bungalows (5 en délai réduit) fermant à clé ou par code, équipés pour 2 personnes, plus 1 local additionnel par sous-traitant."
+ },
+ {
+  "id": "PIG-32",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§8",
+  "q": "Combien de DECT ou cartes SIM CONNECT sont demandés au minimum ?",
+  "o": [
+   "6",
+   "4",
+   "8",
+   "2"
+  ],
+  "a": 0,
+  "e": "Au minimum 6 DECT ou 6 cartes SIM CONNECT : 1 par GIBR dans le BR, 1 CdT ETV, 1 CdT Lançage, 1 PM, 1 superviseur, 1 QHSE-RP."
+ },
+ {
+  "id": "PIG-33",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§8",
+  "q": "Quelle est la particularité de la tarlatane dans le bâtiment réacteur ?",
+  "o": [
+   "Elle est interdite dans le BR et nécessite une demande de dérogation",
+   "Elle est fournie systématiquement par EDF",
+   "Elle est utilisée pour le colisage des conteneurs",
+   "Elle remplace le vinyle au sol"
+  ],
+  "a": 0,
+  "e": "La tarlatane est interdite dans le BR ; elle permet de maintenir le vinyle au sol avant mise en place des GIBR, d'où une demande de dérogation. Sinon, la pose est faite par la PGAC."
+ },
+ {
+  "id": "PIG-34",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§8",
+  "q": "Dans le cadre d'un NPGV ou NCGV, combien de balises BM 25 sont demandées par groupe de lançage ?",
+  "o": [
+   "2",
+   "1",
+   "4",
+   "3"
+  ],
+  "a": 0,
+  "e": "Dans le cadre d'un NPGV ou NCGV : 2 balises BM 25 par groupe de lançage (hydrazine, ammoniac et taux d'oxygène)."
+ },
+ {
+  "id": "PIG-35",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§9",
+  "q": "Quelle quantité d'eau SED nécessite une opération de lançage par GIBR ?",
+  "o": [
+   "3,5 m³",
+   "1 m³",
+   "7 m³",
+   "10 m³"
+  ],
+  "a": 0,
+  "e": "Une opération de lançage nécessite 3,5 m³ d'eau SED par GIBR ; un rinçage nécessite a minima 3,5 m³ également."
+ },
+ {
+  "id": "PIG-36",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§9",
+  "q": "Quelle est la formule de calcul du volume d'eau SED ?",
+  "o": [
+   "V = 3,5 m³ x (nombre de GV lancés en parallèle + nombre de rinçages)",
+   "V = 3,5 m³ x nombre de GV uniquement",
+   "V = 7 m³ x nombre de GIBR",
+   "V = 3,5 m³ x nombre de rinçages uniquement"
+  ],
+  "a": 0,
+  "e": "V eau SED = 3,5 m³ x (nombre de GV lancés en parallèle + nombre de rinçages)."
+ },
+ {
+  "id": "PIG-37",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§9",
+  "q": "Quel type de raccord est demandé pour le piquage d'eau SED ?",
+  "o": [
+   "Un raccord Camelock",
+   "Un raccord Storz",
+   "Un raccord à bride DN50",
+   "Un raccord rapide Staubli"
+  ],
+  "a": 0,
+  "e": "Westinghouse demande un piquage au plus proche de la zone d'installation des GIBR, muni d'un raccord Camelock ; à défaut le type est précisé en réunion d'enclenchement."
+ },
+ {
+  "id": "PIG-38",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§9 / §10 / §11",
+  "q": "Quel est le délai de mise à disposition des servitudes (eau SED, air SAT, électricité) ?",
+  "o": [
+   "Au plus tard 48 h avant le J0",
+   "Au plus tard 24 h avant le J0",
+   "Le jour du J0",
+   "Une semaine avant le J0"
+  ],
+  "a": 0,
+  "e": "Les vannes SED, piquages SAT et alimentations électriques déconsignés doivent être disponibles au plus tard 48 h avant le J0."
+ },
+ {
+  "id": "PIG-39",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§10",
+  "q": "Quelles caractéristiques minimales sont demandées pour les piquages d'air SAT ?",
+  "o": [
+   "7 bar à 700 Nm³/h avec raccord Camlock",
+   "3 bar à 300 Nm³/h",
+   "10 bar à 500 Nm³/h",
+   "5 bar à 1000 Nm³/h"
+  ],
+  "a": 0,
+  "e": "Westinghouse demande des piquages dédiés assurant a minima 7 bar à 700 Nm³/h munis d'un raccord Camlock."
+ },
+ {
+  "id": "PIG-40",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§10",
+  "q": "Combien de piquages SAT sont demandés au plus proche de la zone d'installation des GIBR ?",
+  "o": [
+   "3 piquages sur trois collecteurs différents",
+   "1 piquage par GIBR",
+   "2 piquages sur le même collecteur",
+   "4 piquages sur deux collecteurs"
+  ],
+  "a": 0,
+  "e": "Pour le lançage : 3 piquages SAT sur trois collecteurs différents au plus proche de la zone d'installation des GIBR."
+ },
+ {
+  "id": "PIG-41",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§10",
+  "q": "Quel besoin SAT supplémentaire existe à proximité des casemates GV pour le lançage ?",
+  "o": [
+   "A minima un piquage SAT par GIBR pour l'alimentation des pompes à membrane",
+   "Un piquage par opérateur",
+   "Aucun besoin à proximité des casemates",
+   "Deux piquages par casemate quel que soit le palier"
+  ],
+  "a": 0,
+  "e": "À proximité des casemates GV : a minima un piquage SAT par GIBR pour les pompes à membrane ; pour les 1450 MW, 1 piquage supplémentaire par casemate pour le système de lançage."
+ },
+ {
+  "id": "PIG-42",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Quelle alimentation électrique dédiée est demandée par GIBR ?",
+  "o": [
+   "Triphasé 1 x 232 A / 380 V / 50 Hz, pouvoir de coupure 10 kA",
+   "Monophasé 1 x 13 A / 220 V / 50 Hz",
+   "Triphasé 1 x 100 A / 400 V / 50 Hz",
+   "Monophasé 1 x 30 A / 380 V"
+  ],
+  "a": 0,
+  "e": "Lançage : une alimentation dédiée par GIBR en triphasé 1 x 232 A / 380 V / 50 Hz, avec un pouvoir de coupure de 10 kA."
+ },
+ {
+  "id": "PIG-43",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "À quelle distance maximale du pupitre de commande doit se trouver le point de raccordement électrique ?",
+  "o": [
+   "Moins de 25 mètres",
+   "Moins de 10 mètres",
+   "Moins de 50 mètres",
+   "Aucune contrainte de distance"
+  ],
+  "a": 0,
+  "e": "Le point de raccordement doit se trouver à moins de 25 mètres de l'emplacement prévu du pupitre de commande."
+ },
+ {
+  "id": "PIG-44",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Quel type de prise est demandé pour la connexion sur la régie ?",
+  "o": [
+   "Une prise Maréchal DS2 femelle de 250 A",
+   "Une prise Maréchal DS1 de 30 A",
+   "Une prise de type E ménagère",
+   "Une prise CEE 63 A"
+  ],
+  "a": 0,
+  "e": "La connexion sur la régie doit être une prise Maréchal DS2 femelle de 250 A, ou à défaut sur un jeu de barres. Si le CNPE n'en dispose pas, Westinghouse ouvre une fiche de constat."
+ },
+ {
+  "id": "PIG-45",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Quelle alimentation est demandée au niveau du poste d'inspection ETV (baie de commande) ?",
+  "o": [
+   "Monophasé 1 x 13 A / 220 V / 50 Hz sur prise de type E",
+   "Triphasé 232 A / 380 V",
+   "Monophasé 30 A / 380 V sur coffret DNX",
+   "Aucune alimentation dédiée"
+  ],
+  "a": 0,
+  "e": "ETV : une alimentation par casemate GV et une au niveau de la baie de commande, en monophasé 1 x 13 A / 220 V / 50 Hz sur prise de type E (ménagère)."
+ },
+ {
+  "id": "PIG-46",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Quelle puissance moyenne doivent supporter les alimentations 220 V à l'entrée de casemate pour le séchage ?",
+  "o": [
+   "10 kW",
+   "3 kW",
+   "30 kW",
+   "5 kW"
+  ],
+  "a": 0,
+  "e": "Séchage : deux alimentations monophasées 220 V à chaque entrée de casemate GV pouvant supporter une puissance moyenne de 10 kW."
+ },
+ {
+  "id": "PIG-47",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Quel coffret est nécessaire par GV en cas d'alimentation 380 V pour le séchage ?",
+  "o": [
+   "Un coffret DNX [2 x 3P + T 30A DS1 femelle]",
+   "Un coffret DS2 250 A",
+   "Un coffret monophasé 13 A",
+   "Aucun coffret spécifique"
+  ],
+  "a": 0,
+  "e": "Deux alimentations monophasées 380 V à chaque entrée de casemate nécessitent la présence d'un coffret DNX [2 x 3P + T 30A DS1 femelle] par générateur de vapeur."
+ },
+ {
+  "id": "PIG-48",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Quel domaine de variation de tension est exigé selon les critères RCC-E ?",
+  "o": [
+   "Entre -10 % et +10 % dans les conditions nominales d'utilisation",
+   "Entre -5 % et +5 %",
+   "Entre -15 % et +15 %",
+   "Aucune tolérance n'est spécifiée"
+  ],
+  "a": 0,
+  "e": "La tension doit être stable suivant les critères RCC-E, avec un domaine de variation compris entre -10 % et +10 % dans les conditions nominales."
+ },
+ {
+  "id": "PIG-49",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§11",
+  "q": "Que doit faire EDF en cas de basculement de voie électrique ?",
+  "o": [
+   "Informer Westinghouse au préalable afin d'anticiper la mise hors tension du pupitre",
+   "Basculer sans préavis, le système est protégé",
+   "Couper l'alimentation SED simultanément",
+   "Remplacer la prise Maréchal"
+  ],
+  "a": 0,
+  "e": "En cas de basculement de voie, Westinghouse doit en être informé au préalable afin d'anticiper la mise hors tension du pupitre : risque important de détérioration du matériel."
+ },
+ {
+  "id": "PIG-50",
+  "theme": "Commun",
+  "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+  "ref": "§12",
+  "q": "Sur un GV 68/19, quels TP sont à ouvrir pour le lançage PT ?",
+  "o": [
+   "Les TP 000 et 180",
+   "Les TP 053 et 233",
+   "Les TP 143 et 323",
+   "Les TP 090 et 270"
+  ],
+  "a": 0,
+  "e": "Tableau §12 : pour le 68/19, les TP à ouvrir pour le lançage PT sont les TP 000 et 180."
+ }
+]
