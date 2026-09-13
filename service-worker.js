@@ -39,7 +39,9 @@ const ASSETS = [
    "pigvs-envoi.js",
    "pigvs-auth.js",
    "login.html",
-   "detailSousEnsemble.html"
+   "detailSousEnsemble.html",
+   "quizz.html",
+   "quizz-questions.json"
    
 ];
 

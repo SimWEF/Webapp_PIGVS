@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>PIGVS – Quizz procédures</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Quizz procédures – PIGVS</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0078D7">
+<link rel="apple-touch-icon" href="icon-192.png">
+<script src="pigvs-auth.js"></script>
+<script>PIGVS_AUTH.protegerPage();</script>
 <style>
+/* Styles autonomes : cette page n'utilise pas style.css afin d'éviter
+   toute collision avec les classes .card / .container de la webapp.   */
 :root{
-  --bleu:#003b71; --bleu2:#0a5ca8; --accent:#e8a33d;
+  --bleu:#0078D7; --bleu-f:#003b71; --bleu2:#0a5ca8; --accent:#e8a33d;
   --vert:#1f8a4c; --rouge:#c0392b;
   --fond:#f4f6f9; --carte:#fff; --txt:#1c2430; --gris:#6b7684; --bord:#dde3ea;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
      background:var(--fond);color:var(--txt);font-size:16px;line-height:1.45}
-header{background:var(--bleu);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:10;
+.qz-header{background:var(--bleu);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:10;
        display:flex;align-items:center;gap:12px;padding-top:calc(14px + env(safe-area-inset-top))}
-header h1{font-size:17px;margin:0;font-weight:600;flex:1}
-.btn-back{background:rgba(255,255,255,.15);border:0;color:#fff;border-radius:8px;
-          padding:8px 12px;font-size:14px;cursor:pointer}
-main{max-width:720px;margin:0 auto;padding:16px;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
-.card{background:var(--carte);border:1px solid var(--bord);border-radius:12px;padding:16px;margin-bottom:14px;
+.qz-header h1{font-size:17px;margin:0;font-weight:600;flex:1}
+.btn-back{background:rgba(255,255,255,.18);border:0;color:#fff;border-radius:8px;
+          padding:9px 13px;font-size:14px;font-weight:600;cursor:pointer;flex:0 0 auto}
+.qz-main{max-width:720px;margin:0 auto;padding:16px;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
+.qz-card{background:var(--carte);border:1px solid var(--bord);border-radius:12px;padding:16px;margin-bottom:14px;
       box-shadow:0 1px 3px rgba(16,30,54,.06)}
-h2{font-size:16px;margin:0 0 12px}
+.qz-card h2{font-size:16px;margin:0 0 12px}
 p.sub{color:var(--gris);font-size:14px;margin:0 0 16px}
 
-/* Choix du thème */
 .themes{display:grid;gap:10px}
 .theme{display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--bord);
        border-radius:12px;background:#fff;cursor:pointer;text-align:left;width:100%;font-size:16px;color:inherit}
 .theme:active{transform:scale(.99)}
 .theme.on{border-color:var(--bleu2);background:#eef5fd}
-.theme .ico{width:40px;height:40px;border-radius:10px;background:var(--bleu);color:#fff;
+.theme .ico{width:40px;height:40px;border-radius:10px;background:var(--bleu-f);color:#fff;
       display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:0 0 auto}
 .theme .ico.sla{background:var(--bleu2)} .theme .ico.com{background:#4a6b8a} .theme .ico.all{background:var(--accent)}
 .theme b{display:block;font-size:15px} .theme span{font-size:13px;color:var(--gris)}
 
-.primary{display:block;width:100%;background:var(--bleu);color:#fff;border:0;border-radius:12px;
+.primary{display:block;width:100%;background:var(--bleu-f);color:#fff;border:0;border-radius:12px;
      padding:16px;font-size:16px;font-weight:600;cursor:pointer;margin-top:6px}
 .primary:disabled{background:#9fb0c2;cursor:not-allowed}
-.ghost{display:block;width:100%;background:#fff;color:var(--bleu);border:2px solid var(--bleu);
-     border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-top:10px}
+.ghost{display:block;width:100%;background:#fff;color:var(--bleu-f);border:2px solid var(--bleu-f);
+     border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-top:10px;
+     text-align:center;text-decoration:none}
 
-/* Progression */
 .bar{height:6px;background:var(--bord);border-radius:3px;overflow:hidden;margin-bottom:14px}
 .bar i{display:block;height:100%;background:var(--bleu2);transition:width .25s}
 .meta{display:flex;justify-content:space-between;font-size:13px;color:var(--gris);margin-bottom:8px}
@@ -49,14 +55,11 @@ p.sub{color:var(--gris);font-size:14px;margin:0 0 16px}
      padding:3px 8px;font-size:12px;margin-bottom:10px}
 .q{font-size:17px;font-weight:600;margin:0 0 14px}
 
-/* Réponses */
 .opts{display:grid;gap:9px}
 .opt{display:flex;gap:11px;align-items:flex-start;padding:13px;border:2px solid var(--bord);
      border-radius:10px;background:#fff;cursor:pointer;font-size:15px;text-align:left;width:100%;color:inherit}
 .opt .l{flex:0 0 26px;height:26px;border-radius:50%;background:#eef2f7;color:var(--gris);
         display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
-.opt.sel{border-color:var(--bleu2);background:#eef5fd}
-.opt.sel .l{background:var(--bleu2);color:#fff}
 .opt.ok{border-color:var(--vert);background:#eaf7ef} .opt.ok .l{background:var(--vert);color:#fff}
 .opt.ko{border-color:var(--rouge);background:#fdeeec} .opt.ko .l{background:var(--rouge);color:#fff}
 .opt[disabled]{cursor:default}
@@ -67,39 +70,38 @@ p.sub{color:var(--gris);font-size:14px;margin:0 0 16px}
 .expl b{display:block;margin-bottom:4px}
 .expl .src{display:block;margin-top:8px;font-size:12px;color:var(--gris)}
 
-/* Résultat */
 .score{text-align:center;padding:8px 0 4px}
-.score .n{font-size:46px;font-weight:700;line-height:1;color:var(--bleu)}
+.score .n{font-size:46px;font-weight:700;line-height:1;color:var(--bleu-f)}
 .score .n.bad{color:var(--rouge)} .score .n.good{color:var(--vert)}
 .score .t{font-size:14px;color:var(--gris);margin-top:6px}
-.recap{margin-top:14px;display:grid;gap:8px}
+.recap{margin-top:4px;display:grid;gap:8px}
 .ritem{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:10px;
        border-radius:8px;background:#f7f9fb;border-left:3px solid var(--vert)}
 .ritem.ko{border-left-color:var(--rouge)}
 .ritem .st{flex:0 0 auto;font-weight:700}
 .ritem small{display:block;color:var(--gris);margin-top:3px}
 .hide{display:none}
-footer{text-align:center;font-size:12px;color:var(--gris);padding:6px 16px 24px}
+.qz-footer{text-align:center;font-size:12px;color:var(--gris);padding:6px 16px 24px}
 </style>
 </head>
 <body>
 
-<header>
-  <button class="btn-back hide" id="btnBack">◀ Retour</button>
-  <h1>Quizz procédures PIGVS</h1>
+<header class="qz-header">
+  <button class="btn-back" id="btnBack" type="button">◀ Accueil</button>
+  <h1>Quizz procédures</h1>
 </header>
 
-<main>
+<main class="qz-main">
 
   <!-- ÉCRAN 1 : choix du thème -->
   <section id="ecranAccueil">
-    <div class="card">
+    <div class="qz-card">
       <h2>Testez vos connaissances</h2>
-      <p class="sub">10 questions tirées au hasard dans la banque. Chaque correction renvoie vers la référence de la procédure.</p>
+      <p class="sub">10 questions tirées au hasard dans la banque. Chaque correction renvoie vers la référence exacte de la procédure.</p>
       <div class="themes" id="themes"></div>
-      <button class="primary" id="btnStart" disabled>Commencer le quizz</button>
+      <button class="primary" id="btnStart" type="button" disabled>Commencer le quizz</button>
     </div>
-    <div class="card">
+    <div class="qz-card">
       <h2>Comment ça marche</h2>
       <p class="sub" style="margin:0">
         Les 10 questions et l'ordre des réponses sont tirés aléatoirement à chaque tentative :
@@ -112,75 +114,74 @@ footer{text-align:center;font-size:12px;color:var(--gris);padding:6px 16px 24px}
   <section id="ecranQuizz" class="hide">
     <div class="bar"><i id="prog"></i></div>
     <div class="meta"><span id="compteur"></span><span id="scoreLive"></span></div>
-    <div class="card">
+    <div class="qz-card">
       <span class="tag" id="tagDoc"></span>
       <p class="q" id="question"></p>
       <div class="opts" id="opts"></div>
       <div class="expl hide" id="expl"></div>
     </div>
-    <button class="primary hide" id="btnNext">Question suivante</button>
+    <button class="primary hide" id="btnNext" type="button">Question suivante</button>
   </section>
 
   <!-- ÉCRAN 3 : résultat -->
   <section id="ecranFin" class="hide">
-    <div class="card">
+    <div class="qz-card">
       <div class="score">
         <div class="n" id="finNote"></div>
         <div class="t" id="finTexte"></div>
       </div>
     </div>
-    <div class="card">
+    <div class="qz-card">
       <h2>Détail des réponses</h2>
       <div class="recap" id="recap"></div>
     </div>
-    <button class="primary" id="btnRetry">Nouveau quizz (mêmes réglages)</button>
-    <button class="ghost" id="btnHome">Changer de thème</button>
+    <button class="primary" id="btnRetry" type="button">Nouveau quizz (même thème)</button>
+    <button class="ghost" id="btnHome" type="button">Changer de thème</button>
+    <a class="ghost" href="index.html">Retour à l'accueil</a>
   </section>
 
 </main>
 
-<footer>Westinghouse Electrique France – usage interne · Les procédures approuvées font seules foi.</footer>
+<footer class="qz-footer">Westinghouse Electrique France – usage interne · Seules les procédures approuvées font foi.</footer>
 
 <script>
 /* ============================================================
    QUIZZ PROCÉDURES PIGVS
-   Banque : data/quizz-questions.json
-   Format d'une question :
-   { id, theme:"ETV"|"Lançage"|"Commun", doc, ref, q, o:[4 réponses], a:index bonne réponse, e:justification }
-   NB : dans le JSON la bonne réponse est toujours en position 0,
+   Banque : quizz-questions.json
+   { id, theme:"ETV"|"Lançage"|"Commun", doc, ref, q, o:[4 réponses], a, e }
+   NB : dans le JSON la bonne réponse est toujours en position 0 (a=0),
         l'ordre des propositions est mélangé à l'affichage.
    ============================================================ */
 
 const NB_QUESTIONS = 10;
 const THEMES = [
-  {id:'ETV',     lib:'ETV',            desc:'Examens télévisuels – procédures ETV', cls:'',    ini:'ETV'},
-  {id:'Lançage', lib:'Lançage',        desc:'Lançage et GIBR – procédures SLA',     cls:'sla', ini:'SLA'},
-  {id:'Commun',  lib:'Commun',         desc:'Besoins et organisation – PIGVS',      cls:'com', ini:'PIG'},
-  {id:'*',       lib:'Indifférent',    desc:'Toutes procédures confondues',         cls:'all', ini:'ALL'}
+  {id:'ETV',     lib:'ETV',         desc:'Examens télévisuels – procédures ETV', cls:'',    ini:'ETV'},
+  {id:'Lançage', lib:'Lançage',     desc:'Lançage et GIBR – procédures SLA',     cls:'sla', ini:'SLA'},
+  {id:'Commun',  lib:'Commun',      desc:'Besoins et organisation – PIGVS',      cls:'com', ini:'PIG'},
+  {id:'*',       lib:'Indifférent', desc:'Toutes procédures confondues',         cls:'all', ini:'ALL'}
 ];
 
 let banque = [], theme = null, tirage = [], idx = 0, score = 0, reponses = [], verrou = false;
-
 const $ = id => document.getElementById(id);
 
 /* ---------- chargement de la banque ---------- */
-fetch('data/quizz-questions.json?v=' + Date.now())
+fetch('quizz-questions.json?v=' + Date.now())
   .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
   .then(d => { banque = d; initThemes(); })
   .catch(e => {
     $('themes').innerHTML =
       '<div class="expl ko">Impossible de charger la banque de questions (' + e.message + ').<br>' +
-      'Vérifiez la présence du fichier <b>data/quizz-questions.json</b>.</div>';
+      'Vérifiez la présence du fichier <b>quizz-questions.json</b>.</div>';
   });
 
 /* ---------- écran 1 ---------- */
 function initThemes(){
   $('themes').innerHTML = THEMES.map(t => {
     const n = t.id === '*' ? banque.length : banque.filter(q => q.theme === t.id).length;
-    return `<button class="theme" data-t="${t.id}">
-              <span class="ico ${t.cls}">${t.ini}</span>
-              <span><b>${t.lib}</b><span>${t.desc} · ${n} questions</span></span>
-            </button>`;
+    return '<button class="theme" type="button" data-t="' + t.id + '">' +
+             '<span class="ico ' + t.cls + '">' + t.ini + '</span>' +
+             '<span><b>' + t.lib + '</b><span>' + t.desc + ' · ' + n + ' questions</span></span>' +
+           '</button>';
   }).join('');
   document.querySelectorAll('.theme').forEach(b => b.onclick = () => {
     document.querySelectorAll('.theme').forEach(x => x.classList.remove('on'));
@@ -200,7 +201,7 @@ function tirerQuestions(){
   return melange(pool).slice(0, Math.min(NB_QUESTIONS, pool.length)).map(q => {
     const bonne = q.o[q.a];
     const opts = melange(q.o);
-    return {...q, opts, bonneIdx: opts.indexOf(bonne)};
+    return Object.assign({}, q, {opts: opts, bonneIdx: opts.indexOf(bonne)});
   });
 }
 
@@ -208,11 +209,10 @@ function ecran(n){
   $('ecranAccueil').classList.toggle('hide', n !== 1);
   $('ecranQuizz').classList.toggle('hide', n !== 2);
   $('ecranFin').classList.toggle('hide', n !== 3);
-  $('btnBack').classList.toggle('hide', n === 1);
   window.scrollTo(0, 0);
 }
 
-/* ---------- déroulé du quizz ---------- */
+/* ---------- déroulé ---------- */
 function demarrer(){
   tirage = tirerQuestions(); idx = 0; score = 0; reponses = [];
   ecran(2); afficher();
@@ -222,14 +222,15 @@ function afficher(){
   verrou = false;
   const q = tirage[idx];
   $('prog').style.width = (idx / tirage.length * 100) + '%';
-  $('compteur').textContent = `Question ${idx + 1} / ${tirage.length}`;
-  $('scoreLive').textContent = `Score : ${score}`;
-  $('tagDoc').textContent = `${q.theme} · ${q.doc} ${q.ref}`;
+  $('compteur').textContent = 'Question ' + (idx + 1) + ' / ' + tirage.length;
+  $('scoreLive').textContent = 'Score : ' + score;
+  $('tagDoc').textContent = q.theme + ' · ' + q.doc + ' ' + q.ref;
   $('question').textContent = q.q;
   $('expl').className = 'expl hide';
   $('btnNext').classList.add('hide');
   $('opts').innerHTML = q.opts.map((o, i) =>
-      `<button class="opt" data-i="${i}"><span class="l">${'ABCD'[i]}</span><span>${o}</span></button>`).join('');
+      '<button class="opt" type="button" data-i="' + i + '"><span class="l">' +
+      'ABCD'[i] + '</span><span>' + o + '</span></button>').join('');
   document.querySelectorAll('.opt').forEach(b => b.onclick = () => repondre(+b.dataset.i));
 }
 
@@ -237,7 +238,7 @@ function repondre(choix){
   if(verrou) return; verrou = true;
   const q = tirage[idx], juste = choix === q.bonneIdx;
   if(juste) score++;
-  reponses.push({q, choix, juste});
+  reponses.push({q:q, choix:choix, juste:juste});
 
   document.querySelectorAll('.opt').forEach(b => {
     const i = +b.dataset.i; b.disabled = true;
@@ -247,10 +248,10 @@ function repondre(choix){
 
   const e = $('expl');
   e.className = 'expl ' + (juste ? 'ok' : 'ko');
-  e.innerHTML = `<b>${juste ? '✔ Bonne réponse' : '✘ Réponse incorrecte'}</b>${q.e}
-                 <span class="src">Source : ${q.doc} – ${q.ref}</span>`;
+  e.innerHTML = '<b>' + (juste ? '✔ Bonne réponse' : '✘ Réponse incorrecte') + '</b>' + q.e +
+                '<span class="src">Source : ' + q.doc + ' – ' + q.ref + '</span>';
 
-  $('scoreLive').textContent = `Score : ${score}`;
+  $('scoreLive').textContent = 'Score : ' + score;
   $('prog').style.width = ((idx + 1) / tirage.length * 100) + '%';
   const b = $('btnNext');
   b.textContent = (idx === tirage.length - 1) ? 'Voir mon résultat' : 'Question suivante';
@@ -265,20 +266,21 @@ function suivante(){
 function terminer(){
   const n = tirage.length, pct = Math.round(score / n * 100);
   const el = $('finNote');
-  el.textContent = `${score}/${n}`;
+  el.textContent = score + '/' + n;
   el.className = 'n ' + (pct >= 80 ? 'good' : pct < 50 ? 'bad' : '');
   $('finTexte').textContent =
       pct >= 80 ? 'Très bon niveau — connaissances maîtrisées.'
     : pct >= 50 ? 'Niveau correct — quelques points à revoir ci-dessous.'
     : 'Relisez les procédures concernées avant intervention.';
 
-  $('recap').innerHTML = reponses.map((r, i) => `
-    <div class="ritem ${r.juste ? '' : 'ko'}">
-      <span class="st">${r.juste ? '✔' : '✘'}</span>
-      <span>${i + 1}. ${r.q.q}
-        <small>${r.juste ? '' : 'Bonne réponse : ' + r.q.opts[r.q.bonneIdx] + ' — '}${r.q.doc} ${r.q.ref}</small>
-      </span>
-    </div>`).join('');
+  $('recap').innerHTML = reponses.map((r, i) =>
+    '<div class="ritem ' + (r.juste ? '' : 'ko') + '">' +
+      '<span class="st">' + (r.juste ? '✔' : '✘') + '</span>' +
+      '<span>' + (i + 1) + '. ' + r.q.q +
+        '<small>' + (r.juste ? '' : 'Bonne réponse : ' + r.q.opts[r.q.bonneIdx] + ' — ') +
+        r.q.doc + ' ' + r.q.ref + '</small>' +
+      '</span>' +
+    '</div>').join('');
 
   ecran(3);
   envoyerResultat(pct);
@@ -294,24 +296,46 @@ function envoyerResultat(pct){
     method:'POST', headers:{'Content-Type':'application/json'},
     body: JSON.stringify({
       theme: theme === '*' ? 'Indifférent' : theme,
-      score, total: tirage.length, pourcentage: pct,
+      score: score, total: tirage.length, pourcentage: pct,
       date: new Date().toISOString(),
       questions: reponses.map(r => ({id:r.q.id, juste:r.juste}))
     })
-  }).catch(()=>{});
+  }).catch(function(){});
   */
 }
 
 /* ---------- navigation ---------- */
+function quizzEnCours(){
+  return !$('ecranQuizz').classList.contains('hide') && idx >= 0 && tirage.length > 0;
+}
+
 $('btnStart').onclick = demarrer;
 $('btnNext').onclick  = suivante;
 $('btnRetry').onclick = demarrer;
-$('btnHome').onclick  = () => ecran(1);
-$('btnBack').onclick  = () => {
-  if(!$('ecranQuizz').classList.contains('hide') && idx > 0 &&
-     !confirm('Quitter le quizz en cours ?')) return;
-  ecran(1);
+$('btnHome').onclick  = function(){ ecran(1); };
+
+/* Flèche retour : toujours vers la page d'accueil de la webapp */
+$('btnBack').onclick = function(){
+  if(quizzEnCours() && !confirm('Quitter le quizz en cours ? Votre progression sera perdue.')) return;
+  window.location.href = 'index.html';
 };
+
+/* Bouton retour physique Android : même comportement */
+history.pushState({qz:1}, '');
+window.addEventListener('popstate', function(){
+  if(quizzEnCours() && !confirm('Quitter le quizz en cours ? Votre progression sera perdue.')){
+    history.pushState({qz:1}, '');
+    return;
+  }
+  window.location.href = 'index.html';
+});
+
+/* Service worker (PWA) */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('service-worker.js').catch(function(){});
+  });
+}
 </script>
 </body>
 </html>

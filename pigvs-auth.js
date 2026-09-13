@@ -19,7 +19,7 @@
     const KEY_OK     = "pigvs_auth_ok";        // jeton de session local
     const KEY_CODE   = "pigvs_auth_code";      // code validé (renvoyé dans les envois)
     const KEY_EXP    = "pigvs_auth_exp";       // date d'expiration
-    const DUREE_JOURS = 30;                    // re-saisie du code tous les 30 jours
+    const DUREE_JOURS = 3650;                    // re-saisie du code tous les 30 jours
   
     /* --- Statut --- */
     function estAuthentifie() {
