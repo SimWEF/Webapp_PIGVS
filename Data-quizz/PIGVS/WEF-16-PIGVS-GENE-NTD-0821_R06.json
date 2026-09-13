@@ -1,0 +1,752 @@
+[
+  {
+    "id": "PIG-01",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§1",
+    "q": "Quel est l'objet de la note WEF-16-PIGVS-GENE-NTD-0821 ?",
+    "o": [
+      "Décrire les besoins enveloppes pour l'opération de PIGVS sur le parc REP français",
+      "Décrire le mode opératoire des inspections télévisuelles",
+      "Définir les critères de propreté des GV",
+      "Fixer les règles de radioprotection du chantier"
+    ],
+    "a": 0,
+    "e": "Ce document décrit les besoins enveloppes pour l'opération de PIGVS (lançage et examens télévisuels) sur le parc REP français."
+  },
+  {
+    "id": "PIG-02",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§2",
+    "q": "À quels paliers cette note s'applique-t-elle ?",
+    "o": [
+      "Aux tranches 900 MWe, 1300 MWe et 1450 MWe",
+      "Uniquement aux tranches 900 MWe",
+      "Uniquement aux tranches 1300 MWe",
+      "À l'EPR uniquement"
+    ],
+    "a": 0,
+    "e": "La note s'applique aux opérations de PIGVS sur les tranches 900 MWe, 1300 MWe et 1450 MWe, en PIGVS seule ou en post NCGV/NPGV."
+  },
+  {
+    "id": "PIG-03",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§4",
+    "q": "Que signifie l'acronyme PIGVS ?",
+    "o": [
+      "Prestation Intégrée des Générateurs de Vapeur Secondaire",
+      "Programme d'Inspection des Générateurs de Vapeur Standard",
+      "Procédure Intégrée de Gestion de la Vapeur Secondaire",
+      "Prestation Industrielle des GV Spécifiques"
+    ],
+    "a": 0,
+    "e": "PIGVS : Prestation Intégrée des Générateurs de Vapeur Secondaire (glossaire §4)."
+  },
+  {
+    "id": "PIG-04",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§4",
+    "q": "Que signifie l'acronyme GIBR ?",
+    "o": [
+      "Groupe Intérieur Bâtiment Réacteur",
+      "Groupe d'Intervention Bâtiment Réacteur",
+      "Gestion Interne du Bâtiment Réacteur",
+      "Groupe d'Inspection du Bâtiment Réacteur"
+    ],
+    "a": 0,
+    "e": "GIBR : Groupe Intérieur Bâtiment Réacteur, groupe hydraulique de lançage installé dans le BR."
+  },
+  {
+    "id": "PIG-05",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§4",
+    "q": "Que signifie CART dans le glossaire de la note ?",
+    "o": [
+      "Cleanliness Assessment Robot for outer Tubes",
+      "Camera Assisted Remote Tool",
+      "Control And Recording Tool",
+      "Cleaning Auxiliary Robot for Tubes"
+    ],
+    "a": 0,
+    "e": "CART : Cleanliness Assessment Robot for outer Tubes (glossaire §4)."
+  },
+  {
+    "id": "PIG-06",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§4",
+    "q": "Que signifient NPGV et NCGV ?",
+    "o": [
+      "Nettoyage Préventif et Nettoyage Chimique des Générateurs de Vapeur",
+      "Nettoyage Programmé et Nettoyage Complémentaire des GV",
+      "Note Préalable et Note Comparative GV",
+      "Nouvelle Procédure et Nouveau Contrôle GV"
+    ],
+    "a": 0,
+    "e": "NPGV : Nettoyage Préventif des Générateurs de Vapeur ; NCGV : Nettoyage Chimique des Générateurs de Vapeur (§4)."
+  },
+  {
+    "id": "PIG-07",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§4",
+    "q": "Que signifie SLA dans le glossaire de la note PIGVS ?",
+    "o": [
+      "Sludge Lancing",
+      "Service Level Agreement",
+      "Système de Lançage Automatisé",
+      "Skid de Lançage Annulaire"
+    ],
+    "a": 0,
+    "e": "SLA : Sludge Lancing, c'est-à-dire le lançage (glossaire §4)."
+  },
+  {
+    "id": "PIG-08",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.1.1",
+    "q": "Quelle surface est requise par GIBR pour la zone de travail SLA 1 ?",
+    "o": [
+      "30 m² non morcelable",
+      "10 m² non morcelable",
+      "8 m²",
+      "50 m² morcelables"
+    ],
+    "a": 0,
+    "e": "La surface requise par GIBR est de 30 m² non morcelable, à multiplier par le nombre de GIBR utilisés."
+  },
+  {
+    "id": "PIG-09",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.1.1",
+    "q": "Où est idéalement positionné le premier GIBR si un seul est utilisé ?",
+    "o": [
+      "Dans l'espace annulaire du BR, à gauche ou à droite du SAS d'introduction BR",
+      "Dans l'espace intra-annulaire",
+      "En casemate GV",
+      "Au niveau du poste de pilotage ETV"
+    ],
+    "a": 0,
+    "e": "Si un seul GIBR est utilisé, il est idéalement positionné dans l'espace annulaire du BR, à gauche ou à droite du SAS d'introduction BR ; le 2ème en intra-annulaire."
+  },
+  {
+    "id": "PIG-10",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.1.1",
+    "q": "Combien de modules Pompe HP sont nécessaires pour 2 GV lancés en parallèle ?",
+    "o": [
+      "4 (+2)",
+      "2 (+1)",
+      "6 (+3)",
+      "2 sans spare"
+    ],
+    "a": 0,
+    "e": "Le tableau des modules donne 2 (+1) modules pompe HP pour 1 GV, 4 (+2) pour 2 GV en parallèle et 6 (+3) pour 3 GV."
+  },
+  {
+    "id": "PIG-11",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.1.1",
+    "q": "Quelles sont les dimensions du pupitre de commande d'un GIBR ?",
+    "o": [
+      "1500 x 1400 x 1800 mm",
+      "1950 x 1200 x 1800 mm",
+      "1200 x 1200 x 1800 mm",
+      "1000 x 1000 x 1400 mm"
+    ],
+    "a": 0,
+    "e": "Le tableau des caractéristiques dimensionnelles donne 1500 x 1400 x 1800 mm pour le pupitre de commande."
+  },
+  {
+    "id": "PIG-12",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.1.1",
+    "q": "Pourquoi les accès aux casemates GV sont-ils interdits durant l'intervention ?",
+    "o": [
+      "Afin d'éviter l'endommagement du matériel",
+      "Pour des raisons de dosimétrie uniquement",
+      "Parce que les casemates sont consignées électriquement",
+      "Pour limiter le nombre d'intervenants au RTR"
+    ],
+    "a": 0,
+    "e": "Les casemates des GV traités sont des zones de travail pendant toute la durée de l'intervention et les accès sont interdits afin d'éviter l'endommagement du matériel."
+  },
+  {
+    "id": "PIG-13",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.2.1",
+    "q": "Quelle surface d'entreposage est requise pour le stockage SLA 1 avec 3 GV en parallèle ?",
+    "o": [
+      "20 m²",
+      "10 m²",
+      "15 m²",
+      "30 m²"
+    ],
+    "a": 0,
+    "e": "Stockage SLA 1 : 10 m² pour des GV lancés en série, 15 m² pour 2 GV en parallèle et 20 m² pour 3 GV en parallèle."
+  },
+  {
+    "id": "PIG-14",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.2.1",
+    "q": "Quelle surface est requise pour le stockage SLA 2 (équipements en spare) ?",
+    "o": [
+      "10 m²",
+      "2 m²",
+      "20 m²",
+      "6 m²"
+    ],
+    "a": 0,
+    "e": "Le stockage SLA 2 des modules GIBR complémentaires (pompe HP, pupitre, RHP, groupe froid) requiert 10 m²."
+  },
+  {
+    "id": "PIG-15",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.2.1",
+    "q": "Quelle surface est requise pour le stockage SLA 3 (pompes à membrane) ?",
+    "o": [
+      "2 m² au pied de chaque casemate",
+      "10 m² dans l'espace annulaire",
+      "1 m² en face de chaque casemate",
+      "6 m² près de la baie de commande"
+    ],
+    "a": 0,
+    "e": "Stockage SLA 3 : pompes à membrane et flexibles de lançage, 2 m² au pied de chaque casemate."
+  },
+  {
+    "id": "PIG-16",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§5.2.1",
+    "q": "Quelle surface est requise pour le stockage SLA 4 (enclosure box et matériel lançage) ?",
+    "o": [
+      "1 m² en face de chaque casemate + 2 m²",
+      "2 m² au pied de chaque casemate",
+      "10 m² près du SAS",
+      "6 m² en espace annulaire"
+    ],
+    "a": 0,
+    "e": "Stockage SLA 4 : 1 m² en face de chaque casemate + 2 m²."
+  },
+  {
+    "id": "PIG-17",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "Quelle surface est requise pour la zone de travail ETV 1 (zone de pilotage) ?",
+    "o": [
+      "8 m²",
+      "30 m²",
+      "1 m²",
+      "10 m²"
+    ],
+    "a": 0,
+    "e": "La zone de travail ETV 1 correspond à la baie de commande depuis laquelle les opérateurs pilotent les outils : surface requise 8 m²."
+  },
+  {
+    "id": "PIG-18",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "Quelle surface est requise au pied du trou d'accès en zone de travail ETV 2 ?",
+    "o": [
+      "1 m²",
+      "8 m²",
+      "2 m²",
+      "6 m²"
+    ],
+    "a": 0,
+    "e": "Zone de travail ETV 2 (casemate) : surface requise au pied du trou d'accès de 1 m², où sont installés le CAVALRI et les outillages SPICE, CART, perche."
+  },
+  {
+    "id": "PIG-19",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "Dans quel cylindre minimal le sabre doit-il s'inscrire pour l'inspection SPICE ?",
+    "o": [
+      "Un cylindre de 40 mm de diamètre axé sur le ru central",
+      "Un cylindre de 420 mm de diamètre",
+      "Un cylindre de 100 mm de diamètre",
+      "Un cylindre de 26,25 mm de diamètre"
+    ],
+    "a": 0,
+    "e": "Inspection : le sabre s'inscrit dans un cylindre de 40 mm de diamètre minimum axé sur le ru central."
+  },
+  {
+    "id": "PIG-20",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "Quel recul est nécessaire par rapport au trou d'accès lors de l'installation du SPICE ?",
+    "o": [
+      "600 mm",
+      "550 mm",
+      "420 mm",
+      "300 mm"
+    ],
+    "a": 0,
+    "e": "Le recul nécessaire par rapport au trou d'accès est de 600 mm à l'installation et de 550 mm en opération."
+  },
+  {
+    "id": "PIG-21",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "Quel recul est nécessaire par rapport au trou d'accès en opération avec le SPICE ?",
+    "o": [
+      "550 mm",
+      "600 mm",
+      "420 mm",
+      "500 mm"
+    ],
+    "a": 0,
+    "e": "L'encombrement maximal en profondeur est de 550 mm en opération, contre 600 mm à l'installation."
+  },
+  {
+    "id": "PIG-22",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "Dans quel cylindre le robot SPICE s'inscrit-il, centré sur le trou d'accès ?",
+    "o": [
+      "420 mm de diamètre",
+      "40 mm de diamètre",
+      "600 mm de diamètre",
+      "250 mm de diamètre"
+    ],
+    "a": 0,
+    "e": "Le robot s'inscrit dans un cylindre de 420 mm de diamètre centré sur le trou d'accès, auxquels s'ajoutent les cotes 1, 2 et 3."
+  },
+  {
+    "id": "PIG-23",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.1.1",
+    "q": "De combien dépasse le moteur du bloc entrainement sabre (Cote 2) ?",
+    "o": [
+      "26,25 mm",
+      "9,50 mm",
+      "22,5 mm",
+      "40 mm"
+    ],
+    "a": 0,
+    "e": "Cote 1 = 9,50 mm (ouverture de mâchoire), Cote 2 = 26,25 mm (moteur du bloc entrainement sabre), Cote 3 = 22,5 mm (flasque de la bobine)."
+  },
+  {
+    "id": "PIG-24",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.2.1",
+    "q": "Quelle surface est requise pour la zone de stockage ETV 1 (rolls et sécheurs) ?",
+    "o": [
+      "10 m² à proximité du SAS d'entrée matériel",
+      "6 m² en espace annulaire",
+      "8 m² près de la baie de commande",
+      "2 m² au pied de la casemate"
+    ],
+    "a": 0,
+    "e": "Stockage ETV 1 : rolls de rangement ETV et sécheurs, à proximité du SAS d'entrée matériel, 10 m², zone morcelable."
+  },
+  {
+    "id": "PIG-25",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§6.2.1",
+    "q": "Quelle surface est requise pour les zones de stockage ETV 2 et ETV 3 ?",
+    "o": [
+      "6 m² chacune",
+      "10 m² chacune",
+      "8 m² chacune",
+      "2 m² chacune"
+    ],
+    "a": 0,
+    "e": "Les stockages ETV 2 (colisage et pièces de rechange CART) et ETV 3 (colisage et pièces de rechange SPICE) requièrent 6 m² chacun, en espace annulaire."
+  },
+  {
+    "id": "PIG-26",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§7.1",
+    "q": "Y a-t-il des zones de travail à prévoir hors BR ?",
+    "o": [
+      "Non, aucune zone de travail n'est à prévoir hors BR",
+      "Oui, 30 m² pour le GIBR de secours",
+      "Oui, 8 m² pour un second poste ETV",
+      "Oui, une zone de colisage de 10 m²"
+    ],
+    "a": 0,
+    "e": "§7.1 : il n'y a pas de zone de travail à prévoir hors BR (seules des zones de stockage de conteneurs sont nécessaires)."
+  },
+  {
+    "id": "PIG-27",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§7.2",
+    "q": "Combien de conteneurs chauds de stockage lançage faut-il pour 2 GV lancés en parallèle ?",
+    "o": [
+      "6",
+      "3",
+      "8",
+      "2"
+    ],
+    "a": 0,
+    "e": "Conteneurs chauds de stockage lançage : 3 pour 1 GV, 6 pour 2 GV et 8 pour 3 GV en parallèle."
+  },
+  {
+    "id": "PIG-28",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§7.2",
+    "q": "Quelle est la masse d'un conteneur de stockage lançage Type A/IP2 de 20 pieds ?",
+    "o": [
+      "3400 kg",
+      "1800 kg",
+      "2500 kg",
+      "5000 kg"
+    ],
+    "a": 0,
+    "e": "Le conteneur de stockage lançage (610x244x260 cm) pèse 3400 kg ; le conteneur ETV de 10 pieds pèse 1800 kg."
+  },
+  {
+    "id": "PIG-29",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§7.2",
+    "q": "Quelles sont les dimensions du conteneur de stockage ETV (10 pieds) ?",
+    "o": [
+      "305 x 244 x 260 cm",
+      "610 x 244 x 260 cm",
+      "244 x 244 x 260 cm",
+      "400 x 200 x 250 cm"
+    ],
+    "a": 0,
+    "e": "Le conteneur de stockage ETV Type A/IP2 de 10 pieds mesure 305 x 244 x 260 cm pour 1800 kg."
+  },
+  {
+    "id": "PIG-30",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§7.3",
+    "q": "Pourquoi les conteneurs froids doivent-ils rester accessibles et dégagés ?",
+    "o": [
+      "Parce qu'on peut avoir besoin à tout moment des équipements et pièces de rechange qui y sont stockés",
+      "Pour permettre leur pesée régulière",
+      "Pour respecter les règles incendie du CNPE",
+      "Pour faciliter leur évacuation en fin de chantier"
+    ],
+    "a": 0,
+    "e": "§7.3 : ces conteneurs doivent rester accessibles car à tout moment on peut avoir besoin des équipements et pièces de rechange ; l'espace devant leur porte doit rester dégagé."
+  },
+  {
+    "id": "PIG-31",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§8",
+    "q": "Combien de locaux ou bungalows Westinghouse demande-t-il en configuration standard ?",
+    "o": [
+      "4 locaux (5 en délai réduit), plus 1 par sous-traitant",
+      "2 locaux seulement",
+      "6 locaux quelle que soit la configuration",
+      "1 local par GV traité"
+    ],
+    "a": 0,
+    "e": "Westinghouse demande 4 locaux ou bungalows (5 en délai réduit) fermant à clé ou par code, équipés pour 2 personnes, plus 1 local additionnel par sous-traitant."
+  },
+  {
+    "id": "PIG-32",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§8",
+    "q": "Combien de DECT ou cartes SIM CONNECT sont demandés au minimum ?",
+    "o": [
+      "6",
+      "4",
+      "8",
+      "2"
+    ],
+    "a": 0,
+    "e": "Au minimum 6 DECT ou 6 cartes SIM CONNECT : 1 par GIBR dans le BR, 1 CdT ETV, 1 CdT Lançage, 1 PM, 1 superviseur, 1 QHSE-RP."
+  },
+  {
+    "id": "PIG-33",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§8",
+    "q": "Quelle est la particularité de la tarlatane dans le bâtiment réacteur ?",
+    "o": [
+      "Elle est interdite dans le BR et nécessite une demande de dérogation",
+      "Elle est fournie systématiquement par EDF",
+      "Elle est utilisée pour le colisage des conteneurs",
+      "Elle remplace le vinyle au sol"
+    ],
+    "a": 0,
+    "e": "La tarlatane est interdite dans le BR ; elle permet de maintenir le vinyle au sol avant mise en place des GIBR, d'où une demande de dérogation. Sinon, la pose est faite par la PGAC."
+  },
+  {
+    "id": "PIG-34",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§8",
+    "q": "Dans le cadre d'un NPGV ou NCGV, combien de balises BM 25 sont demandées par groupe de lançage ?",
+    "o": [
+      "2",
+      "1",
+      "4",
+      "3"
+    ],
+    "a": 0,
+    "e": "Dans le cadre d'un NPGV ou NCGV : 2 balises BM 25 par groupe de lançage (hydrazine, ammoniac et taux d'oxygène)."
+  },
+  {
+    "id": "PIG-35",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§9",
+    "q": "Quelle quantité d'eau SED nécessite une opération de lançage par GIBR ?",
+    "o": [
+      "3,5 m³",
+      "1 m³",
+      "7 m³",
+      "10 m³"
+    ],
+    "a": 0,
+    "e": "Une opération de lançage nécessite 3,5 m³ d'eau SED par GIBR ; un rinçage nécessite a minima 3,5 m³ également."
+  },
+  {
+    "id": "PIG-36",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§9",
+    "q": "Quelle est la formule de calcul du volume d'eau SED ?",
+    "o": [
+      "V = 3,5 m³ x (nombre de GV lancés en parallèle + nombre de rinçages)",
+      "V = 3,5 m³ x nombre de GV uniquement",
+      "V = 7 m³ x nombre de GIBR",
+      "V = 3,5 m³ x nombre de rinçages uniquement"
+    ],
+    "a": 0,
+    "e": "V eau SED = 3,5 m³ x (nombre de GV lancés en parallèle + nombre de rinçages)."
+  },
+  {
+    "id": "PIG-37",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§9",
+    "q": "Quel type de raccord est demandé pour le piquage d'eau SED ?",
+    "o": [
+      "Un raccord Camelock",
+      "Un raccord Storz",
+      "Un raccord à bride DN50",
+      "Un raccord rapide Staubli"
+    ],
+    "a": 0,
+    "e": "Westinghouse demande un piquage au plus proche de la zone d'installation des GIBR, muni d'un raccord Camelock ; à défaut le type est précisé en réunion d'enclenchement."
+  },
+  {
+    "id": "PIG-38",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§9 / §10 / §11",
+    "q": "Quel est le délai de mise à disposition des servitudes (eau SED, air SAT, électricité) ?",
+    "o": [
+      "Au plus tard 48 h avant le J0",
+      "Au plus tard 24 h avant le J0",
+      "Le jour du J0",
+      "Une semaine avant le J0"
+    ],
+    "a": 0,
+    "e": "Les vannes SED, piquages SAT et alimentations électriques déconsignés doivent être disponibles au plus tard 48 h avant le J0."
+  },
+  {
+    "id": "PIG-39",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§10",
+    "q": "Quelles caractéristiques minimales sont demandées pour les piquages d'air SAT ?",
+    "o": [
+      "7 bar à 700 Nm³/h avec raccord Camlock",
+      "3 bar à 300 Nm³/h",
+      "10 bar à 500 Nm³/h",
+      "5 bar à 1000 Nm³/h"
+    ],
+    "a": 0,
+    "e": "Westinghouse demande des piquages dédiés assurant a minima 7 bar à 700 Nm³/h munis d'un raccord Camlock."
+  },
+  {
+    "id": "PIG-40",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§10",
+    "q": "Combien de piquages SAT sont demandés au plus proche de la zone d'installation des GIBR ?",
+    "o": [
+      "3 piquages sur trois collecteurs différents",
+      "1 piquage par GIBR",
+      "2 piquages sur le même collecteur",
+      "4 piquages sur deux collecteurs"
+    ],
+    "a": 0,
+    "e": "Pour le lançage : 3 piquages SAT sur trois collecteurs différents au plus proche de la zone d'installation des GIBR."
+  },
+  {
+    "id": "PIG-41",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§10",
+    "q": "Quel besoin SAT supplémentaire existe à proximité des casemates GV pour le lançage ?",
+    "o": [
+      "A minima un piquage SAT par GIBR pour l'alimentation des pompes à membrane",
+      "Un piquage par opérateur",
+      "Aucun besoin à proximité des casemates",
+      "Deux piquages par casemate quel que soit le palier"
+    ],
+    "a": 0,
+    "e": "À proximité des casemates GV : a minima un piquage SAT par GIBR pour les pompes à membrane ; pour les 1450 MW, 1 piquage supplémentaire par casemate pour le système de lançage."
+  },
+  {
+    "id": "PIG-42",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Quelle alimentation électrique dédiée est demandée par GIBR ?",
+    "o": [
+      "Triphasé 1 x 232 A / 380 V / 50 Hz, pouvoir de coupure 10 kA",
+      "Monophasé 1 x 13 A / 220 V / 50 Hz",
+      "Triphasé 1 x 100 A / 400 V / 50 Hz",
+      "Monophasé 1 x 30 A / 380 V"
+    ],
+    "a": 0,
+    "e": "Lançage : une alimentation dédiée par GIBR en triphasé 1 x 232 A / 380 V / 50 Hz, avec un pouvoir de coupure de 10 kA."
+  },
+  {
+    "id": "PIG-43",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "À quelle distance maximale du pupitre de commande doit se trouver le point de raccordement électrique ?",
+    "o": [
+      "Moins de 25 mètres",
+      "Moins de 10 mètres",
+      "Moins de 50 mètres",
+      "Aucune contrainte de distance"
+    ],
+    "a": 0,
+    "e": "Le point de raccordement doit se trouver à moins de 25 mètres de l'emplacement prévu du pupitre de commande."
+  },
+  {
+    "id": "PIG-44",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Quel type de prise est demandé pour la connexion sur la régie ?",
+    "o": [
+      "Une prise Maréchal DS2 femelle de 250 A",
+      "Une prise Maréchal DS1 de 30 A",
+      "Une prise de type E ménagère",
+      "Une prise CEE 63 A"
+    ],
+    "a": 0,
+    "e": "La connexion sur la régie doit être une prise Maréchal DS2 femelle de 250 A, ou à défaut sur un jeu de barres. Si le CNPE n'en dispose pas, Westinghouse ouvre une fiche de constat."
+  },
+  {
+    "id": "PIG-45",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Quelle alimentation est demandée au niveau du poste d'inspection ETV (baie de commande) ?",
+    "o": [
+      "Monophasé 1 x 13 A / 220 V / 50 Hz sur prise de type E",
+      "Triphasé 232 A / 380 V",
+      "Monophasé 30 A / 380 V sur coffret DNX",
+      "Aucune alimentation dédiée"
+    ],
+    "a": 0,
+    "e": "ETV : une alimentation par casemate GV et une au niveau de la baie de commande, en monophasé 1 x 13 A / 220 V / 50 Hz sur prise de type E (ménagère)."
+  },
+  {
+    "id": "PIG-46",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Quelle puissance moyenne doivent supporter les alimentations 220 V à l'entrée de casemate pour le séchage ?",
+    "o": [
+      "10 kW",
+      "3 kW",
+      "30 kW",
+      "5 kW"
+    ],
+    "a": 0,
+    "e": "Séchage : deux alimentations monophasées 220 V à chaque entrée de casemate GV pouvant supporter une puissance moyenne de 10 kW."
+  },
+  {
+    "id": "PIG-47",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Quel coffret est nécessaire par GV en cas d'alimentation 380 V pour le séchage ?",
+    "o": [
+      "Un coffret DNX [2 x 3P + T 30A DS1 femelle]",
+      "Un coffret DS2 250 A",
+      "Un coffret monophasé 13 A",
+      "Aucun coffret spécifique"
+    ],
+    "a": 0,
+    "e": "Deux alimentations monophasées 380 V à chaque entrée de casemate nécessitent la présence d'un coffret DNX [2 x 3P + T 30A DS1 femelle] par générateur de vapeur."
+  },
+  {
+    "id": "PIG-48",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Quel domaine de variation de tension est exigé selon les critères RCC-E ?",
+    "o": [
+      "Entre -10 % et +10 % dans les conditions nominales d'utilisation",
+      "Entre -5 % et +5 %",
+      "Entre -15 % et +15 %",
+      "Aucune tolérance n'est spécifiée"
+    ],
+    "a": 0,
+    "e": "La tension doit être stable suivant les critères RCC-E, avec un domaine de variation compris entre -10 % et +10 % dans les conditions nominales."
+  },
+  {
+    "id": "PIG-49",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§11",
+    "q": "Que doit faire EDF en cas de basculement de voie électrique ?",
+    "o": [
+      "Informer Westinghouse au préalable afin d'anticiper la mise hors tension du pupitre",
+      "Basculer sans préavis, le système est protégé",
+      "Couper l'alimentation SED simultanément",
+      "Remplacer la prise Maréchal"
+    ],
+    "a": 0,
+    "e": "En cas de basculement de voie, Westinghouse doit en être informé au préalable afin d'anticiper la mise hors tension du pupitre : risque important de détérioration du matériel."
+  },
+  {
+    "id": "PIG-50",
+    "theme": "Commun",
+    "doc": "WEF-16-PIGVS-GENE-NTD-0821 R06",
+    "ref": "§12",
+    "q": "Sur un GV 68/19, quels TP sont à ouvrir pour le lançage PT ?",
+    "o": [
+      "Les TP 000 et 180",
+      "Les TP 053 et 233",
+      "Les TP 143 et 323",
+      "Les TP 090 et 270"
+    ],
+    "a": 0,
+    "e": "Tableau §12 : pour le 68/19, les TP à ouvrir pour le lançage PT sont les TP 000 et 180."
+  }
+]

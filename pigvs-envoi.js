@@ -13,8 +13,6 @@
           ⚠️ Elle doit contenir &sig=... à la fin ! */
     const URL_FLUX = "https://default516ec17ab92f438b8594e11b6f6bec.79.environment.api.powerplatform.com:443/powerautomate/automations/direct/cu/04/workflows/7ee4645413cd4d43aaf312a6fe97fbf4/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-uzPwa9IbvsUrxX4D26HGUMER7LS0dT3-mr2dfwKITw";
   
-    /* 2️⃣ Code chantier (doit correspondre à la condition de déclenchement) */
-    const CODE_TEST = PIGVS_AUTH.getCode();
   
     /* Le base64 gonfle le poids d'environ 33 % */
     const LIMITE_PHOTOS = 10 * 1024 * 1024;
@@ -60,9 +58,9 @@
         }
       }
   
-      const code = (window.PIGVS_AUTH && PIGVS_AUTH.getCode && PIGVS_AUTH.getCode())
-                   ? PIGVS_AUTH.getCode()
-                   : CODE_TEST;
+      const code = (window.PIGVS_AUTH && PIGVS_AUTH.getCode)
+             ? PIGVS_AUTH.getCode()
+             : "";
   
       const payload = {
         type   : type,

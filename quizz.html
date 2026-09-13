@@ -2,340 +2,108 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Quizz procédures – PIGVS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quizz procédures - PIGVS</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0078D7">
+<meta name="theme-color" content="#0078d7">
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="pigvs-auth.js"></script>
-<script>PIGVS_AUTH.protegerPage();</script>
+<script>if(window.PIGVS_AUTH){PIGVS_AUTH.protegerPage();}</script>
 <style>
-/* Styles autonomes : cette page n'utilise pas style.css afin d'éviter
-   toute collision avec les classes .card / .container de la webapp.   */
-:root{
-  --bleu:#0078D7; --bleu-f:#003b71; --bleu2:#0a5ca8; --accent:#e8a33d;
-  --vert:#1f8a4c; --rouge:#c0392b;
-  --fond:#f4f6f9; --carte:#fff; --txt:#1c2430; --gris:#6b7684; --bord:#dde3ea;
-}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-     background:var(--fond);color:var(--txt);font-size:16px;line-height:1.45}
-.qz-header{background:var(--bleu);color:#fff;padding:14px 16px;position:sticky;top:0;z-index:10;
-       display:flex;align-items:center;gap:12px;padding-top:calc(14px + env(safe-area-inset-top))}
-.qz-header h1{font-size:17px;margin:0;font-weight:600;flex:1}
-.btn-back{background:rgba(255,255,255,.18);border:0;color:#fff;border-radius:8px;
-          padding:9px 13px;font-size:14px;font-weight:600;cursor:pointer;flex:0 0 auto}
-.qz-main{max-width:720px;margin:0 auto;padding:16px;padding-bottom:calc(32px + env(safe-area-inset-bottom))}
-.qz-card{background:var(--carte);border:1px solid var(--bord);border-radius:12px;padding:16px;margin-bottom:14px;
-      box-shadow:0 1px 3px rgba(16,30,54,.06)}
-.qz-card h2{font-size:16px;margin:0 0 12px}
-p.sub{color:var(--gris);font-size:14px;margin:0 0 16px}
-
-.themes{display:grid;gap:10px}
-.theme{display:flex;align-items:center;gap:12px;padding:14px;border:2px solid var(--bord);
-       border-radius:12px;background:#fff;cursor:pointer;text-align:left;width:100%;font-size:16px;color:inherit}
-.theme:active{transform:scale(.99)}
-.theme.on{border-color:var(--bleu2);background:#eef5fd}
-.theme .ico{width:40px;height:40px;border-radius:10px;background:var(--bleu-f);color:#fff;
-      display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex:0 0 auto}
-.theme .ico.sla{background:var(--bleu2)} .theme .ico.com{background:#4a6b8a} .theme .ico.all{background:var(--accent)}
-.theme b{display:block;font-size:15px} .theme span{font-size:13px;color:var(--gris)}
-
-.primary{display:block;width:100%;background:var(--bleu-f);color:#fff;border:0;border-radius:12px;
-     padding:16px;font-size:16px;font-weight:600;cursor:pointer;margin-top:6px}
-.primary:disabled{background:#9fb0c2;cursor:not-allowed}
-.ghost{display:block;width:100%;background:#fff;color:var(--bleu-f);border:2px solid var(--bleu-f);
-     border-radius:12px;padding:14px;font-size:15px;font-weight:600;cursor:pointer;margin-top:10px;
-     text-align:center;text-decoration:none}
-
-.bar{height:6px;background:var(--bord);border-radius:3px;overflow:hidden;margin-bottom:14px}
-.bar i{display:block;height:100%;background:var(--bleu2);transition:width .25s}
-.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--gris);margin-bottom:8px}
-.tag{display:inline-block;background:#eef2f7;color:var(--gris);border-radius:6px;
-     padding:3px 8px;font-size:12px;margin-bottom:10px}
-.q{font-size:17px;font-weight:600;margin:0 0 14px}
-
-.opts{display:grid;gap:9px}
-.opt{display:flex;gap:11px;align-items:flex-start;padding:13px;border:2px solid var(--bord);
-     border-radius:10px;background:#fff;cursor:pointer;font-size:15px;text-align:left;width:100%;color:inherit}
-.opt .l{flex:0 0 26px;height:26px;border-radius:50%;background:#eef2f7;color:var(--gris);
-        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
-.opt.ok{border-color:var(--vert);background:#eaf7ef} .opt.ok .l{background:var(--vert);color:#fff}
-.opt.ko{border-color:var(--rouge);background:#fdeeec} .opt.ko .l{background:var(--rouge);color:#fff}
-.opt[disabled]{cursor:default}
-
-.expl{margin-top:13px;padding:13px;border-radius:10px;font-size:14px;background:#eef2f7;border-left:4px solid var(--bleu2)}
-.expl.ok{background:#eaf7ef;border-left-color:var(--vert)}
-.expl.ko{background:#fdeeec;border-left-color:var(--rouge)}
-.expl b{display:block;margin-bottom:4px}
-.expl .src{display:block;margin-top:8px;font-size:12px;color:var(--gris)}
-
-.score{text-align:center;padding:8px 0 4px}
-.score .n{font-size:46px;font-weight:700;line-height:1;color:var(--bleu-f)}
-.score .n.bad{color:var(--rouge)} .score .n.good{color:var(--vert)}
-.score .t{font-size:14px;color:var(--gris);margin-top:6px}
-.recap{margin-top:4px;display:grid;gap:8px}
-.ritem{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:10px;
-       border-radius:8px;background:#f7f9fb;border-left:3px solid var(--vert)}
-.ritem.ko{border-left-color:var(--rouge)}
-.ritem .st{flex:0 0 auto;font-weight:700}
-.ritem small{display:block;color:var(--gris);margin-top:3px}
-.hide{display:none}
-.qz-footer{text-align:center;font-size:12px;color:var(--gris);padding:6px 16px 24px}
+:root{--blue:#0078d7;--dark:#003b71;--blue2:#0a5ca8;--green:#1f8a4c;--red:#c0392b;--orange:#e8a33d;--bg:#f4f6f9;--card:#fff;--text:#1c2430;--muted:#687788;--line:#dce3ea}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{margin:0;font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+header{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--blue);color:#fff}header h1{font-size:17px;margin:0;flex:1}.hbtn{border:0;border-radius:8px;padding:9px 11px;background:#ffffff2b;color:#fff;font-weight:700;cursor:pointer}.user{max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+main{max-width:760px;margin:auto;padding:16px 16px calc(30px + env(safe-area-inset-bottom))}.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:14px;box-shadow:0 1px 4px #1020380d}h2{font-size:17px;margin:0 0 11px}.sub{font-size:14px;color:var(--muted);margin:0 0 14px}.hide{display:none!important}
+.tabs{display:flex;gap:8px;margin-bottom:14px}.tab{flex:1;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--muted);padding:11px;font-weight:700}.tab.on{border-color:var(--blue2);background:#edf6ff;color:var(--dark)}
+input,select{width:100%;padding:13px;border:2px solid var(--line);border-radius:10px;background:#fff;color:inherit;font:inherit}input:focus,select:focus{outline:0;border-color:var(--blue2)}label{display:block;margin:0 0 6px;font-weight:700;font-size:13px;color:#46576a}.grid{display:grid;gap:12px}.avatars{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:13px 0}.avatar{width:45px;height:45px;border:2px solid var(--line);border-radius:50%;background:#fff;font-size:22px}.avatar.on{border-color:var(--blue);background:#edf6ff}
+.primary,.secondary,.danger{display:block;width:100%;border:0;border-radius:11px;padding:14px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--dark);color:#fff}.primary:disabled{opacity:.45}.secondary{background:#fff;color:var(--dark);border:2px solid var(--dark);margin-top:9px}.danger{background:#fff0ef;color:var(--red);margin-top:9px}.error{color:var(--red);font-size:13px;margin-top:8px}.notice{padding:12px;border-left:4px solid var(--blue);border-radius:8px;background:#edf6ff;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{text-align:center;background:#f7f9fb;border-radius:10px;padding:11px 5px}.stat b{display:block;font-size:22px;color:var(--dark)}.stat span{font-size:11px;color:var(--muted)}
+.themes{display:grid;gap:9px}.theme{display:flex;gap:12px;align-items:center;width:100%;padding:13px;border:2px solid var(--line);border-radius:11px;background:#fff;text-align:left;color:inherit}.theme.on{border-color:var(--blue2);background:#edf6ff}.ico{flex:0 0 42px;height:42px;border-radius:10px;display:grid;place-items:center;background:var(--dark);color:#fff;font-size:12px;font-weight:800}.theme b{display:block}.theme small{display:block;color:var(--muted)}
+.formrow{margin-bottom:13px}.loading{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:14px}.spin{width:19px;height:19px;border:3px solid #cbd5df;border-top-color:var(--blue);border-radius:50%;animation:s .7s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+.bar{height:7px;background:#dfe6ed;border-radius:99px;overflow:hidden;margin-bottom:12px}.bar i{display:block;height:100%;background:var(--blue2);transition:.2s}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:9px}.tag{display:inline-block;background:#eef2f6;color:#536374;border-radius:6px;padding:4px 8px;font-size:12px;margin-bottom:10px}.question{font-size:18px;font-weight:700;margin:0 0 14px}.answers{display:grid;gap:9px}.answer{display:flex;gap:10px;align-items:flex-start;width:100%;padding:13px;border:2px solid var(--line);border-radius:10px;background:#fff;text-align:left;color:inherit;font:inherit}.letter{flex:0 0 27px;height:27px;border-radius:50%;display:grid;place-items:center;background:#eef2f6;font-size:13px;font-weight:800}.answer.ok{border-color:var(--green);background:#eaf7ef}.answer.ok .letter{background:var(--green);color:#fff}.answer.ko{border-color:var(--red);background:#fdeeed}.answer.ko .letter{background:var(--red);color:#fff}.answer:disabled{color:inherit}.explain{margin-top:13px;padding:13px;border-left:4px solid var(--blue);border-radius:9px;background:#eef4f8;font-size:14px}.explain.ok{background:#eaf7ef;border-color:var(--green)}.explain.ko{background:#fdeeed;border-color:var(--red)}.source{display:block;color:var(--muted);font-size:12px;margin-top:7px}.gain{float:right;color:var(--green);font-weight:800}.streak{color:var(--orange);font-weight:800}
+.result{text-align:center}.result .big{font-size:48px;font-weight:800;color:var(--dark)}.result .points{font-size:19px;color:var(--orange);font-weight:800}.recap{display:grid;gap:8px}.item{padding:10px;border-left:3px solid var(--green);border-radius:8px;background:#f7f9fb;font-size:14px}.item.ko{border-color:var(--red)}.item small{display:block;color:var(--muted);margin-top:4px}
+.rankrow{display:flex;gap:10px;align-items:center;padding:10px;border-radius:9px;background:#f7f9fb;margin-bottom:7px}.rankrow.me{outline:1px solid var(--blue);background:#edf6ff}.rank{width:30px;text-align:center;font-weight:800}.rname{flex:1;font-weight:700}.rname small{display:block;color:var(--muted);font-weight:400}.rpts{font-weight:800;color:var(--dark)}footer{text-align:center;color:var(--muted);font-size:12px;padding:0 14px 24px}
+@media(max-width:480px){.user{max-width:105px}.stats{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
 <body>
+<header><button class="hbtn" id="back">◀ Accueil</button><h1>Quizz procédures</h1><button class="hbtn user hide" id="userBtn"></button></header>
+<main>
+<section id="fatal" class="card hide"><h2>Impossible de charger les quizz</h2><div id="fatalText" class="notice"></div></section>
 
-<header class="qz-header">
-  <button class="btn-back" id="btnBack" type="button">◀ Accueil</button>
-  <h1>Quizz procédures</h1>
-</header>
+<section id="pseudoScreen" class="hide">
+ <div class="card"><h2>Choisissez votre pseudo</h2><p class="sub">Utilisez un pseudo, pas votre nom. Il sera conservé uniquement sur cet appareil pour vos points et badges.</p>
+ <label for="pseudo">Pseudo</label><input id="pseudo" maxlength="14" placeholder="Ex. LANCE-42" autocomplete="off"><div id="avatars" class="avatars"></div><div id="pseudoErr" class="error hide"></div><button id="savePseudo" class="primary">Valider</button></div>
+</section>
 
-<main class="qz-main">
+<section id="homeScreen" class="hide">
+ <div class="tabs"><button id="quizTab" class="tab on">🎯 Quizz</button><button id="rankTab" class="tab">🏆 Classement local</button></div>
+ <div id="quizPane">
+  <div class="card"><h2>Vos résultats</h2><div class="stats"><div class="stat"><b id="totalPts">0</b><span>points</span></div><div class="stat"><b id="totalQuiz">0</b><span>quizz</span></div><div class="stat"><b id="average">-</b><span>réussite</span></div></div></div>
+  <div class="card"><h2>Nouveau quizz</h2><p class="sub">Choisissez un thème, puis une procédure précise ou toutes les procédures du thème.</p><div id="themes" class="themes"></div>
+   <div id="procedureBox" class="formrow hide" style="margin-top:14px"><label for="procedure">Procédure</label><select id="procedure"></select></div>
+   <div id="loadStatus" class="loading hide"><span class="spin"></span><span>Chargement de la banque…</span></div>
+   <button id="start" class="primary" disabled>Commencer le quizz</button>
+  </div>
+  <div class="card"><h2>Barème</h2><p class="sub" style="margin:0">10 points par bonne réponse, +5 à partir de 3 bonnes réponses consécutives, et +30 pour un sans-faute.</p></div>
+ </div>
+ <div id="rankPane" class="hide"><div class="card"><h2>Classement de cet appareil</h2><p class="sub">Ce classement reste local au téléphone ou à l'ordinateur utilisé.</p><div id="ranking"></div></div></div>
+</section>
 
-  <!-- ÉCRAN 1 : choix du thème -->
-  <section id="ecranAccueil">
-    <div class="qz-card">
-      <h2>Testez vos connaissances</h2>
-      <p class="sub">10 questions tirées au hasard dans la banque. Chaque correction renvoie vers la référence exacte de la procédure.</p>
-      <div class="themes" id="themes"></div>
-      <button class="primary" id="btnStart" type="button" disabled>Commencer le quizz</button>
-    </div>
-    <div class="qz-card">
-      <h2>Comment ça marche</h2>
-      <p class="sub" style="margin:0">
-        Les 10 questions et l'ordre des réponses sont tirés aléatoirement à chaque tentative :
-        deux quizz ne se ressemblent jamais. Aucun réseau n'est nécessaire, le quizz fonctionne hors ligne.
-      </p>
-    </div>
-  </section>
+<section id="quizScreen" class="hide">
+ <div class="bar"><i id="progress"></i></div><div class="meta"><span id="counter"></span><span id="liveScore"></span></div>
+ <div class="card"><span id="qtag" class="tag"></span><p id="qtext" class="question"></p><div id="answers" class="answers"></div><div id="explain" class="explain hide"></div></div>
+ <button id="next" class="primary hide">Question suivante</button>
+</section>
 
-  <!-- ÉCRAN 2 : questions -->
-  <section id="ecranQuizz" class="hide">
-    <div class="bar"><i id="prog"></i></div>
-    <div class="meta"><span id="compteur"></span><span id="scoreLive"></span></div>
-    <div class="qz-card">
-      <span class="tag" id="tagDoc"></span>
-      <p class="q" id="question"></p>
-      <div class="opts" id="opts"></div>
-      <div class="expl hide" id="expl"></div>
-    </div>
-    <button class="primary hide" id="btnNext" type="button">Question suivante</button>
-  </section>
-
-  <!-- ÉCRAN 3 : résultat -->
-  <section id="ecranFin" class="hide">
-    <div class="qz-card">
-      <div class="score">
-        <div class="n" id="finNote"></div>
-        <div class="t" id="finTexte"></div>
-      </div>
-    </div>
-    <div class="qz-card">
-      <h2>Détail des réponses</h2>
-      <div class="recap" id="recap"></div>
-    </div>
-    <button class="primary" id="btnRetry" type="button">Nouveau quizz (même thème)</button>
-    <button class="ghost" id="btnHome" type="button">Changer de thème</button>
-    <a class="ghost" href="index.html">Retour à l'accueil</a>
-  </section>
-
+<section id="resultScreen" class="hide"><div class="card result"><div id="resultNote" class="big"></div><div id="resultText" class="sub"></div><div id="resultPoints" class="points"></div></div><div class="card"><h2>Détail</h2><div id="recap" class="recap"></div></div><button id="again" class="primary">Nouveau quizz, même sélection</button><button id="menu" class="secondary">Changer de thème ou procédure</button></section>
 </main>
-
-<footer class="qz-footer">Westinghouse Electrique France – usage interne · Seules les procédures approuvées font foi.</footer>
-
+<footer>Usage interne. Seules les procédures approuvées font foi.</footer>
 <script>
-/* ============================================================
-   QUIZZ PROCÉDURES PIGVS
-   Banque : quizz-questions.json
-   { id, theme:"ETV"|"Lançage"|"Commun", doc, ref, q, o:[4 réponses], a, e }
-   NB : dans le JSON la bonne réponse est toujours en position 0 (a=0),
-        l'ordre des propositions est mélangé à l'affichage.
-   ============================================================ */
-
-const NB_QUESTIONS = 10;
-const THEMES = [
-  {id:'ETV',     lib:'ETV',         desc:'Examens télévisuels – procédures ETV', cls:'',    ini:'ETV'},
-  {id:'Lançage', lib:'Lançage',     desc:'Lançage et GIBR – procédures SLA',     cls:'sla', ini:'SLA'},
-  {id:'Commun',  lib:'Commun',      desc:'Besoins et organisation – PIGVS',      cls:'com', ini:'PIG'},
-  {id:'*',       lib:'Indifférent', desc:'Toutes procédures confondues',         cls:'all', ini:'ALL'}
-];
-
-let banque = [], theme = null, tirage = [], idx = 0, score = 0, reponses = [], verrou = false;
-const $ = id => document.getElementById(id);
-
-/* ---------- chargement de la banque ---------- */
-fetch('quizz-questions.json?v=' + Date.now())
-  .then(r => { if(!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d => { banque = d; initThemes(); })
-  .catch(e => {
-    $('themes').innerHTML =
-      '<div class="expl ko">Impossible de charger la banque de questions (' + e.message + ').<br>' +
-      'Vérifiez la présence du fichier <b>quizz-questions.json</b>.</div>';
-  });
-
-/* ---------- écran 1 ---------- */
-function initThemes(){
-  $('themes').innerHTML = THEMES.map(t => {
-    const n = t.id === '*' ? banque.length : banque.filter(q => q.theme === t.id).length;
-    return '<button class="theme" type="button" data-t="' + t.id + '">' +
-             '<span class="ico ' + t.cls + '">' + t.ini + '</span>' +
-             '<span><b>' + t.lib + '</b><span>' + t.desc + ' · ' + n + ' questions</span></span>' +
-           '</button>';
-  }).join('');
-  document.querySelectorAll('.theme').forEach(b => b.onclick = () => {
-    document.querySelectorAll('.theme').forEach(x => x.classList.remove('on'));
-    b.classList.add('on');
-    theme = b.dataset.t;
-    $('btnStart').disabled = false;
-  });
+'use strict';
+const INDEX_URL='Data-quizz/index.json';
+const NB_QUESTIONS=10, STORE='pigvs_quizz_v2', AVATARS=['🔧','⚙️','🛠️','🔩','📡','🚿','🧰','⚡','🦺','🎯'];
+const THEME_INFO={ETV:{label:'ETV',desc:'Examens télévisuels',icon:'ETV'},Lancage:{label:'Lançage',desc:'Procédures SLA',icon:'SLA'},PIGVS:{label:'Commun',desc:'Documents PIGVS',icon:'PIG'},ALL:{label:'Indifférent',desc:'Toutes les procédures',icon:'ALL'}};
+let manifest={},bank=[],selectedTheme='',selectedProcedure='ALL',questions=[],qpos=0,good=0,points=0,streak=0,answersLog=[],locked=false,avatar=AVATARS[0],db=loadDb(),me=null;
+const $=id=>document.getElementById(id);
+function loadDb(){try{return JSON.parse(localStorage.getItem(STORE))||{pseudo:null,players:{}}}catch(e){return{pseudo:null,players:{}}}}
+function saveDb(){localStorage.setItem(STORE,JSON.stringify(db))}
+function player(name){if(!db.players[name])db.players[name]={pseudo:name,avatar,pts:0,quiz:0,good:0,total:0,best:0};return db.players[name]}
+function show(n){['pseudoScreen','homeScreen','quizScreen','resultScreen'].forEach(id=>$(id).classList.toggle('hide',id!==n));$('userBtn').classList.toggle('hide',!me||n==='pseudoScreen');scrollTo(0,0)}
+function fail(msg){['pseudoScreen','homeScreen','quizScreen','resultScreen'].forEach(id=>$(id).classList.add('hide'));$('fatal').classList.remove('hide');$('fatalText').innerHTML=msg}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function shuffled(a){a=a.slice();for(let i=a.length-1;i;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function entriesFor(theme){if(theme==='ALL')return Object.keys(THEME_INFO).filter(k=>k!=='ALL').flatMap(k=>manifest[k]||[]);return manifest[theme]||[]}
+function normalizePath(path){path=String(path||'').replace(/\\/g,'/').replace(/^\.\//,'');if(path.toLowerCase().startsWith('data-quizz/'))return path;return 'Data-quizz/'+path.replace(/^\//,'')}
+async function getJson(url){const r=await fetch(url+'?v='+Date.now());if(!r.ok)throw Error(url+' : HTTP '+r.status);return r.json()}
+async function boot(){
+ try{manifest=await getJson(INDEX_URL);validateManifest();renderThemes();renderAvatars();if(db.pseudo){me=player(db.pseudo);avatar=me.avatar||avatar;openHome()}else show('pseudoScreen')}
+ catch(e){fail('<b>'+esc(e.message)+'</b><br>Vérifiez la présence de <code>'+INDEX_URL+'</code>, les noms de dossiers et les chemins du fichier index.')}
 }
-
-/* ---------- utilitaires ---------- */
-const melange = a => { a = a.slice();
-  for(let i = a.length - 1; i > 0; i--){ const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
-  return a; };
-
-function tirerQuestions(){
-  const pool = theme === '*' ? banque : banque.filter(q => q.theme === theme);
-  return melange(pool).slice(0, Math.min(NB_QUESTIONS, pool.length)).map(q => {
-    const bonne = q.o[q.a];
-    const opts = melange(q.o);
-    return Object.assign({}, q, {opts: opts, bonneIdx: opts.indexOf(bonne)});
-  });
-}
-
-function ecran(n){
-  $('ecranAccueil').classList.toggle('hide', n !== 1);
-  $('ecranQuizz').classList.toggle('hide', n !== 2);
-  $('ecranFin').classList.toggle('hide', n !== 3);
-  window.scrollTo(0, 0);
-}
-
-/* ---------- déroulé ---------- */
-function demarrer(){
-  tirage = tirerQuestions(); idx = 0; score = 0; reponses = [];
-  ecran(2); afficher();
-}
-
-function afficher(){
-  verrou = false;
-  const q = tirage[idx];
-  $('prog').style.width = (idx / tirage.length * 100) + '%';
-  $('compteur').textContent = 'Question ' + (idx + 1) + ' / ' + tirage.length;
-  $('scoreLive').textContent = 'Score : ' + score;
-  $('tagDoc').textContent = q.theme + ' · ' + q.doc + ' ' + q.ref;
-  $('question').textContent = q.q;
-  $('expl').className = 'expl hide';
-  $('btnNext').classList.add('hide');
-  $('opts').innerHTML = q.opts.map((o, i) =>
-      '<button class="opt" type="button" data-i="' + i + '"><span class="l">' +
-      'ABCD'[i] + '</span><span>' + o + '</span></button>').join('');
-  document.querySelectorAll('.opt').forEach(b => b.onclick = () => repondre(+b.dataset.i));
-}
-
-function repondre(choix){
-  if(verrou) return; verrou = true;
-  const q = tirage[idx], juste = choix === q.bonneIdx;
-  if(juste) score++;
-  reponses.push({q:q, choix:choix, juste:juste});
-
-  document.querySelectorAll('.opt').forEach(b => {
-    const i = +b.dataset.i; b.disabled = true;
-    if(i === q.bonneIdx) b.classList.add('ok');
-    else if(i === choix) b.classList.add('ko');
-  });
-
-  const e = $('expl');
-  e.className = 'expl ' + (juste ? 'ok' : 'ko');
-  e.innerHTML = '<b>' + (juste ? '✔ Bonne réponse' : '✘ Réponse incorrecte') + '</b>' + q.e +
-                '<span class="src">Source : ' + q.doc + ' – ' + q.ref + '</span>';
-
-  $('scoreLive').textContent = 'Score : ' + score;
-  $('prog').style.width = ((idx + 1) / tirage.length * 100) + '%';
-  const b = $('btnNext');
-  b.textContent = (idx === tirage.length - 1) ? 'Voir mon résultat' : 'Question suivante';
-  b.classList.remove('hide');
-}
-
-function suivante(){
-  idx++;
-  if(idx < tirage.length) afficher(); else terminer();
-}
-
-function terminer(){
-  const n = tirage.length, pct = Math.round(score / n * 100);
-  const el = $('finNote');
-  el.textContent = score + '/' + n;
-  el.className = 'n ' + (pct >= 80 ? 'good' : pct < 50 ? 'bad' : '');
-  $('finTexte').textContent =
-      pct >= 80 ? 'Très bon niveau — connaissances maîtrisées.'
-    : pct >= 50 ? 'Niveau correct — quelques points à revoir ci-dessous.'
-    : 'Relisez les procédures concernées avant intervention.';
-
-  $('recap').innerHTML = reponses.map((r, i) =>
-    '<div class="ritem ' + (r.juste ? '' : 'ko') + '">' +
-      '<span class="st">' + (r.juste ? '✔' : '✘') + '</span>' +
-      '<span>' + (i + 1) + '. ' + r.q.q +
-        '<small>' + (r.juste ? '' : 'Bonne réponse : ' + r.q.opts[r.q.bonneIdx] + ' — ') +
-        r.q.doc + ' ' + r.q.ref + '</small>' +
-      '</span>' +
-    '</div>').join('');
-
-  ecran(3);
-  envoyerResultat(pct);
-}
-
-/* ---------- remontée facultative du résultat (Power Automate) ----------
-   Décommentez et renseignez l'URL du trigger HTTP pour historiser les scores.
-   Mode auto-évaluation : aucun nom n'est transmis par défaut.            */
-function envoyerResultat(pct){
-  /*
-  const URL_FLOW = "https://prod-XX.westeurope.logic.azure.com:443/workflows/...";
-  fetch(URL_FLOW, {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({
-      theme: theme === '*' ? 'Indifférent' : theme,
-      score: score, total: tirage.length, pourcentage: pct,
-      date: new Date().toISOString(),
-      questions: reponses.map(r => ({id:r.q.id, juste:r.juste}))
-    })
-  }).catch(function(){});
-  */
-}
-
-/* ---------- navigation ---------- */
-function quizzEnCours(){
-  return !$('ecranQuizz').classList.contains('hide') && idx >= 0 && tirage.length > 0;
-}
-
-$('btnStart').onclick = demarrer;
-$('btnNext').onclick  = suivante;
-$('btnRetry').onclick = demarrer;
-$('btnHome').onclick  = function(){ ecran(1); };
-
-/* Flèche retour : toujours vers la page d'accueil de la webapp */
-$('btnBack').onclick = function(){
-  if(quizzEnCours() && !confirm('Quitter le quizz en cours ? Votre progression sera perdue.')) return;
-  window.location.href = 'index.html';
-};
-
-/* Bouton retour physique Android : même comportement */
-history.pushState({qz:1}, '');
-window.addEventListener('popstate', function(){
-  if(quizzEnCours() && !confirm('Quitter le quizz en cours ? Votre progression sera perdue.')){
-    history.pushState({qz:1}, '');
-    return;
-  }
-  window.location.href = 'index.html';
-});
-
-/* Service worker (PWA) */
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('service-worker.js').catch(function(){});
-  });
-}
+function validateManifest(){if(!manifest||typeof manifest!=='object')throw Error('Le fichier index.json est invalide.');['ETV','Lancage','PIGVS'].forEach(k=>{if(!Array.isArray(manifest[k]))manifest[k]=[]});if(!entriesFor('ALL').length)throw Error('Aucune procédure n’est déclarée dans index.json.')}
+function renderAvatars(){$('avatars').innerHTML=AVATARS.map((a,i)=>'<button class="avatar '+(i===0?'on':'')+'" data-a="'+a+'">'+a+'</button>').join('');document.querySelectorAll('.avatar').forEach(b=>b.onclick=()=>{document.querySelectorAll('.avatar').forEach(x=>x.classList.remove('on'));b.classList.add('on');avatar=b.dataset.a})}
+$('savePseudo').onclick=()=>{const p=$('pseudo').value.trim().replace(/\s+/g,' ');if(p.length<3||p.length>14){$('pseudoErr').textContent='Le pseudo doit contenir de 3 à 14 caractères.';$('pseudoErr').classList.remove('hide');return}if(!/^[A-Za-z0-9À-ÿ _-]+$/.test(p)){$('pseudoErr').textContent='Utilisez uniquement lettres, chiffres, espace, tiret ou underscore.';$('pseudoErr').classList.remove('hide');return}$('pseudoErr').classList.add('hide');db.pseudo=p;me=player(p);me.avatar=avatar;saveDb();openHome()};
+function openHome(){updateStats();$('userBtn').textContent=(me.avatar||'🔧')+' '+me.pseudo;show('homeScreen')}
+function updateStats(){$('totalPts').textContent=me.pts;$('totalQuiz').textContent=me.quiz;$('average').textContent=me.total?Math.round(me.good/me.total*100)+'%':'-'}
+function count(theme){return entriesFor(theme).reduce((s,p)=>s+Number(p.nbQuestions||0),0)}
+function renderThemes(){const order=['ETV','Lancage','PIGVS','ALL'];$('themes').innerHTML=order.map(k=>{const t=THEME_INFO[k];return '<button class="theme" data-theme="'+k+'"><span class="ico">'+t.icon+'</span><span><b>'+t.label+'</b><small>'+t.desc+' · '+count(k)+' questions déclarées</small></span></button>'}).join('');document.querySelectorAll('.theme').forEach(b=>b.onclick=()=>chooseTheme(b.dataset.theme,b))}
+function chooseTheme(k,b){selectedTheme=k;selectedProcedure='ALL';bank=[];document.querySelectorAll('.theme').forEach(x=>x.classList.remove('on'));b.classList.add('on');const list=entriesFor(k);$('procedure').innerHTML='<option value="ALL">Toutes les procédures ('+list.length+')</option>'+list.map((p,i)=>'<option value="'+i+'">'+esc((p.description?p.description+' - ':'')+p.nom+' '+(p.version||''))+' ('+(p.nbQuestions||'?')+')</option>').join('');$('procedureBox').classList.remove('hide');$('start').disabled=false}
+$('procedure').onchange=()=>{selectedProcedure=$('procedure').value;bank=[]};
+async function loadSelection(){const all=entriesFor(selectedTheme),chosen=selectedProcedure==='ALL'?all:[all[Number(selectedProcedure)]];if(!chosen.length)throw Error('Aucune procédure disponible pour cette sélection.');$('loadStatus').classList.remove('hide');$('start').disabled=true;try{const files=await Promise.all(chosen.map(p=>getJson(normalizePath(p.fichier))));const merged=files.flat();merged.forEach((q,i)=>{if(!q||!Array.isArray(q.o)||q.o.length<2||!Number.isInteger(q.a)||q.a<0||q.a>=q.o.length)throw Error('Question invalide dans '+chosen.map(x=>x.nom).join(', ')+' (position '+(i+1)+').')});bank=merged;if(bank.length<NB_QUESTIONS)throw Error('La sélection ne contient que '+bank.length+' questions, il en faut au moins '+NB_QUESTIONS+'.');return bank}finally{$('loadStatus').classList.add('hide');$('start').disabled=false}}
+$('start').onclick=async()=>{try{await loadSelection();startQuiz()}catch(e){alert('Chargement impossible : '+e.message)}};
+function startQuiz(){questions=shuffled(bank).slice(0,NB_QUESTIONS).map(q=>{const correct=q.o[q.a],opts=shuffled(q.o);return Object.assign({},q,{opts,correctIndex:opts.indexOf(correct)})});qpos=good=points=streak=0;answersLog=[];show('quizScreen');renderQuestion()}
+function renderQuestion(){locked=false;const q=questions[qpos];$('progress').style.width=(qpos/questions.length*100)+'%';$('counter').textContent='Question '+(qpos+1)+' / '+questions.length;live();$('qtag').textContent=(q.theme||selectedTheme)+' · '+(q.doc||'')+' '+(q.ref||'');$('qtext').textContent=q.q;$('explain').className='explain hide';$('next').classList.add('hide');$('answers').innerHTML=q.opts.map((o,i)=>'<button class="answer" data-i="'+i+'"><span class="letter">'+'ABCD'[i]+'</span><span>'+esc(o)+'</span></button>').join('');document.querySelectorAll('.answer').forEach(b=>b.onclick=()=>reply(Number(b.dataset.i)))}
+function live(){$('liveScore').innerHTML=points+' pts'+(streak>=3?' <span class="streak">🔥 '+streak+'</span>':'')}
+function reply(choice){if(locked)return;locked=true;const q=questions[qpos],ok=choice===q.correctIndex;let gain=0;if(ok){good++;streak++;gain=10+(streak>=3?5:0);points+=gain}else streak=0;answersLog.push({q,choice,ok});document.querySelectorAll('.answer').forEach(b=>{const i=Number(b.dataset.i);b.disabled=true;if(i===q.correctIndex)b.classList.add('ok');else if(i===choice)b.classList.add('ko')});const e=$('explain');e.className='explain '+(ok?'ok':'ko');e.innerHTML=(ok?'<span class="gain">+'+gain+' pts</span>':'')+'<b>'+(ok?'✔ Bonne réponse':'✘ Réponse incorrecte')+'</b><br>'+esc(q.e||'')+'<span class="source">Source : '+esc(q.doc||'')+' - '+esc(q.ref||'')+'</span>';live();$('progress').style.width=((qpos+1)/questions.length*100)+'%';$('next').textContent=qpos===questions.length-1?'Voir le résultat':'Question suivante';$('next').classList.remove('hide')}
+$('next').onclick=()=>{qpos++;if(qpos<questions.length)renderQuestion();else finish()};
+function finish(){const perfect=good===questions.length;if(perfect)points+=30;me.pts+=points;me.quiz++;me.good+=good;me.total+=questions.length;me.best=Math.max(me.best||0,points);saveDb();$('resultNote').textContent=good+'/'+questions.length;$('resultText').textContent=good>=8?'Très bon niveau - connaissances maîtrisées.':good>=5?'Niveau correct - quelques points sont à revoir.':'Relisez les procédures concernées avant intervention.';$('resultPoints').textContent='+'+points+' points'+(perfect?' · sans-faute 🎯':'');$('recap').innerHTML=answersLog.map((r,i)=>'<div class="item '+(r.ok?'':'ko')+'"><b>'+(r.ok?'✔':'✘')+' '+(i+1)+'. '+esc(r.q.q)+'</b><small>'+(r.ok?'':'Bonne réponse : '+esc(r.q.opts[r.q.correctIndex])+' · ')+esc(r.q.doc||'')+' '+esc(r.q.ref||'')+'</small></div>').join('');show('resultScreen')}
+$('again').onclick=()=>startQuiz();$('menu').onclick=()=>openHome();
+$('quizTab').onclick=()=>{$('quizTab').classList.add('on');$('rankTab').classList.remove('on');$('quizPane').classList.remove('hide');$('rankPane').classList.add('hide')};$('rankTab').onclick=()=>{$('rankTab').classList.add('on');$('quizTab').classList.remove('on');$('rankPane').classList.remove('hide');$('quizPane').classList.add('hide');renderRanking()};
+function renderRanking(){const rows=Object.values(db.players).sort((a,b)=>b.pts-a.pts||b.quiz-a.quiz);$('ranking').innerHTML=rows.length?rows.map((p,i)=>'<div class="rankrow '+(p.pseudo===me.pseudo?'me':'')+'"><span class="rank">'+(i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1)+'</span><span>'+(p.avatar||'🔧')+'</span><span class="rname">'+esc(p.pseudo)+'<small>'+p.quiz+' quizz · '+(p.total?Math.round(p.good/p.total*100):0)+' %</small></span><span class="rpts">'+p.pts+' pts</span></div>').join(''):'<p class="sub">Aucun résultat.</p>'}
+$('userBtn').onclick=()=>{$('pseudo').value=db.pseudo||'';show('pseudoScreen')};
+$('back').onclick=()=>{if(!$('quizScreen').classList.contains('hide')&&!confirm('Quitter le quizz en cours ?'))return;location.href='index.html'};
+if('serviceWorker'in navigator)addEventListener('load',()=>navigator.serviceWorker.register('service-worker.js').catch(()=>{}));
+boot();
 </script>
 </body>
 </html>

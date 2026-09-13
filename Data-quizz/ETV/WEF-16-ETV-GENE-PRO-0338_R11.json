@@ -1,0 +1,737 @@
+[
+  {
+    "id": "ETV-01",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§1",
+    "q": "Quel est l'objet de la procédure WEF-16-ETV-GENE-PRO-0338 ?",
+    "o": [
+      "Le mode opératoire des examens télévisuels inter-faisceaux de la partie secondaire des GV",
+      "Le nettoyage haute pression de la plaque tubulaire",
+      "La maintenance préventive des pompes HP",
+      "Le contrôle radiochimique de l'eau de lançage"
+    ],
+    "a": 0,
+    "e": "Le document présente le mode opératoire à mettre en œuvre lors des examens télévisuels inter-faisceaux de la partie secondaire des générateurs de vapeur."
+  },
+  {
+    "id": "ETV-02",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§3 Glossaire",
+    "q": "Que signifie l'acronyme SPICE ?",
+    "o": [
+      "Support Plate Inspection for Clogging Examination",
+      "Steam Plate Inspection Camera Equipment",
+      "Secondary Pipe Inspection Control Equipment",
+      "Sludge Pressure Injection Cleaning Equipment"
+    ],
+    "a": 0,
+    "e": "SPICE : Support Plate Inspection for Clogging Examination (glossaire §3)."
+  },
+  {
+    "id": "ETV-03",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§3 Glossaire",
+    "q": "Que signifie CAVALRI ?",
+    "o": [
+      "Central Audio and Video Access Link for Remote Inspection",
+      "Camera Vision And Live Recording Interface",
+      "Control And Video Acquisition Link for Robot Inspection",
+      "Central Acquisition Video Assisted Live Remote Imaging"
+    ],
+    "a": 0,
+    "e": "CAVALRI : Central Audio and Video Access Link for Remote Inspection."
+  },
+  {
+    "id": "ETV-04",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§6",
+    "q": "En combien de sous-ensembles l'ensemble robot SPICE est-il décomposé ?",
+    "o": [
+      "5",
+      "3",
+      "4",
+      "7"
+    ],
+    "a": 0,
+    "e": "5 sous-ensembles : l'interface avec le GV, le bloc principal, le galet d'entrainement sabre, la bobine sabre, la tête de guide et ses allonges."
+  },
+  {
+    "id": "ETV-05",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.1.1",
+    "q": "Quel type de sabre est utilisé pour l'inspection de la plaque tubulaire (PT) ?",
+    "o": [
+      "Le sabre axial avec déflecteur rigide",
+      "Le sabre 20°",
+      "Le sabre PE5",
+      "Le sabre articulé"
+    ],
+    "a": 0,
+    "e": "Pour la PT, on utilise le sabre axial avec déflecteur rigide (§8.1.1)."
+  },
+  {
+    "id": "ETV-06",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.1.1",
+    "q": "Quel sabre est utilisé pour l'inspection de la PE1 ?",
+    "o": [
+      "Le sabre 20°",
+      "Le sabre axial",
+      "Le sabre PE5",
+      "Le sabre droit court"
+    ],
+    "a": 0,
+    "e": "La PE1 s'inspecte avec le sabre 20° (déflecteur rigide ou béquillable selon le GV)."
+  },
+  {
+    "id": "ETV-07",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.1.1",
+    "q": "Quel matériel est utilisé pour l'inspection des PE4 sur GV 56F / 58F ?",
+    "o": [
+      "Le sabre PE5 avec déflecteur béquillable",
+      "Le sabre axial avec déflecteur rigide",
+      "Le sabre 20° avec déflecteur rigide",
+      "Aucun sabre, uniquement la perche"
+    ],
+    "a": 0,
+    "e": "Pour les PE4 (56F/58F), le tableau §8.1.1 impose le sabre PE5 avec déflecteur béquillable."
+  },
+  {
+    "id": "ETV-08",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.1.2",
+    "q": "Dans quelles conditions peut-on utiliser un sabre ou un déflecteur alternatif ?",
+    "o": [
+      "En mode dégradé, sous FNC",
+      "Librement, au choix du pilote",
+      "Uniquement avec l'accord verbal du CNPE",
+      "Jamais, aucune alternative n'est prévue"
+    ],
+    "a": 0,
+    "e": "Les configurations alternatives (sabre axial, déflecteur articulé) ne sont admises qu'en mode dégradé sous FNC (§8.1.2)."
+  },
+  {
+    "id": "ETV-09",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.1.3",
+    "q": "Quelle est la particularité de l'adaptateur Type 4 ?",
+    "o": [
+      "Les vis de bridage sont soudées sur l'interface et il n'y a pas de pion de centrage",
+      "Il se monte sans aucune vis",
+      "Il nécessite quatre pions de centrage",
+      "Il s'installe uniquement sur les TP des GV 51B"
+    ],
+    "a": 0,
+    "e": "L'adaptateur Type 4 s'installe uniquement sur les TO supérieurs du GV 68/19 ; les vis de bridage sont soudées et il n'y a pas de pion de centrage."
+  },
+  {
+    "id": "ETV-10",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.1.3",
+    "q": "Sur quels GV l'adaptateur Type 2 s'installe-t-il ?",
+    "o": [
+      "Sur les TP des GV 51B / 51BR et sur GV 74/19",
+      "Sur tous les GV 1300 MWe",
+      "Uniquement sur les TO du 68/19",
+      "Sur les GV 56F et 58F"
+    ],
+    "a": 0,
+    "e": "Cet adaptateur s'installe uniquement sur les TP GV 51B / 51BR et sur GV 74/19."
+  },
+  {
+    "id": "ETV-11",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.2",
+    "q": "Quel outil est utilisé pour serrer les 2 vis de bridage de l'interface sur la bride GV ?",
+    "o": [
+      "Une clé Allen de 6",
+      "Une clé plate de 10",
+      "Une clé dynamométrique réglée à 30 N.m",
+      "Un tournevis cruciforme"
+    ],
+    "a": 0,
+    "e": "Le serrage des 2 vis de bridage se fait à l'aide d'une clé Allen de 6, quel que soit le type d'adaptateur."
+  },
+  {
+    "id": "ETV-12",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.2",
+    "q": "Comment doit être positionné le détrompeur lors de la mise en place de l'interface ?",
+    "o": [
+      "En haut à droite du trou de la bride GV",
+      "En bas à gauche du trou de la bride GV",
+      "Face au ru central",
+      "Indifféremment, il n'est pas orienté"
+    ],
+    "a": 0,
+    "e": "L'interface se positionne de telle façon que le détrompeur soit en haut à droite du trou de la bride GV."
+  },
+  {
+    "id": "ETV-13",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.2",
+    "q": "Quelle action sensible est associée au montage des vis de l'adaptateur ?",
+    "o": [
+      "Contrôle croisé : s'assurer d'avoir engagé la totalité du filetage de la vis dans la platine",
+      "Autocontrôle du couple au moyen d'une clé dynamométrique",
+      "Contrôle technique par le client EDF",
+      "Aucune, c'est une action standard"
+    ],
+    "a": 0,
+    "e": "Au montage de la vis, une action sensible avec contrôle croisé impose de vérifier que la totalité du filetage est engagée (partie non filetée prisonnière du taraudage)."
+  },
+  {
+    "id": "ETV-14",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.4.1",
+    "q": "Combien d'allonges guides longs faut-il insérer sur un GV 1300 MWe ?",
+    "o": [
+      "4",
+      "3",
+      "11",
+      "15"
+    ],
+    "a": 0,
+    "e": "Sur 1300 MWe : 4 allonges longues et 15 allonges courtes ; sur 900 MWe : 3 longues et 11 courtes."
+  },
+  {
+    "id": "ETV-15",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.4.1",
+    "q": "Combien d'allonges guides courts faut-il insérer sur un GV 900 MWe ?",
+    "o": [
+      "11",
+      "15",
+      "3",
+      "4"
+    ],
+    "a": 0,
+    "e": "900 MWe : 11 allonges guides courts (en plus de la tête de guide) et 3 allonges longues."
+  },
+  {
+    "id": "ETV-16",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.4.2",
+    "q": "Avec quel angle et dans quel sens présente-t-on une allonge guide pour l'insérer ?",
+    "o": [
+      "15° dans le sens anti-horaire",
+      "15° dans le sens horaire",
+      "45° dans le sens horaire",
+      "90°, sans notion de sens"
+    ],
+    "a": 0,
+    "e": "On présente l'allonge à 15° en sens anti-horaire pour faire correspondre les dentures, puis on la tourne de 15° en sens horaire pour aligner les crémaillères."
+  },
+  {
+    "id": "ETV-17",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.5.4.2",
+    "q": "Qu'est-ce qui empêche de dépasser les 15° de rotation lors de l'assemblage d'une allonge ?",
+    "o": [
+      "2 têtes de vis servant de butée mécanique",
+      "Un capteur d'angle sur l'IHM",
+      "Un ergot plastique fusible",
+      "Rien, c'est au ressenti de l'opérateur"
+    ],
+    "a": 0,
+    "e": "Note du §8.5.4.2 : 2 têtes de vis servent de butée mécanique pour ne pas tourner au-delà des 15° nécessaires."
+  },
+  {
+    "id": "ETV-18",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.1",
+    "q": "Lors de l'inspection d'une PT, dans quel sens doit se faire le mouvement du sabre ?",
+    "o": [
+      "Toujours dans un mouvement continu du haut vers le bas",
+      "Toujours du bas vers le haut",
+      "Alternativement dans les deux sens",
+      "Par à-coups, du bas vers le haut"
+    ],
+    "a": 0,
+    "e": "Sur PT le mouvement doit être continu du haut vers le bas : un mouvement du bas vers le haut présente un risque important d'endommagement."
+  },
+  {
+    "id": "ETV-19",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.1",
+    "q": "Lors de l'inspection d'une PE1, dans quel sens doit se faire le mouvement du sabre ?",
+    "o": [
+      "Du bas vers le haut",
+      "Du haut vers le bas",
+      "Indifféremment",
+      "En rotation uniquement"
+    ],
+    "a": 0,
+    "e": "En PE1, le mouvement doit se faire du bas vers le haut ; l'inverse présente un risque important d'endommagement."
+  },
+  {
+    "id": "ETV-20",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.1",
+    "q": "Que fait le contrôle-commande lorsque le sabre est sorti à plus de 20 mm ?",
+    "o": [
+      "Il limite la translation à une demi-inter-colonne en avance ou en recul",
+      "Il coupe l'alimentation des moteurs",
+      "Il déclenche une alarme sonore sans bridage",
+      "Il force le retour du sabre en position de sécurité"
+    ],
+    "a": 0,
+    "e": "Par sécurité, au-delà de 20 mm de sortie, le contrôle-commande limite la translation à une demi-inter-colonne."
+  },
+  {
+    "id": "ETV-21",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.1",
+    "q": "Dans quelle position doit se trouver le sabre lors des translations de guide ?",
+    "o": [
+      "En position de sécurité dans la tête de guide / effecteur",
+      "Sorti de 25 mm minimum",
+      "Totalement inséré dans l'inter-colonne",
+      "Bloqué par le frein bobine uniquement"
+    ],
+    "a": 0,
+    "e": "Lors des translations de guide, le sabre doit être en position de sécurité dans la tête de guide / effecteur."
+  },
+  {
+    "id": "ETV-22",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Quel est le programme d'inspection minimal d'un ETV-G IF PT ?",
+    "o": [
+      "10 inter-colonnes en boîte chaude et 5 en boîte froide",
+      "5 inter-colonnes en boîte chaude et 10 en boîte froide",
+      "10 inter-colonnes par boîte",
+      "Une inter-colonne par quart de GV"
+    ],
+    "a": 0,
+    "e": "L'ETV-G IF est à réaliser a minima sur 10 IC en boîte chaude et 5 IC en boîte froide."
+  },
+  {
+    "id": "ETV-23",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Qui rédige le programme d'inspection initial de l'ETV-G IF PT ?",
+    "o": [
+      "EDF",
+      "Westinghouse",
+      "Le chargé de travaux",
+      "L'ASN"
+    ],
+    "a": 0,
+    "e": "Le programme d'inspection initial est défini en phase de préparation, au plus tard en levée des préalables, et il est rédigé par EDF."
+  },
+  {
+    "id": "ETV-24",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "À quelle condition le programme d'inspection étendu est-il considéré comme terminé lors des inspections IF PT ?",
+    "o": [
+      "Lorsque 2 inter-colonnes consécutives ne présentent plus de boues dures",
+      "Lorsque 15 inter-colonnes ont été inspectées",
+      "Dès que la boue dure n'est plus visible sur une IC",
+      "Après accord verbal du CNPE"
+    ],
+    "a": 0,
+    "e": "Le programme est terminé lorsque 2 inter-colonnes consécutives ne présentent plus de boues dures, dans la limite des zones accessibles et qualifiées."
+  },
+  {
+    "id": "ETV-25",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Quelle est la vitesse maximale de translation lors de l'inspection ETV IF ?",
+    "o": [
+      "70 % sur l'interface",
+      "50 % sur l'interface",
+      "100 %, sans limitation",
+      "25 % sur l'interface"
+    ],
+    "a": 0,
+    "e": "L'IC est inspectée en reculant le sabre, la vitesse maximale de translation étant de 70 % sur l'interface."
+  },
+  {
+    "id": "ETV-26",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Quel critère de conformité vidéo concerne la hauteur de visualisation en ETV-G IF PT ?",
+    "o": [
+      "Une visualisation du tube environ 10 mm au-dessus de la plaque à tubes",
+      "Une visualisation à 50 mm au-dessus de la plaque",
+      "Une visée depuis la PRD",
+      "Une visualisation au niveau de la première interligne"
+    ],
+    "a": 0,
+    "e": "La conformité impose une visualisation du tube à environ 10 mm au-dessus de la plaque à tubes, ce qui correspond à la tête de sabre affleurante de la PT."
+  },
+  {
+    "id": "ETV-27",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Combien de captures vidéo par GV sont requises a minima en ETV-G IF PT ?",
+    "o": [
+      "10",
+      "5",
+      "15",
+      "20"
+    ],
+    "a": 0,
+    "e": "10 captures vidéo par GV sont requises a minima, caractéristiques de la propreté de la plaque, plus 5 captures supplémentaires dans des zones définies."
+  },
+  {
+    "id": "ETV-28",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Sur un GV 68/19, quelle zone fait l'objet des captures d'images supplémentaires ?",
+    "o": [
+      "Entre les colonnes 65 et 68 et entre les lignes 5 et 15",
+      "Entre les colonnes 51 et 54 et entre les lignes 2 et 8",
+      "Entre les colonnes 56 et 60 et entre les lignes 1 et 10",
+      "La zone cruciforme uniquement"
+    ],
+    "a": 0,
+    "e": "Pour le 68/19, les inter-tubes d'intérêt sont entre les colonnes 65 et 68 et entre les lignes 5 et 15."
+  },
+  {
+    "id": "ETV-29",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Sur un GV 51B ou 47/22, quelle zone fait l'objet des captures d'images supplémentaires ?",
+    "o": [
+      "Entre les colonnes 51 et 54 et entre les lignes 2 et 8",
+      "Entre les colonnes 65 et 68 et entre les lignes 5 et 15",
+      "Entre les colonnes 56 et 60 et entre les lignes 1 et 10",
+      "Aucune zone n'est spécifiée"
+    ],
+    "a": 0,
+    "e": "Pour les 51B et 47/22, les inter-tubes d'intérêt sont entre les colonnes 51 et 54 et entre les lignes 2 et 8."
+  },
+  {
+    "id": "ETV-30",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.2",
+    "q": "Pour les GV de remplacement 74/19 et 80F, que prévoit la procédure sur les captures supplémentaires ?",
+    "o": [
+      "Elles ne sont pas spécifiées dans les CSCT et seront à préciser en amont des chantiers",
+      "Elles sont identiques à celles du 68/19",
+      "Elles sont supprimées",
+      "Elles sont doublées"
+    ],
+    "a": 0,
+    "e": "Nota §9.2 : pour les GV de remplacement (74/19 et 80F), les captures supplémentaires ne sont pas spécifiées dans les CSCT et seront à préciser en amont des chantiers concernés."
+  },
+  {
+    "id": "ETV-31",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.3",
+    "q": "Quel est l'objectif de l'inspection ETV-IF PRD ?",
+    "o": [
+      "Visualiser la PRD et détecter la présence de corps migrants",
+      "Mesurer le colmatage des foliés",
+      "Contrôler l'état de la plaque tubulaire",
+      "Vérifier l'étanchéité des tubes"
+    ],
+    "a": 0,
+    "e": "L'ETV IF PRD a pour but de visualiser la plaque de répartition de débit et de détecter la présence de corps migrants."
+  },
+  {
+    "id": "ETV-32",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.4",
+    "q": "Que doit permettre d'apprécier l'ETV PE1 ?",
+    "o": [
+      "Le degré de colmatage des foliés, sans conduire à un calcul de colmatage",
+      "Le taux de colmatage chiffré de la plaque",
+      "L'épaisseur des dépôts sur la plaque tubulaire",
+      "Le débit résiduel dans le ru central"
+    ],
+    "a": 0,
+    "e": "L'ETV PE1 doit permettre d'apprécier le degré de colmatage des foliés ; l'inspection ne conduit pas à un calcul de colmatage."
+  },
+  {
+    "id": "ETV-33",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.4",
+    "q": "Comment est réalisée l'inspection PE1 ?",
+    "o": [
+      "Par le dessous de la plaque, sabre monté en suivant le tube 3, puis inspection en avançant",
+      "Par le dessus de la plaque, en reculant le sabre",
+      "Par le ru central, en rotation continue",
+      "Par le dessous, en reculant le sabre"
+    ],
+    "a": 0,
+    "e": "L'inspection PE1 est réalisée par le dessous : le sabre est monté au niveau de la face inférieure en suivant le tube 3, puis la plaque est inspectée en avançant le sabre."
+  },
+  {
+    "id": "ETV-34",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.4",
+    "q": "Pourquoi la vue du lobe supérieur n'est-elle pas requise en inspection PE1 ?",
+    "o": [
+      "Compte tenu des caractéristiques du sabre 20°, il est quasi-impossible de visualiser les deux lobes en même temps",
+      "Parce que le lobe supérieur n'est jamais colmaté",
+      "Parce que l'éclairage est insuffisant en partie haute",
+      "Parce que le CSCT ne le demande pas pour les 900 MWe"
+    ],
+    "a": 0,
+    "e": "La procédure précise que compte tenu des caractéristiques du sabre 20°, il est quasi-impossible de visualiser les lobes inférieur et supérieur en même temps."
+  },
+  {
+    "id": "ETV-36",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6",
+    "q": "Comment est réalisée l'inspection ETV PE5 (68/19, 55/19) ou PE4 (56F, 58F) ?",
+    "o": [
+      "Par le dessus de la plaque entretoise, foliés inspectés en reculant le sabre",
+      "Par le dessous de la plaque, en avançant le sabre",
+      "Depuis le trou de poing inférieur uniquement",
+      "Avec la perche d'inspection"
+    ],
+    "a": 0,
+    "e": "L'inspection est réalisée par le dessus de la plaque entretoise : le sabre est inséré jusqu'au dernier tube de l'IC, puis les foliés sont inspectés en reculant."
+  },
+  {
+    "id": "ETV-37",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6",
+    "q": "À quelle pression maximale doivent être réglés le kit de filtration d'air et le détendeur pour le ballon du sabre PE5 ?",
+    "o": [
+      "3 bar",
+      "2 bar",
+      "5 bar",
+      "7 bar"
+    ],
+    "a": 0,
+    "e": "Le kit de filtration d'air en amont du CAVALRI et le détendeur sur le boitier de commande doivent être réglés au maximum à 3 bar."
+  },
+  {
+    "id": "ETV-38",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6",
+    "q": "De combien le sabre PE5 doit-il être sorti au minimum pour pouvoir gonfler le ballon ?",
+    "o": [
+      "140 mm",
+      "25 mm",
+      "60 mm",
+      "20 mm"
+    ],
+    "a": 0,
+    "e": "Le sabre doit être sorti de 140 mm minimum pour pouvoir gonfler le ballon ; il ne faut jamais le rentrer dans le déflecteur si le ballon n'est pas totalement dégonflé."
+  },
+  {
+    "id": "ETV-39",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6.3",
+    "q": "Après avoir béquillé le déflecteur, à quelle valeur rentre-t-on le sabre pour faire une initialisation affleurant ?",
+    "o": [
+      "25 mm",
+      "140 mm",
+      "0 mm",
+      "60 mm"
+    ],
+    "a": 0,
+    "e": "Mode opératoire §9.6.3 : sortir le sabre de 140 mm, béquiller doucement, puis rentrer le sabre jusqu'à 25 mm et faire une initialisation affleurant."
+  },
+  {
+    "id": "ETV-40",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6.3",
+    "q": "Pourquoi ne faut-il pas effectuer de rotation du robot quand la position du déflecteur béquillé n'est connue qu'approximativement ?",
+    "o": [
+      "Le couple du moteur de rotation est très important : risque de tordre la béquille du déflecteur",
+      "Cela déclenche un arrêt d'urgence du contrôle-commande",
+      "Cela fausse l'incrustation de l'enregistrement",
+      "Cela dégonfle le ballon du sabre"
+    ],
+    "a": 0,
+    "e": "Le couple du moteur de rotation est très important : une rotation à l'aveugle risque de tordre la béquille du déflecteur, rendant le béquillage impossible."
+  },
+  {
+    "id": "ETV-41",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6.5",
+    "q": "À combien est évaluée la flèche du sabre PE5 en bout de l'IC la plus longue ?",
+    "o": [
+      "16° environ",
+      "3,9°",
+      "45°",
+      "25°"
+    ],
+    "a": 0,
+    "e": "Suite aux essais internes, la flèche du sabre est évaluée à environ 16° en bout de l'IC la plus longue ; l'angle d'insertion doit en tenir compte."
+  },
+  {
+    "id": "ETV-42",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6.5",
+    "q": "Quelle est la largeur du ru central d'un GV 68/19 selon le tableau d'aide à l'inspection PE5 ?",
+    "o": [
+      "131 mm",
+      "123 mm",
+      "141 mm",
+      "168 mm"
+    ],
+    "a": 0,
+    "e": "Tableau §9.6.5 : largeur du ru central 68/19 = 131 mm (123 mm pour 55/19, 141 mm pour 56F, 168 mm pour 58F)."
+  },
+  {
+    "id": "ETV-43",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6",
+    "q": "Combien de photos de folié sont attendues au minimum en livrable d'une inspection PE4/PE5 ?",
+    "o": [
+      "1 photo de folié par tube",
+      "1 photo par inter-colonne",
+      "10 photos par GV",
+      "5 photos par boîte"
+    ],
+    "a": 0,
+    "e": "Les livrables imposent a minima 1 photo de folié par tube, en plus du fichier vidéo et de la cartographie."
+  },
+  {
+    "id": "ETV-44",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§9.6",
+    "q": "Quelle marge est exigée entre les contours supérieurs et inférieurs sur les photos de foliés PE4/PE5 ?",
+    "o": [
+      "1 mm en taille réelle",
+      "10 mm en taille réelle",
+      "Aucune marge n'est exigée",
+      "5 mm à l'écran"
+    ],
+    "a": 0,
+    "e": "La conformité impose une visualisation des deux lobes sur la même image avec une marge de 1 mm (taille réelle) entre les contours supérieurs et inférieurs."
+  },
+  {
+    "id": "ETV-45",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§11.1",
+    "q": "En mode dégradé, quelle translation du sabre obtient-on pour un tour de manivelle ?",
+    "o": [
+      "48,5 mm",
+      "2 mm",
+      "10 mm",
+      "100 mm"
+    ],
+    "a": 0,
+    "e": "Note §11.1 : un tour de manivelle entraîne une translation du sabre dans les guides de 48,5 mm, pour un effort de l'ordre de 3 kg."
+  },
+  {
+    "id": "ETV-46",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§11.3",
+    "q": "En mode dégradé de rotation du bloc, quelle rotation obtient-on pour un tour de manivelle ?",
+    "o": [
+      "2°",
+      "15°",
+      "45°",
+      "0,5°"
+    ],
+    "a": 0,
+    "e": "Note §11.3 : un tour de manivelle a pour effet une rotation du bloc de 2°, pour un effort de l'ordre de 0,5 kg."
+  },
+  {
+    "id": "ETV-47",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§4",
+    "q": "Lequel de ces éléments N'EST PAS un prérequis à la mise en œuvre de la procédure ETV ?",
+    "o": [
+      "La présence du représentant de l'ASN en casemate",
+      "Un régime de travail radiologique valide",
+      "Des équipements déchargés",
+      "Une plaque à inspecter suffisamment sèche"
+    ],
+    "a": 0,
+    "e": "Les prérequis sont : équipements déchargés, RTR valide, vérification des conditions d'intervention, organigramme conforme, régime de consignation, plaque suffisamment sèche."
+  },
+  {
+    "id": "ETV-48",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§5",
+    "q": "Comment doit être formalisé tout dysfonctionnement d'équipement, même une panne mineure ?",
+    "o": [
+      "Par une fiche de maintenance",
+      "Par une simple information orale au chef de quart",
+      "Par une FNC systématique",
+      "Par une note interne en fin de chantier"
+    ],
+    "a": 0,
+    "e": "§5 Précautions : tout dysfonctionnement (panne même mineure, pièce manquante, défaut de colisage, risque de fiabilité détecté) est formalisé par une fiche de maintenance."
+  },
+  {
+    "id": "ETV-49",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§5",
+    "q": "Selon les précautions du §5, quelle est la priorité absolue de la prestation ?",
+    "o": [
+      "La sécurité, la sûreté nucléaire et la sécurité industrielle, avant tout autre élément",
+      "Le respect des durées contractuelles",
+      "Le nombre d'inter-colonnes inspectées par poste",
+      "La dosimétrie collective"
+    ],
+    "a": 0,
+    "e": "La sécurité et la sûreté nucléaire, les normes environnementales et la sécurité industrielle sont prioritaires ; la qualité d'exécution prime aussi sur le respect des durées contractuelles."
+  },
+  {
+    "id": "ETV-50",
+    "theme": "ETV",
+    "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
+    "ref": "§8.3 / §9",
+    "q": "Quelle vérification est réalisée avant chaque entrée et après chaque sortie d'élément, et tracée dans le journal FME ?",
+    "o": [
+      "Une vérification visio-tactile de la conformité des équipements",
+      "Une mesure dosimétrique de l'élément",
+      "Une pesée de l'équipement",
+      "Un contrôle d'étanchéité à l'air"
+    ],
+    "a": 0,
+    "e": "Une vérification visio-tactile de la conformité est réalisée avant chaque entrée ou après chaque sortie, tracée dans le journal FME ; tous les écarts sont formalisés."
+  }
+]

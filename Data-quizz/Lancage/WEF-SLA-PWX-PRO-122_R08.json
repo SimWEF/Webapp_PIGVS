@@ -1,0 +1,752 @@
+[
+  {
+    "id": "SLA-01",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§1",
+    "q": "Quel est l'objet de la procédure WEF-SLA-PWX-PRO-122 ?",
+    "o": [
+      "L'installation, l'utilisation et le repli des Groupes de lançage Intérieur Bâtiment Réacteur (GIBR)",
+      "L'inspection télévisuelle des plaques entretoises",
+      "La définition des besoins EDF pour la PIGVS",
+      "Le contrôle radiochimique des effluents"
+    ],
+    "a": 0,
+    "e": "Cette procédure présente l'installation, l'utilisation et le repli des GIBR des GV des centrales REP 900, 1300 et 1450 MWe."
+  },
+  {
+    "id": "SLA-02",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§2",
+    "q": "Quelle prestation N'EST PAS couverte par cette procédure ?",
+    "o": [
+      "L'inspection ETV des GV, qui fait appel à sa propre procédure",
+      "Le lançage de la partie basse des GV",
+      "La pesée des boues",
+      "Le repli des équipements de lançage"
+    ],
+    "a": 0,
+    "e": "La procédure concerne exclusivement les équipements de lançage et de pesée des boues ; l'inspection ETV fait appel à sa propre procédure."
+  },
+  {
+    "id": "SLA-03",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§3",
+    "q": "Que signifient les abréviations BEP et BES ?",
+    "o": [
+      "Bâche à eau propre et bâche à eau sale",
+      "Bâche d'eau primaire et bâche d'eau secondaire",
+      "Bloc eau pompe et bloc eau skid",
+      "Bâche d'effluents propres et bâche d'effluents sales"
+    ],
+    "a": 0,
+    "e": "BEP : bâche à eau propre ; BES : bâche à eau sale (§3 Abréviations)."
+  },
+  {
+    "id": "SLA-04",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§3",
+    "q": "Que signifie l'abréviation DAV ?",
+    "o": [
+      "Système Audio et Vidéo",
+      "Dispositif d'Aspiration Variable",
+      "Débit d'Alimentation Vanne",
+      "Diagramme d'Acquisition Vidéo"
+    ],
+    "a": 0,
+    "e": "DAV : Système Audio et Vidéo, permettant la communication entre le pupitre de commande et les techniciens au pied des GV."
+  },
+  {
+    "id": "SLA-05",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§7",
+    "q": "Quel est le principe de fonctionnement hydraulique du système de lançage ?",
+    "o": [
+      "Un fonctionnement en boucle fermée permettant de réutiliser l'eau filtrée",
+      "Un circuit ouvert avec rejet direct au puisard",
+      "Une alimentation continue en eau SED sans recyclage",
+      "Un circuit sous vide sans pompe"
+    ],
+    "a": 0,
+    "e": "§7 : le fonctionnement en boucle fermée du système permet de réutiliser l'eau filtrée pour poursuivre le nettoyage."
+  },
+  {
+    "id": "SLA-06",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§7",
+    "q": "Quel est le rôle du flux d'eau périphérique (JP) ?",
+    "o": [
+      "Entraîner les boues jusqu'aux têtes d'aspiration interfacées au GV",
+      "Découper les boues dures sur la plaque tubulaire",
+      "Refroidir les pompes haute pression",
+      "Remplir la bâche à eau propre"
+    ],
+    "a": 0,
+    "e": "En parallèle du circuit HP, le flux d'eau périphérique permet l'entrainement des boues jusqu'à des têtes d'aspiration interfacées au générateur de vapeur."
+  },
+  {
+    "id": "SLA-07",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.1.2",
+    "q": "Quelle valeur de résistance d'isolement est attendue, interrupteur général 001JS ouvert ?",
+    "o": [
+      "> 5 Mohms par phase",
+      "< 1 ohm par phase",
+      "> 0,5 Mohm par phase",
+      "> 2 ohms par phase"
+    ],
+    "a": 0,
+    "e": "Chaque phase doit avoir une résistance > 5 Mohms interrupteur ouvert et < 1 ohm interrupteur fermé."
+  },
+  {
+    "id": "SLA-08",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.1.2",
+    "q": "Que faire si la mesure de continuité de terre donne une résistance supérieure à 2 ohms ?",
+    "o": [
+      "Refaire la mise à la terre",
+      "Poursuivre, la valeur est acceptable",
+      "Remplacer le pupitre de commande",
+      "Baisser la tension d'alimentation"
+    ],
+    "a": 0,
+    "e": "GIBR hors tension, on mesure la continuité de terre : en cas de résistance > 2 ohms, il faut refaire la mise à la terre."
+  },
+  {
+    "id": "SLA-09",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.1.2",
+    "q": "Quelle résistance minimale est attendue entre chaque phase et entre phase et terre, disjoncteur 002JS ouvert ?",
+    "o": [
+      "> 0,5 Mohm",
+      "> 5 Mohms",
+      "> 2 ohms",
+      "< 1 ohm"
+    ],
+    "a": 0,
+    "e": "Après ouverture du disjoncteur 002JS, la résistance mesurée entre chaque phase et entre phase et terre doit être > 0,5 Mohm."
+  },
+  {
+    "id": "SLA-10",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.1.2",
+    "q": "Qui doit réaliser le branchement de l'alimentation électrique sur le pupitre de commande ?",
+    "o": [
+      "Un électricien habilité",
+      "Le chargé de travaux lançage",
+      "Un opérateur de quart",
+      "Le représentant EDF"
+    ],
+    "a": 0,
+    "e": "La procédure impose de faire appel à un électricien habilité pour le branchement et la mise sous tension via le sectionneur principal."
+  },
+  {
+    "id": "SLA-11",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.1",
+    "q": "Quel équipement permet de gérer les consignes des moteurs de lances et les signaux du DAV ?",
+    "o": [
+      "L'Enclosure box",
+      "L'Inline Filter",
+      "Le module de régulation HP",
+      "La bâche à eau propre"
+    ],
+    "a": 0,
+    "e": "L'enclosure box est l'interface électronique permettant le pilotage des lances et du système DAV."
+  },
+  {
+    "id": "SLA-12",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.2",
+    "q": "Avec quel type de câble l'Enclosure box est-elle reliée au pupitre de commande ?",
+    "o": [
+      "Un câble RJ45",
+      "Un câble coaxial",
+      "Une fibre optique",
+      "Un câble USB"
+    ],
+    "a": 0,
+    "e": "L'Enclosure box est reliée au pupitre de commande avec un câble RJ45, de même que la boîte I/O sur l'Enclosure box."
+  },
+  {
+    "id": "SLA-13",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.3",
+    "q": "Où doit être installé l'Inline Filter ?",
+    "o": [
+      "En casemate GV, au plus proche du GV",
+      "Au pied du module de régulation HP",
+      "Sur la bâche à eau propre",
+      "À la sortie de la pompe à membrane"
+    ],
+    "a": 0,
+    "e": "IMPORTANT §10.1.2.3 : l'inline filter doit être installé en casemate GV, au plus proche du GV. Il peut être désolidarisé du T HP pour faciliter son accès."
+  },
+  {
+    "id": "SLA-14",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.3",
+    "q": "Quel est le diamètre des tuyaux de lançage HP tirés du module de régulation jusqu'au GV ?",
+    "o": [
+      "1 pouce",
+      "3/4 de pouce",
+      "1 pouce 1/2",
+      "2 pouces"
+    ],
+    "a": 0,
+    "e": "Les tuyaux HP 1'' vont du module de régulation HP au GV ; les tuyaux HP des lances raccordés sur le T HP sont en 3/4''."
+  },
+  {
+    "id": "SLA-15",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.3",
+    "q": "Quel est le diamètre des tuyaux de flux d'eau périphérique tirés depuis la bâche à eau propre ?",
+    "o": [
+      "2 pouces",
+      "1 pouce",
+      "1 pouce 1/2",
+      "3/4 de pouce"
+    ],
+    "a": 0,
+    "e": "Les tuyaux de flux d'eau périphérique tirés de la BEP jusqu'au GV sont en 1''1/2 ; les tuyaux des têtes de flux périphérique sont en 1''."
+  },
+  {
+    "id": "SLA-16",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.4",
+    "q": "Que faut-il vérifier avant toute action sur les tuyaux HP ?",
+    "o": [
+      "Que le circuit HP est arrêté et en sécurité",
+      "Que les pompes à membrane sont en marche",
+      "Que la BEP est pleine",
+      "Que le DAV est replié"
+    ],
+    "a": 0,
+    "e": "Attention §10.1.2.4 : avant de réaliser toute action sur les tuyaux HP, il faut vérifier que le circuit HP est arrêté et en sécurité."
+  },
+  {
+    "id": "SLA-17",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.4",
+    "q": "Quel outil permet de vérifier la qualité de l'accouplement de deux tuyaux HP ?",
+    "o": [
+      "La cale étalon ou gabarit « High Pressure Hose Coupling GO Gage »",
+      "Un pied à coulisse numérique",
+      "Une clé dynamométrique",
+      "Un manomètre de contrôle"
+    ],
+    "a": 0,
+    "e": "La qualité de l'accouplement se vérifie à l'aide de la cale étalon, ou gabarit « High Pressure Hose Coupling GO Gage »."
+  },
+  {
+    "id": "SLA-18",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.4",
+    "q": "À quoi sert la bague de sécurité installée derrière le raccord femelle HP ?",
+    "o": [
+      "Elle rend impossible tout désaccouplement intempestif",
+      "Elle assure l'étanchéité du raccord",
+      "Elle limite la pression du circuit",
+      "Elle sert de repère de couleur pour le lignage"
+    ],
+    "a": 0,
+    "e": "Une fois la bague de sécurité installée et serrée, tout désaccouplement intempestif est impossible car elle empêche le désengagement du raccord femelle."
+  },
+  {
+    "id": "SLA-19",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.4",
+    "q": "Que faire si le raccordement de deux embouts HP ne peut pas se faire « en douceur » ?",
+    "o": [
+      "Nettoyer la saleté gênant le montage ou lubrifier si besoin",
+      "Forcer progressivement avec un levier",
+      "Chauffer le raccord",
+      "Changer immédiatement les deux flexibles"
+    ],
+    "a": 0,
+    "e": "Attention : ne pas forcer. Si l'opération ne se fait pas en douceur, nettoyer la saleté pouvant gêner le montage ou lubrifier si besoin."
+  },
+  {
+    "id": "SLA-20",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.5",
+    "q": "Combien de pompes à membrane sont nécessaires par GV ?",
+    "o": [
+      "2",
+      "1",
+      "4",
+      "3"
+    ],
+    "a": 0,
+    "e": "Les circuits de retour d'aspiration comportent 2 pompes à membrane par GV, avec 2 lignes d'aspiration, 2 bacs de rétention et 2 manomètres par GV."
+  },
+  {
+    "id": "SLA-21",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.5",
+    "q": "Comment la pompe à membrane est-elle fixée à son bac de rétention ?",
+    "o": [
+      "Par des sangles de maintien",
+      "Par quatre vis traversantes",
+      "Par un système magnétique",
+      "Elle est simplement posée"
+    ],
+    "a": 0,
+    "e": "L'étape de connexion impose de fixer la pompe à son bac de rétention grâce à des sangles de maintien."
+  },
+  {
+    "id": "SLA-22",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.2.5",
+    "q": "Où doit être placé le bouchon retiré côté aspiration/refoulement de la pompe ?",
+    "o": [
+      "Dans le bac de rétention",
+      "Dans la caisse à outils",
+      "Sur le raccord voisin",
+      "Au pied de la casemate"
+    ],
+    "a": 0,
+    "e": "Lors du retrait des bouchons côté aspiration et refoulement, la procédure impose de placer le bouchon dans le bac de rétention."
+  },
+  {
+    "id": "SLA-23",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.3.1",
+    "q": "Quels sont les deux tests réalisés pour vérifier l'étanchéité et la non obstruction du réseau hydraulique (GIBR4) ?",
+    "o": [
+      "Test n°1 tuyau périphérique + aspiration n°1, test n°2 tuyau HP + aspiration n°2",
+      "Test d'isolement électrique et test de continuité",
+      "Test de débit et test de conductivité",
+      "Test de pression d'air et test de vide"
+    ],
+    "a": 0,
+    "e": "Deux tests sont réalisés : le test n°1 vérifie le tuyau périphérique et les tuyaux d'aspiration n°1, le test n°2 le tuyau haute pression et les tuyaux d'aspiration n°2."
+  },
+  {
+    "id": "SLA-24",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.3.2",
+    "q": "Quel débit typique est fixé pour le flux d'eau périphérique lors du test n°1 ?",
+    "o": [
+      "Entre 90 et 110 l/min",
+      "Entre 20 et 40 l/min",
+      "Entre 150 et 200 l/min",
+      "Exactement 70 l/min"
+    ],
+    "a": 0,
+    "e": "Lors du test n°1, on fixe le débit du flux d'eau périphérique typiquement entre 90 et 110 l/min, maintenu 15 minutes."
+  },
+  {
+    "id": "SLA-25",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.3.2",
+    "q": "Combien de temps le flux d'eau périphérique est-il maintenu lors du test n°1 ?",
+    "o": [
+      "15 minutes",
+      "5 minutes",
+      "20 minutes",
+      "1 heure"
+    ],
+    "a": 0,
+    "e": "Le flux d'eau périphérique est maintenu pendant 15 minutes en surveillant la pression et le débit pour s'assurer qu'il n'y a pas d'obstruction."
+  },
+  {
+    "id": "SLA-26",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.3.3",
+    "q": "À quelle pression la pompe HP est-elle maintenue lors du test n°2 ?",
+    "o": [
+      "10 bar pendant 15 minutes",
+      "20 bar pendant 5 minutes",
+      "100 bar pendant 15 minutes",
+      "210 bar pendant 1 minute"
+    ],
+    "a": 0,
+    "e": "Test n°2 : la pompe HP est réglée et maintenue à 10 bar pendant 15 minutes, en surveillant pression et débit."
+  },
+  {
+    "id": "SLA-27",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.1.3.2",
+    "q": "Pourquoi le flexible en aspiration doit-il être déconnecté et à l'air libre lors des purges ?",
+    "o": [
+      "Pour éviter l'effet ventouse de la pompe à membrane",
+      "Pour accélérer la vidange",
+      "Pour éviter la cavitation de la pompe HP",
+      "Pour permettre la mesure de conductivité"
+    ],
+    "a": 0,
+    "e": "La procédure précise que, pour éviter l'effet ventouse de la pompe à membrane, le flexible en aspiration doit être déconnecté et à l'air libre."
+  },
+  {
+    "id": "SLA-28",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.1.1",
+    "q": "Quel débit et quelle pression délivre chaque pompe HP ?",
+    "o": [
+      "95 l/min à 210 bar",
+      "70 l/min à 150 bar",
+      "110 l/min à 100 bar",
+      "95 l/min à 20 bar"
+    ],
+    "a": 0,
+    "e": "La procédure rappelle à plusieurs reprises que chaque pompe HP délivre 95 l/min à 210 bar."
+  },
+  {
+    "id": "SLA-29",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.1.1",
+    "q": "À quelle valeur fixe-t-on le point de fonctionnement du circuit HP avant démarrage des pompes ?",
+    "o": [
+      "10 bar",
+      "50 bar",
+      "20 bar",
+      "100 bar"
+    ],
+    "a": 0,
+    "e": "La configuration du circuit HP commence par fixer le point de fonctionnement à 20 bar avant ouverture des vannes et démarrage des pompes."
+  },
+  {
+    "id": "SLA-30",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.1.1",
+    "q": "Combien de temps faut-il rester sur chaque palier lors de la montée en pression HP ?",
+    "o": [
+      "5 secondes",
+      "1 minute",
+      "30 secondes",
+      "Aucune attente n'est requise"
+    ],
+    "a": 0,
+    "e": "La montée en pression HP se fait par palier en restant 5 secondes sur chaque palier."
+  },
+  {
+    "id": "SLA-31",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.1.1",
+    "q": "Quelle est la séquence de montée en pression recommandée pour la Mini-lance ?",
+    "o": [
+      "20 → 50 → 100 → 150 bar → consigne du plan de lançage",
+      "20 → 50 → 100 bar → consigne du plan de lançage",
+      "0 → 100 → 210 bar",
+      "50 → 150 → consigne du plan de lançage"
+    ],
+    "a": 0,
+    "e": "Pour la Mini-lance : 20 bar => 50 bar => 100 bar => 150 bar => consigne du plan de lançage. Pour la lance Série 1, le palier 150 bar n'est pas listé."
+  },
+  {
+    "id": "SLA-32",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.2.2",
+    "q": "Comment doit s'effectuer l'arrêt du circuit haute pression ?",
+    "o": [
+      "Par une baisse de pression progressive et par palier jusqu'à 0 bar",
+      "Par un arrêt immédiat des pompes HP",
+      "Par ouverture de la vanne d'air comprimé",
+      "Par coupure du sectionneur principal"
+    ],
+    "a": 0,
+    "e": "L'arrêt du circuit HP se fait en baissant la pression de manière progressive et par palier (consigne => 150 => 100 => 50 => 20 => 0 bar) avant d'arrêter les pompes."
+  },
+  {
+    "id": "SLA-33",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.5",
+    "q": "Lors d'un changement de tronçon de lance, quel circuit doit obligatoirement être à l'arrêt ?",
+    "o": [
+      "Le circuit HP uniquement",
+      "Tous les circuits hydrauliques",
+      "Le circuit de flux d'eau périphérique uniquement",
+      "Le circuit d'aspiration uniquement"
+    ],
+    "a": 0,
+    "e": "Lors d'un changement de tronçon de lance, il n'est pas nécessaire de stopper tous les circuits : seul le circuit HP doit obligatoirement être à l'arrêt."
+  },
+  {
+    "id": "SLA-34",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.5",
+    "q": "Pourquoi maintient-on le flux d'eau périphérique à l'issue d'une passe de lançage ?",
+    "o": [
+      "Pour éliminer les boues résiduelles",
+      "Pour refroidir les pompes HP",
+      "Pour remplir la bâche à eau propre",
+      "Pour purger le circuit d'air"
+    ],
+    "a": 0,
+    "e": "À l'arrêt des circuits, on veille à maintenir le flux d'eau périphérique à l'issue du lançage afin d'éliminer les boues résiduelles."
+  },
+  {
+    "id": "SLA-35",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.5.4",
+    "q": "Quelle est la première action avant d'ajouter un tronçon de lance ?",
+    "o": [
+      "Arrêter l'indexation de la lance, buses en position initiale après fin d'oscillation",
+      "Purger la bâche à eau sale",
+      "Fermer la vanne HPR-A-1",
+      "Déconnecter l'Enclosure box"
+    ],
+    "a": 0,
+    "e": "L'étape 1 impose d'arrêter l'indexation de la lance en attendant la fin de l'oscillation, les buses devant être à leur position initiale."
+  },
+  {
+    "id": "SLA-36",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.5.4",
+    "q": "Comment les tronçons de Mini-lance sont-ils assemblés ?",
+    "o": [
+      "Vissés de haut en bas par 2 vis, méplat de la tige de positionnement sur 12h",
+      "Par emmanchement conique et goupille",
+      "Par un quart de tour avec clic sonore",
+      "Par raccord rapide à bague"
+    ],
+    "a": 0,
+    "e": "Pour la Mini-lance : respecter la position du méplat de la tige de positionnement sur 12h, puis visser de haut en bas les sections entre elles (2 vis), sans forcer le serrage."
+  },
+  {
+    "id": "SLA-37",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.5.4",
+    "q": "Les tronçons de Mini-lance ont-ils un sens de mise en place particulier ?",
+    "o": [
+      "Non, tous les tronçons sont identiques",
+      "Oui, ils sont repérés 2A, 2B, etc.",
+      "Oui, le sens dépend de la boîte inspectée",
+      "Oui, seul le premier tronçon est orienté"
+    ],
+    "a": 0,
+    "e": "Attention : pour la mini-lance, tous les tronçons sont identiques, donc aucun sens de mise en place particulier. C'est la lance Série 1 qui impose 2A avec 2A, 2B avec 2B."
+  },
+  {
+    "id": "SLA-38",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.5.4",
+    "q": "Comment sait-on qu'un tronçon de lance Série 1 est correctement assemblé ?",
+    "o": [
+      "Une fois en butée, on pivote doucement jusqu'au son d'un « clic »",
+      "Le voyant de l'IHM passe au vert",
+      "La pression HP chute de 10 bar",
+      "Les deux vis de blocage arrivent en butée"
+    ],
+    "a": 0,
+    "e": "Pour la lance Series 1 : une fois en butée, faire pivoter doucement le tronçon inséré et stopper le mouvement de rotation au son d'un « clic »."
+  },
+  {
+    "id": "SLA-39",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.1",
+    "q": "À partir de quelle pression différentielle faut-il basculer sur l'autre préfiltre PALL ?",
+    "o": [
+      "Supérieure à 2,5 bar",
+      "Supérieure à 3,5 bar",
+      "Supérieure à 1 bar",
+      "Supérieure à 5 bar"
+    ],
+    "a": 0,
+    "e": "Préfiltres PALL : pression différentielle > 2,5 bar (ou flux d'eau arrêté entre les deux réservoirs) impose le passage d'un préfiltre à l'autre."
+  },
+  {
+    "id": "SLA-40",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.1",
+    "q": "À partir de quelle pression différentielle faut-il basculer sur l'autre préfiltre TECHNOFILTRE ?",
+    "o": [
+      "Supérieure à 3,5 bar",
+      "Supérieure à 2,5 bar",
+      "Supérieure à 2 bar",
+      "Supérieure à 5 bar"
+    ],
+    "a": 0,
+    "e": "Préfiltres TECHNOFILTRE : le critère de colmatage est une pression différentielle > 3,5 bar, contre 2,5 bar pour les PALL."
+  },
+  {
+    "id": "SLA-41",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.1",
+    "q": "À partir de quelle pression différentielle faut-il changer de filtre (filtration finale) ?",
+    "o": [
+      "Supérieure à 2,5 bar",
+      "Supérieure à 3,5 bar",
+      "Supérieure à 1,5 bar",
+      "Supérieure à 4 bar"
+    ],
+    "a": 0,
+    "e": "Filtres : pression différentielle > 2,5 bar impose le passage d'un filtre à l'autre."
+  },
+  {
+    "id": "SLA-42",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.5",
+    "q": "Combien de temps et à quelle pression souffle-t-on un filtre avant sa pesée ?",
+    "o": [
+      "20 minutes à 2 bar",
+      "5 minutes à 2 bar",
+      "20 minutes à 5 bar",
+      "15 minutes à 3 bar"
+    ],
+    "a": 0,
+    "e": "Pesée et remplacement d'un filtre : souffler le filtre concerné pendant 20 minutes à 2 bar (contre 5 minutes à 2 bar pour un préfiltre)."
+  },
+  {
+    "id": "SLA-43",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.6",
+    "q": "Combien de temps et à quelle pression souffle-t-on un préfiltre avant sa pesée (GIBR4) ?",
+    "o": [
+      "5 minutes à 2 bar",
+      "20 minutes à 2 bar",
+      "15 minutes à 5 bar",
+      "10 minutes à 3 bar"
+    ],
+    "a": 0,
+    "e": "Pesée et remplacement d'un préfiltre : souffler le préfiltre concerné pendant 5 minutes à 2 bar."
+  },
+  {
+    "id": "SLA-44",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.5",
+    "q": "Combien de nouveaux filtres met-on en place lors du remplacement des cartouches ?",
+    "o": [
+      "12",
+      "6",
+      "10",
+      "24"
+    ],
+    "a": 0,
+    "e": "L'étape 7 de la pesée et du remplacement d'un filtre impose la mise en place de nouveaux filtres en quantité 12."
+  },
+  {
+    "id": "SLA-45",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.8",
+    "q": "Que dit la règle concernant le soufflage des éléments de filtration ?",
+    "o": [
+      "Il est interdit de souffler plusieurs filtres à la fois",
+      "Il faut souffler tous les filtres simultanément",
+      "Le soufflage se fait uniquement en fin de chantier",
+      "Le soufflage doit se faire à pression maximale d'emblée"
+    ],
+    "a": 0,
+    "e": "§10.2.7.8 : il est interdit de souffler plusieurs filtres à la fois ; il faut aussi vérifier que le filtre à purger n'est pas en cours d'utilisation."
+  },
+  {
+    "id": "SLA-46",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.2.7.4",
+    "q": "Quand les opérations de pesée de la boue sèche récoltée sont-elles réalisées ?",
+    "o": [
+      "Quand un élément de filtration est plein et doit être changé, et à la fin du lançage d'un GV",
+      "Uniquement en fin de chantier",
+      "Toutes les 8 heures",
+      "À chaque changement de passe"
+    ],
+    "a": 0,
+    "e": "Les pesées sont réalisées lorsqu'un des éléments de filtration est plein et doit être changé, et lorsque l'opération de lançage sur un GV est terminée."
+  },
+  {
+    "id": "SLA-47",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.3.2",
+    "q": "Quel équipement doit être replié en dernier lors du démontage en casemate GV ?",
+    "o": [
+      "Le système DAV",
+      "L'Enclosure box",
+      "Les tuyaux HP",
+      "Les pompes à membrane"
+    ],
+    "a": 0,
+    "e": "Pour le démontage de l'ensemble du matériel, la procédure impose de replier le DAV en dernier."
+  },
+  {
+    "id": "SLA-48",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.3.1",
+    "q": "Quelle vérification est un préalable au repli des équipements dans le BR ?",
+    "o": [
+      "Que les circuits HP et de flux d'eau périphérique sont arrêtés et purgés",
+      "Que les filtres sont neufs",
+      "Que la BEP est pleine",
+      "Que le pupitre est sous tension"
+    ],
+    "a": 0,
+    "e": "Avant tout repli, il faut vérifier l'arrêt des circuits de flux d'eau périphérique, la purge du circuit HP et du flux périphérique, et la dépose des interfaces GV."
+  },
+  {
+    "id": "SLA-49",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.3.3.1",
+    "q": "Quelle interdiction concerne la purge du module de refroidissement ?",
+    "o": [
+      "Interdiction de le souffler en air",
+      "Interdiction de le vidanger par gravité",
+      "Interdiction d'y mettre un bac de rétention",
+      "Interdiction d'utiliser une pompe à membrane"
+    ],
+    "a": 0,
+    "e": "Deux méthodes sont admises (aspiration par pompe à membrane ou vidange par gravité) mais il y a interdiction de souffler en air le module de refroidissement."
+  },
+  {
+    "id": "SLA-50",
+    "theme": "Lançage",
+    "doc": "WEF-SLA-PWX-PRO-122 R08",
+    "ref": "§10.3.4",
+    "q": "Que doit-on poser sur tous les raccords ouverts lors de la préparation des modules au transport ?",
+    "o": [
+      "Des bouchons FME",
+      "Des rubans adhésifs de repérage",
+      "Des joints toriques neufs",
+      "Des brides pleines boulonnées"
+    ],
+    "a": 0,
+    "e": "La préparation au transport impose de déconnecter les flexibles puis de poser des bouchons FME sur tous les raccords ouverts."
+  }
+]

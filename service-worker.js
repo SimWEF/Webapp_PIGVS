@@ -1,23 +1,4 @@
-/* =========================================================
-   PIGVS - Service Worker
-   ---------------------------------------------------------
-   Rôle :
-   - rendre l'application installable (PWA)
-   - servir une page de secours si le réseau est indisponible
-   Stratégie :
-   - "network-first" : on essaie TOUJOURS le réseau d'abord
-     (pour avoir la dernière version + les JSON à jour),
-     et on ne se rabat sur le cache qu'en cas de coupure.
-   ⚠️ Pense à incrémenter CACHE_VERSION à chaque mise à jour
-      importante pour forcer le rafraîchissement du cache.
-   ========================================================= */
 
-const CACHE_VERSION = "pigvs-v4";
-const CACHE_NAME = CACHE_VERSION;
-
-/* Fichiers "coquille" mis en cache à l'installation.
-   ⚠️ Adapte cette liste aux fichiers réellement présents.
-   On NE met PAS les .json de données ici (ils changent souvent). */
 const ASSETS = [
   "index.html",
   "fdm.html",
@@ -43,44 +24,223 @@ const ASSETS = [
    "quizz.html",
    "quizz-questions.json"
 ];
+/* ==========================================================
+   PIGVS Service Worker
+   Version : 3.0
+   ========================================================== */
 
-/* --- Installation : pré-cache de la coquille --- */
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache =>
-      // addAll échoue si UN fichier manque : on tolère les absents
-      Promise.allSettled(ASSETS.map(url => cache.add(url)))
-    ).then(() => self.skipWaiting())
-  );
-});
-
-/* --- Activation : nettoyage des anciens caches --- */
-self.addEventListener("activate", event => {
-  event.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
-  );
-});
-
-/* --- Fetch : network-first, fallback cache --- */
-self.addEventListener("fetch", event => {
-  const req = event.request;
-
-  // On ne gère que les requêtes GET (pas les POST de partage, etc.)
-  if (req.method !== "GET") return;
-
-  event.respondWith(
-    fetch(req)
-      .then(res => {
-        // On met à jour le cache avec la version fraîche
-        const copy = res.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(req, copy)).catch(()=>{});
-        return res;
-      })
-      .catch(() =>
-        // Hors ligne : on tente le cache
-        caches.match(req).then(cached => cached || caches.match("index.html"))
-      )
-  );
-});
+   const APP_CACHE = "pigvs-app-v3";
+   const DATA_CACHE = "pigvs-data-v1";
+   
+   /* ==========================================================
+      Fichiers statiques
+      ========================================================== */
+   
+   const APP_FILES = [
+     "index.html",
+  "fdm.html",
+  "photos.html",
+  "photo.html",
+  "materiel.html",
+  "style.css",
+  "manifest.json",
+  "colisage-data.json",
+  "colisage.html",
+  "rex.html",
+  "info.html",
+  "icon-192.png",
+  "icon-512.png",
+  "pigvs-chantier.js",
+   "chantiers.json", 
+   "info-paluel4.json",
+   "info-cattenom3.json",
+   "pigvs-envoi.js",
+   "pigvs-auth.js",
+   "login.html",
+   "detailSousEnsemble.html",
+   "quizz.html",
+   ];
+   
+   /* ==========================================================
+      Installation
+      ========================================================== */
+   
+   self.addEventListener("install", event => {
+   
+     event.waitUntil(
+   
+       caches.open(APP_CACHE)
+         .then(cache => cache.addAll(APP_FILES))
+   
+     );
+   
+     self.skipWaiting();
+   
+   });
+   
+   /* ==========================================================
+      Activation
+      ========================================================== */
+   
+   self.addEventListener("activate", event => {
+   
+     event.waitUntil(
+   
+       caches.keys()
+         .then(keys =>
+           Promise.all(
+   
+             keys.map(key => {
+   
+               if (
+                 key !== APP_CACHE &&
+                 key !== DATA_CACHE
+               ) {
+                 return caches.delete(key);
+               }
+   
+             })
+   
+           )
+         )
+   
+     );
+   
+     self.clients.claim();
+   
+   });
+   
+   /* ==========================================================
+      Fetch
+      ========================================================== */
+   
+   self.addEventListener("fetch", event => {
+   
+     if (event.request.method !== "GET") {
+       return;
+     }
+   
+     const url = new URL(event.request.url);
+   
+     /* ======================================================
+        CAS 1 : index.json
+        Toujours prioriser le réseau
+        ====================================================== */
+   
+     if (
+       url.pathname.endsWith("/Data-quizz/index.json")
+       ||
+       url.pathname.endsWith("Data-quizz/index.json")
+     ) {
+   
+       event.respondWith(
+   
+         fetch(event.request)
+   
+           .then(response => {
+   
+             const copy = response.clone();
+   
+             caches.open(DATA_CACHE)
+               .then(cache => cache.put(event.request, copy));
+   
+             return response;
+   
+           })
+   
+           .catch(() =>
+             caches.match(event.request)
+           )
+   
+       );
+   
+       return;
+     }
+   
+     /* ======================================================
+        CAS 2 : Fichiers Data-quizz
+        Cache dynamique
+        ====================================================== */
+   
+     if (
+   
+       url.pathname.includes("/Data-quizz/")
+   
+     ) {
+   
+       event.respondWith(
+   
+         caches.open(DATA_CACHE)
+   
+           .then(async cache => {
+   
+             try {
+   
+               const response =
+                 await fetch(event.request);
+   
+               cache.put(
+                 event.request,
+                 response.clone()
+               );
+   
+               return response;
+   
+             }
+   
+             catch {
+   
+               const cached =
+                 await cache.match(event.request);
+   
+               if (cached) {
+                 return cached;
+               }
+   
+               throw new Error(
+                 "Fichier non disponible hors ligne"
+               );
+   
+             }
+   
+           })
+   
+       );
+   
+       return;
+     }
+   
+     /* ======================================================
+        CAS 3 : Application
+        Cache First
+        ====================================================== */
+   
+     event.respondWith(
+   
+       caches.match(event.request)
+   
+         .then(cached => {
+   
+           if (cached) {
+             return cached;
+           }
+   
+           return fetch(event.request)
+             .then(response => {
+   
+               const copy = response.clone();
+   
+               caches.open(APP_CACHE)
+                 .then(cache =>
+                   cache.put(event.request, copy)
+                 );
+   
+               return response;
+   
+             });
+   
+         })
+   
+     );
+   
+   });

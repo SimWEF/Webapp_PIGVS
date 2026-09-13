@@ -1,0 +1,29 @@
+{
+  "ETV": [
+    {
+      "nom": "WEF-16-ETV-GENE-PRO-0338",
+      "description": "WEF 16 ETV GENE PRO 0338",
+      "version": "R11",
+      "fichier": "ETV/WEF-16-ETV-GENE-PRO-0338_R11.json",
+      "nbQuestions": 49
+    }
+  ],
+  "Lancage": [
+    {
+      "nom": "WEF-SLA-PWX-PRO-122",
+      "description": "WEF SLA PWX PRO 122",
+      "version": "R08",
+      "fichier": "Lancage/WEF-SLA-PWX-PRO-122_R08.json",
+      "nbQuestions": 50
+    }
+  ],
+  "PIGVS": [
+    {
+      "nom": "WEF-16-PIGVS-GENE-NTD-0821",
+      "description": "WEF 16 PIGVS GENE NTD 0821",
+      "version": "R06",
+      "fichier": "PIGVS/WEF-16-PIGVS-GENE-NTD-0821_R06.json",
+      "nbQuestions": 50
+    }
+  ]
+}
