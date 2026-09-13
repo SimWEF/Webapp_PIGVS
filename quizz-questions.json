@@ -349,7 +349,7 @@
   "theme": "ETV",
   "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
   "ref": "§9.2",
-  "q": "À quelle condition le programme d'inspection étendu est-il considéré comme terminé ?",
+  "q": "À quelle condition le programme d'inspection étendu est-il considéré comme terminé lors des inspections IF PT ?",
   "o": [
    "Lorsque 2 inter-colonnes consécutives ne présentent plus de boues dures",
    "Lorsque 15 inter-colonnes ont été inspectées",
@@ -509,21 +509,7 @@
   "a": 0,
   "e": "La procédure précise que compte tenu des caractéristiques du sabre 20°, il est quasi-impossible de visualiser les lobes inférieur et supérieur en même temps."
  },
- {
-  "id": "ETV-35",
-  "theme": "ETV",
-  "doc": "WEF-16-ETV-GENE-PRO-0338 R11",
-  "ref": "§9.5",
-  "q": "Sur les GV 55/19, l'IC 54/55 du programme CSCT n'est pas réalisable. Quelle IC est réalisée en remplacement ?",
-  "o": [
-   "L'IC 52/53",
-   "L'IC 56/57",
-   "L'IC 40/41",
-   "L'IC 11/12"
-  ],
-  "a": 0,
-  "e": "L'IC 54/55 n'est pas réalisable du fait de la géométrie des GV 55/19 : l'IC 52/53 est réalisée en remplacement, avec une tolérance de ±2 colonnes."
- },
+ 
  {
   "id": "ETV-36",
   "theme": "ETV",
